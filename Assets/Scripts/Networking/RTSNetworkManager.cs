@@ -5,15 +5,25 @@ using Mirror;
 
 public class RTSNetworkManager : NetworkManager
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    /********** MARK: Private Variables **********/
+    #region Private Variables
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField] GameObject unitSpawnerPrefab = null;
+
+    #endregion
+
+    public override void OnServerAddPlayer(NetworkConnection conn)
     {
-        
+        base.OnServerAddPlayer(conn);
+
+        Vector3 pos = conn.identity.transform.position;
+
+        Quaternion rot = conn.identity.transform.rotation;
+
+        // spawns instance on server
+        GameObject unitSpawnerInstance = Instantiate(unitSpawnerPrefab, pos, rot);
+
+        // server tells all clients to spawn instance
+        NetworkServer.Spawn(unitSpawnerInstance, conn);
     }
 }
