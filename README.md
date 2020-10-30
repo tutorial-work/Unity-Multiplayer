@@ -1,11 +1,13 @@
 # Unity Multiplayer Tutorial
-### Intermediate C# Coding & Networking with GameDev.tv
+#### Intermediate C# Coding & Networking with GameDev.tv
 
 ### Essential Packages
-Please download Mirror from the Unity Asset Store before using this repository
+Please download <strong>Mirror</strong> from the Unity Asset Store before using this repository
 
 ### Branches
+
 #### Multiplayer Basics
-This branch consists of Multiplayer fundementals centered around the Mirror package in Unity
+Consists of Multiplayer fundementals centered around the <strong>Mirror</strong> package in Unity
 
-
+#### RTS
+Features the foundation of a Multiplayer RTS game
