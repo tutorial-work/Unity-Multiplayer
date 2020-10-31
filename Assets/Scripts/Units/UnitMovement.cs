@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Mirror;
-using UnityEngine.InputSystem;
 
 public class UnitMovement : NetworkBehaviour
 {
@@ -12,17 +11,13 @@ public class UnitMovement : NetworkBehaviour
 
     [SerializeField] NavMeshAgent agent = null;
 
-    Camera mainCamera;
-
-    float speed = 0f;
-
     #endregion
 
     /********** MARK: Server Functions **********/
     #region Server Functions
 
     [Command]
-    private void CmdMove(Vector3 position)
+    public void CmdMove(Vector3 position)
     {
         float leeway = 1f; // distance away from navmesh that still counts
 
@@ -37,28 +32,6 @@ public class UnitMovement : NetworkBehaviour
 
     /********** MARK: Client Functions **********/
     #region Client Functions
-
-    public override void OnStartAuthority()
-    {
-        mainCamera = Camera.main;
-    }
-
-    /// <summary>
-    /// Unity Method; Update() is called once per frame
-    /// </summary>
-    [ClientCallback]
-    private void Update()
-    {
-        if (!hasAuthority) return;
-
-        if (!Mouse.current.rightButton.wasPressedThisFrame) return;
-
-        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-
-        if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity)) return;
-
-        CmdMove(hit.point);
-    }
-
+        
     #endregion
 }

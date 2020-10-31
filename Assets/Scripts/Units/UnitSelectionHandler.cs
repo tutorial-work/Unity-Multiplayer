@@ -13,7 +13,12 @@ public class UnitSelectionHandler : MonoBehaviour
 
     Camera mainCamera;
 
-    List<Unit> selectedUnits = new List<Unit>();
+    #endregion
+
+    /********** MARK: Properties **********/
+    #region Properties
+
+    public List<Unit> SelectedUnits { get; } = new List<Unit>();
 
     #endregion
 
@@ -36,6 +41,7 @@ public class UnitSelectionHandler : MonoBehaviour
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             // Start selection area
+            Deselect();
         }
         else if (Mouse.current.leftButton.wasReleasedThisFrame)
         {
@@ -52,18 +58,28 @@ public class UnitSelectionHandler : MonoBehaviour
     {
         Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-        if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity)) return;
+        if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask)) return;
 
         if (!hit.collider.TryGetComponent<Unit>(out Unit unit)) return;
 
         if (!unit.hasAuthority) return;
 
-        selectedUnits.Add(unit);
+        SelectedUnits.Add(unit);
 
-        foreach(Unit selectedUnit in selectedUnits)
+        foreach(Unit selectedUnit in SelectedUnits)
         {
             selectedUnit.Select();
         }
+    }
+
+    private void Deselect()
+    {
+        foreach (Unit selectedUnit in SelectedUnits)
+        {
+            selectedUnit.Deselect();
+        }
+
+        SelectedUnits.Clear();
     }
 
     #endregion
