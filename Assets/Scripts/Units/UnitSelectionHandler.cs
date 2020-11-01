@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mirror;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,8 +10,13 @@ public class UnitSelectionHandler : MonoBehaviour
     /********** MARK: Private Variables **********/
     #region Private Variables
 
+    [SerializeField] RectTransform unitSelectionArea = null;
+
     [SerializeField] LayerMask layerMask = new LayerMask();
 
+    Vector2 startPosition;
+
+    RTSPlayer player;
     Camera mainCamera;
 
     #endregion
@@ -31,6 +37,8 @@ public class UnitSelectionHandler : MonoBehaviour
     protected void Start()
     {
         mainCamera = Camera.main;
+
+        player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
     }
 
     /// <summary>
@@ -40,12 +48,16 @@ public class UnitSelectionHandler : MonoBehaviour
     {
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            // Start selection area
-            Deselect();
+            // Start selection area; deselects units
+            StartSelectionArea();
         }
         else if (Mouse.current.leftButton.wasReleasedThisFrame)
         {
             ClearSelectionArea();
+        }
+        else if (Mouse.current.leftButton.isPressed)
+        {
+            UpdateSelectionArea();
         }
     }
 
@@ -54,25 +66,7 @@ public class UnitSelectionHandler : MonoBehaviour
     /********** MARK: Class Functions **********/
     #region Class Functions
 
-    private void ClearSelectionArea()
-    {
-        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-
-        if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask)) return;
-
-        if (!hit.collider.TryGetComponent<Unit>(out Unit unit)) return;
-
-        if (!unit.hasAuthority) return;
-
-        SelectedUnits.Add(unit);
-
-        foreach(Unit selectedUnit in SelectedUnits)
-        {
-            selectedUnit.Select();
-        }
-    }
-
-    private void Deselect()
+    private void StartSelectionArea()
     {
         foreach (Unit selectedUnit in SelectedUnits)
         {
@@ -80,6 +74,57 @@ public class UnitSelectionHandler : MonoBehaviour
         }
 
         SelectedUnits.Clear();
+
+        unitSelectionArea.gameObject.SetActive(true);
+
+        startPosition = Mouse.current.position.ReadValue();
+
+        UpdateSelectionArea();
+    }
+
+    private void ClearSelectionArea()
+    {
+        unitSelectionArea.gameObject.SetActive(false);
+
+        if (unitSelectionArea.sizeDelta.magnitude == 0)
+        {
+            Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+
+            if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask)) return;
+
+            if (!hit.collider.TryGetComponent<Unit>(out Unit unit)) return;
+
+            if (!unit.hasAuthority) return;
+
+            SelectedUnits.Add(unit);
+
+            foreach (Unit selectedUnit in SelectedUnits)
+            {
+                selectedUnit.Select();
+            }
+
+            return;
+        }
+
+        Vector2 min = unitSelectionArea.anchoredPosition - (unitSelectionArea.sizeDelta / 2);
+        Vector2 max = unitSelectionArea.anchoredPosition + (unitSelectionArea.sizeDelta / 2);
+
+        foreach (Unit unit in player.MyUnits)
+        {
+
+        }
+    }
+
+    private void UpdateSelectionArea()
+    {
+        Vector2 mousePosition = Mouse.current.position.ReadValue();
+
+        float areaWidth = mousePosition.x - startPosition.x;
+        float areaHeight = mousePosition.y - startPosition.y;
+
+        unitSelectionArea.sizeDelta = new Vector2(Mathf.Abs(areaWidth), Mathf.Abs(areaHeight));
+        unitSelectionArea.anchoredPosition = 
+            startPosition + new Vector2(areaWidth / 2, areaHeight / 2);
     }
 
     #endregion
