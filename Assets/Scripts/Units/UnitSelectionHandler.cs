@@ -38,7 +38,8 @@ public class UnitSelectionHandler : MonoBehaviour
     {
         mainCamera = Camera.main;
 
-        player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
+        //player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
+        TempSetPlayer();
     }
 
     /// <summary>
@@ -46,6 +47,9 @@ public class UnitSelectionHandler : MonoBehaviour
     /// </summary>
     protected void Update()
     {
+        bool isSet = TempSetPlayer(); // delete this after lobby is created
+        if (!isSet) return;
+
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             // Start selection area; deselects units
@@ -68,13 +72,16 @@ public class UnitSelectionHandler : MonoBehaviour
 
     private void StartSelectionArea()
     {
-        foreach (Unit selectedUnit in SelectedUnits)
+        if (!Keyboard.current.leftShiftKey.isPressed)
         {
-            selectedUnit.Deselect();
+            foreach (Unit selectedUnit in SelectedUnits)
+            {
+                selectedUnit.Deselect();
+            }
+
+            SelectedUnits.Clear();
         }
-
-        SelectedUnits.Clear();
-
+        
         unitSelectionArea.gameObject.SetActive(true);
 
         startPosition = Mouse.current.position.ReadValue();
@@ -105,13 +112,24 @@ public class UnitSelectionHandler : MonoBehaviour
 
             return;
         }
-
+         
         Vector2 min = unitSelectionArea.anchoredPosition - (unitSelectionArea.sizeDelta / 2);
         Vector2 max = unitSelectionArea.anchoredPosition + (unitSelectionArea.sizeDelta / 2);
 
         foreach (Unit unit in player.MyUnits)
         {
+            if (SelectedUnits.Contains(unit)) continue;
 
+            Vector3 screenPosition = mainCamera.WorldToScreenPoint(unit.transform.position);
+
+            if (screenPosition.x > min.x &&
+                screenPosition.x < max.x &&
+                screenPosition.y > min.y &&
+                screenPosition.y < max.y)
+            {
+                SelectedUnits.Add(unit);
+                unit.Select();
+            }
         }
     }
 
@@ -125,6 +143,26 @@ public class UnitSelectionHandler : MonoBehaviour
         unitSelectionArea.sizeDelta = new Vector2(Mathf.Abs(areaWidth), Mathf.Abs(areaHeight));
         unitSelectionArea.anchoredPosition = 
             startPosition + new Vector2(areaWidth / 2, areaHeight / 2);
+    }
+
+    #endregion
+
+    /********** MARK: Debug **********/
+    #region Debug
+
+    private bool TempSetPlayer()
+    {
+        if (player == null)
+        {
+            if (NetworkClient.connection == null) return false;
+            if (NetworkClient.connection.identity == null) return false;
+
+            player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
+
+            Debug.Log("Setting Player:" + player.name);
+        }
+
+        return true;
     }
 
     #endregion

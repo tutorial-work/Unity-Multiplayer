@@ -10,15 +10,28 @@ public class UnitMovement : NetworkBehaviour
     #region Private Variables
 
     [SerializeField] NavMeshAgent agent = null;
+    [SerializeField] Targeter targeter = null;
 
     #endregion
 
     /********** MARK: Server Functions **********/
     #region Server Functions
 
+    [ServerCallback]
+    private void Update()
+    {
+        if (!agent.hasPath) return;
+
+        if (agent.remainingDistance > agent.stoppingDistance) return;
+
+        agent.ResetPath();
+    }
+
     [Command]
     public void CmdMove(Vector3 position)
     {
+        targeter.ClearTarget();
+
         float leeway = 1f; // distance away from navmesh that still counts
 
         // exit if invalid position
