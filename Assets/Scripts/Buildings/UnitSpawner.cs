@@ -33,11 +33,31 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        DrawLine();
+
         if (eventData.button != PointerEventData.InputButton.Left) return;
 
         if (!hasAuthority) return;
 
         CmdSpawnUnit();
+    }
+
+    #endregion
+
+    /********** MARK: Debug **********/
+    #region Debug
+
+    private void DrawLine()
+    {
+        Camera mainCamera = FindObjectOfType<Camera>(); // "there can be only one"
+        Vector2 mousePosition = UnityEngine.InputSystem.Mouse.current.position.ReadValue();
+
+        Ray ray = mainCamera.ScreenPointToRay(mousePosition);
+
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            Debug.DrawLine(ray.origin, hit.point, Color.white, 3f);
+        }
     }
 
     #endregion

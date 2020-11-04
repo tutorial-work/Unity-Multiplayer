@@ -11,6 +11,7 @@ public class Unit : NetworkBehaviour
     #region Private Variables
 
     [SerializeField] UnitMovement unitMovement = null;
+    [SerializeField] Targeter targeter = null;
     [SerializeField] UnityEvent onSelected = null;
     [SerializeField] UnityEvent onDeselected = null;
 
@@ -30,6 +31,14 @@ public class Unit : NetworkBehaviour
         get
         {
             return unitMovement;
+        }
+    }
+
+    public Targeter Targeter
+    {
+        get
+        {
+            return targeter;
         }
     }
 

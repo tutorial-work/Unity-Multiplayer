@@ -8,7 +8,7 @@ public class RTSPlayer : NetworkBehaviour
     /********** MARK: Private Variables **********/
     #region Private Variables
 
-    List<Unit> myUnits = new List<Unit>();
+    [SerializeField] List<Unit> myUnits = new List<Unit>(); // HACK: probably delete serializefield
 
     #endregion
 

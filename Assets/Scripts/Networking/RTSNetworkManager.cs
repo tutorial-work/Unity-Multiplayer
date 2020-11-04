@@ -12,6 +12,11 @@ public class RTSNetworkManager : NetworkManager
 
     #endregion
 
+    //private void Awake()
+    //{
+    //    GetComponent<NetworkManagerHUD>().offsetX = (Screen.width / 2) - 100;
+    //}
+
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
         base.OnServerAddPlayer(conn);

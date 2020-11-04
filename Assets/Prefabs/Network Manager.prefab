@@ -50,22 +50,22 @@ MonoBehaviour:
   autoStartServerBuild: 1
   showDebugMessages: 0
   serverTickRate: 30
-  offlineScene: 
-  onlineScene: 
+  offlineScene: Assets/Scenes/Scene_Menu.unity
+  onlineScene: Assets/Scenes/Scene_Map_01.unity
   transport: {fileID: 3361349656666813607}
   networkAddress: localhost
   maxConnections: 4
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 4369051049471955617, guid: afe2134aa99f7974f8fffc5f877f43e6,
+  playerPrefab: {fileID: 4369051049471955617, guid: cb57466cd6d32144fb251afb809026ac,
     type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 1
   spawnPrefabs:
-  - {fileID: 6033682856054396528, guid: 19f81ac9f9b506c4fbcd242ba8a1e3c7, type: 3}
-  - {fileID: 7154321727460686249, guid: 9e70f2c256f63d049b82ca2f5a31bb88, type: 3}
-  unitSpawnerPrefab: {fileID: 7154321727460686249, guid: 9e70f2c256f63d049b82ca2f5a31bb88,
+  - {fileID: 6033682856054396528, guid: d5941778de8564480b34f0b483828e25, type: 3}
+  - {fileID: 7154321727460686249, guid: 9c147cd43f9084e96bd66148b14522c1, type: 3}
+  unitSpawnerPrefab: {fileID: 7154321727460686249, guid: 9c147cd43f9084e96bd66148b14522c1,
     type: 3}
 --- !u!114 &3361349656666813607
 MonoBehaviour:
