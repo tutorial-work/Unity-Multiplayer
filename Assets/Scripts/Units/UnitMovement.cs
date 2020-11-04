@@ -11,6 +11,7 @@ public class UnitMovement : NetworkBehaviour
 
     [SerializeField] NavMeshAgent agent = null;
     [SerializeField] Targeter targeter = null;
+    [SerializeField] float chaseRange = 10f;
 
     #endregion
 
@@ -20,6 +21,25 @@ public class UnitMovement : NetworkBehaviour
     [ServerCallback]
     private void Update()
     {
+        Targetable target = targeter.Target;
+
+        if (target != null)
+        {
+            if ((target.transform.position - transform.position).sqrMagnitude
+                > chaseRange * chaseRange)
+            {
+                // chase
+                agent.SetDestination(target.transform.position);
+            }
+            else if(agent.hasPath)
+            {
+                // stop
+                agent.ResetPath();
+            }
+
+            return;
+        }
+
         if (!agent.hasPath) return;
 
         if (agent.remainingDistance > agent.stoppingDistance) return;
