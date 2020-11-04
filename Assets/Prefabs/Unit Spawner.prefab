@@ -118,7 +118,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d71b47ad571776446b1e8929d92d1152, type: 2}
+  - {fileID: 2100000, guid: 54d1c61b6911b4de8b957e8447bed062, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -219,7 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  unitPrefab: {fileID: 6033682856054396528, guid: 19f81ac9f9b506c4fbcd242ba8a1e3c7,
+  unitPrefab: {fileID: 6033682856054396528, guid: d5941778de8564480b34f0b483828e25,
     type: 3}
   spawnPoint: {fileID: 8044804498936425963}
 --- !u!114 &4849654792335039569

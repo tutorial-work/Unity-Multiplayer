@@ -227,6 +227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27dbc11476b754c04b58585335ff2d6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!1 &9143264754079941212
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,6 +372,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f330f24c381307e458c607a171b52d0b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0eba6b72985b44b71877885cd6b9218c, type: 2}
+    - target: {fileID: -7511558181221131132, guid: f330f24c381307e458c607a171b52d0b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: cf3cc64bb44854119832a58a3f1108a0, type: 2}
     - target: {fileID: 919132149155446097, guid: f330f24c381307e458c607a171b52d0b,
         type: 3}
       propertyPath: m_Name
