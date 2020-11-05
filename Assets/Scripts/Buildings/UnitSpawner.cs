@@ -9,6 +9,7 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
     /********** MARK: Private Variables **********/
     #region Private Variables
 
+    [SerializeField] Health health = null;
     [SerializeField] GameObject unitPrefab = null;
     [SerializeField] Transform spawnPoint = null;
 
@@ -16,6 +17,23 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
 
     /********** MARK: Server Functions **********/
     #region Server Functions
+
+    public override void OnStartServer()
+    {
+        health.ServerOnDie += ServerHandleDie;
+    }
+
+    public override void OnStopServer()
+    {
+        health.ServerOnDie -= ServerHandleDie;
+    }
+
+    [Server]
+    private void ServerHandleDie()
+    {
+        //NetworkServer.Destroy(gameObject);
+    }
+
 
     [Command]
     private void CmdSpawnUnit()
@@ -28,7 +46,7 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
 
     #endregion
 
-    /********** MARK: Server Functions **********/
+    /********** MARK: Client Functions **********/
     #region Client Functions
 
     public void OnPointerClick(PointerEventData eventData)
