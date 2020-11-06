@@ -59,10 +59,10 @@ public class RTSPlayer : NetworkBehaviour
     /********** MARK: Client Functions **********/
     #region Client Functions
 
-    public override void OnStartClient()
+    public override void OnStartAuthority()
     {
         // if this is the server, return... i.e. add unit to list only if client
-        if (!isClientOnly) return; 
+        if (NetworkServer.active) return; 
 
         Unit.AuthorityOnUnitSpawned += AuthorityHandleUnitSpawned;
         Unit.AuthorityOnUnitDespawned += AuthorityHandleUnitDespawned;
@@ -71,7 +71,7 @@ public class RTSPlayer : NetworkBehaviour
     public override void OnStopClient()
     {
         // if this is the server, return... i.e. add unit to list only if client
-        if (!isClientOnly) return;
+        if (!isClientOnly || !hasAuthority) return;
 
         Unit.AuthorityOnUnitSpawned -= AuthorityHandleUnitSpawned;
         Unit.AuthorityOnUnitDespawned -= AuthorityHandleUnitDespawned;
@@ -79,17 +79,11 @@ public class RTSPlayer : NetworkBehaviour
 
     private void AuthorityHandleUnitSpawned(Unit unit)
     {
-        // only add a unit to your list if you own the player and the unit
-        if (!hasAuthority) return;
-
         myUnits.Add(unit);
     }
 
     private void AuthorityHandleUnitDespawned(Unit unit)
     {
-        // only add a unit to your list if you own the player and the unit
-        if (!hasAuthority) return;
-
         myUnits.Remove(unit);
     }
 

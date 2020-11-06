@@ -9,6 +9,8 @@ public class GameOverHandler : NetworkBehaviour
     /********** MARK: Class Variables **********/
     #region Class Variables
 
+    public static event Action ServerOnGameOver;
+        
     public static event Action<string> ClientOnGameOver;
 
     List<UnitBase> bases = new List<UnitBase>(); 
@@ -51,6 +53,8 @@ public class GameOverHandler : NetworkBehaviour
         int playerId = bases[0].connectionToClient.connectionId;
 
         RpcGameOver($"Player {playerId} Wins!");
+
+        ServerOnGameOver?.Invoke();
     }
 
     #endregion

@@ -14,7 +14,7 @@ public class UnitCommandGiver : MonoBehaviour
     [SerializeField] UnitSelectionHandler unitSelectionHandler = null;
 
     Camera mainCamera;
-    
+
     #endregion
 
     /********** MARK: Unity Functions **********/
@@ -23,15 +23,22 @@ public class UnitCommandGiver : MonoBehaviour
     /// <summary>
     /// Unity Method; Start() is called before the first frame update
     /// </summary>
-    protected void Start()
+    private void Start()
     {
         mainCamera = Camera.main;
+
+        GameOverHandler.ClientOnGameOver += ClientHandleGameOver;
+    }
+
+    private void OnDestroy()
+    {
+        GameOverHandler.ClientOnGameOver -= ClientHandleGameOver;
     }
 
     /// <summary>
     /// Unity Method; Update() is called once per frame
     /// </summary>
-    protected void Update()
+    private void Update()
     {
         if (!Mouse.current.rightButton.wasPressedThisFrame) { return; }
 
@@ -53,6 +60,11 @@ public class UnitCommandGiver : MonoBehaviour
         TryMove(hit.point);
     }
 
+    #endregion
+
+    /********** MARK: Class Functions **********/
+    #region Class Functions
+
     private void TryMove(Vector3 position)
     {
         foreach (Unit unit in unitSelectionHandler.SelectedUnits)
@@ -67,6 +79,11 @@ public class UnitCommandGiver : MonoBehaviour
         {
             unit.Targeter.CmdSetTarget(target.gameObject);
         }
+    }
+
+    private void ClientHandleGameOver(string winnerName)
+    {
+        enabled = false;
     }
 
     #endregion

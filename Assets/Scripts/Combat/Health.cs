@@ -41,7 +41,7 @@ public class Health : NetworkBehaviour
 
         ServerOnDie?.Invoke();
 
-        Debug.Log(gameObject.name + " has died");
+        Debug.LogWarning(gameObject.name + " has died");
     }
 
     #endregion
