@@ -16,6 +16,9 @@ public class Building : NetworkBehaviour
     public static event Action<Building> ServerOnBuildingSpawned;
     public static event Action<Building> ServerOnBuildingDespawned;
 
+    public static event Action<Building> AuthorityOnBuildingSpawned;
+    public static event Action<Building> AuthorityOnBuildingDespawned;
+
     #endregion
 
     /********** MARK: Properties **********/
@@ -65,7 +68,17 @@ public class Building : NetworkBehaviour
     /********** MARK: Client Functions **********/
     #region Client Functions
 
+    public override void OnStartAuthority()
+    {
+        AuthorityOnBuildingSpawned?.Invoke(this);
+    }
 
+    public override void OnStopClient()
+    {
+        if (!hasAuthority) return;
+
+        AuthorityOnBuildingDespawned?.Invoke(this);
+    }
 
     #endregion
 }
