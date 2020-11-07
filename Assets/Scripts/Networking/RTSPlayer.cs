@@ -8,7 +8,9 @@ public class RTSPlayer : NetworkBehaviour
     /********** MARK: Private Variables **********/
     #region Private Variables
 
-    [SerializeField] List<Unit> myUnits = new List<Unit>(); // HACK: probably delete serializefield
+    List<Unit> myUnits = new List<Unit>();
+
+    List<Building> myBuildings = new List<Building>();
 
     #endregion
 
@@ -23,6 +25,14 @@ public class RTSPlayer : NetworkBehaviour
         }
     }
 
+    public List<Building> MyBuildings
+    {
+        get
+        {
+            return myBuildings;
+        }
+    }
+
     #endregion
 
     /********** MARK: Server Functions **********/
@@ -32,12 +42,18 @@ public class RTSPlayer : NetworkBehaviour
     {
         Unit.ServerOnUnitSpawned += ServerHandleUnitSpawned;
         Unit.ServerOnUnitDespawned += ServerHandleUnitDespawned;
+
+        Building.ServerOnBuildingSpawned += ServerHandleBuildingSpawned;
+        Building.ServerOnBuildingDespawned += ServerHandleBuildingDespawned;
     }
 
     public override void OnStopServer()
     {
         Unit.ServerOnUnitSpawned -= ServerHandleUnitSpawned;
         Unit.ServerOnUnitDespawned -= ServerHandleUnitDespawned;
+
+        Building.ServerOnBuildingSpawned -= ServerHandleBuildingSpawned;
+        Building.ServerOnBuildingDespawned -= ServerHandleBuildingDespawned;
     }
 
     private void ServerHandleUnitSpawned(Unit unit)
@@ -54,11 +70,25 @@ public class RTSPlayer : NetworkBehaviour
         myUnits.Remove(unit);
     }
 
+    private void ServerHandleBuildingSpawned(Building building)
+    {
+        if (building.connectionToClient.connectionId != connectionToClient.connectionId) return;
+
+        myBuildings.Add(building);
+    }
+
+    private void ServerHandleBuildingDespawned(Building building)
+    {
+        if (building.connectionToClient.connectionId != connectionToClient.connectionId) return;
+
+        myBuildings.Remove(building);
+    }
+
     #endregion
 
     /********** MARK: Client Functions **********/
     #region Client Functions
-        
+
     public override void OnStartAuthority()
     {
         // if this is the server, return... i.e. add unit to list only if client

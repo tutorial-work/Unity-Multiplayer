@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 6643961590572130180}
   - component: {fileID: 5987727696471465971}
   - component: {fileID: 1651743649491264422}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Unit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -493,7 +493,7 @@ PrefabInstance:
     - target: {fileID: 352479446603924905, guid: 0aab3dd20cf5a4c50abd0c479b891bb4,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0.3
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 352479446603924905, guid: 0aab3dd20cf5a4c50abd0c479b891bb4,
         type: 3}
@@ -533,7 +533,7 @@ PrefabInstance:
     - target: {fileID: 352479446603924919, guid: 0aab3dd20cf5a4c50abd0c479b891bb4,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0aab3dd20cf5a4c50abd0c479b891bb4, type: 3}
