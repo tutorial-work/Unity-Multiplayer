@@ -58,7 +58,7 @@ public class RTSPlayer : NetworkBehaviour
 
     /********** MARK: Client Functions **********/
     #region Client Functions
-
+        
     public override void OnStartAuthority()
     {
         // if this is the server, return... i.e. add unit to list only if client
