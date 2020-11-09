@@ -9,6 +9,7 @@ public class Building : NetworkBehaviour
     /********** MARK: Private Variables **********/
     #region Private Variables
 
+    [SerializeField] GameObject buildingPreview = null;
     [SerializeField] Sprite icon = null;
     [SerializeField] int id = -1;
     [SerializeField] int price = 100;
@@ -18,11 +19,19 @@ public class Building : NetworkBehaviour
 
     public static event Action<Building> AuthorityOnBuildingSpawned;
     public static event Action<Building> AuthorityOnBuildingDespawned;
-
+    
     #endregion
 
     /********** MARK: Properties **********/
     #region Properties
+
+    public GameObject BuildingPreview
+    {
+        get
+        {
+            return buildingPreview;
+        }
+    }
 
     public Sprite Icon
     {
