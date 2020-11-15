@@ -53,8 +53,7 @@ public class UnitSelectionHandler : MonoBehaviour
     /// </summary>
     protected void Update()
     {
-        bool isSet = TempSetPlayer(); // delete this after lobby is created
-        if (!isSet) return;
+        if (!TempSetPlayer()) return; // delete this after lobby is created
 
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {

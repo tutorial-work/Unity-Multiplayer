@@ -11,8 +11,10 @@ public class RTSPlayer : NetworkBehaviour
 
     [SerializeField] private Building[] buildings = new Building[0];
 
-    [SyncVar]
+    [SyncVar(hook = nameof(ClientHandleResourcesUpdate))]
     private int resources = 500;
+
+    public event Action<int> ClientOnResourcesUpdated;
 
     List<Unit> myUnits = new List<Unit>();
 
@@ -22,6 +24,20 @@ public class RTSPlayer : NetworkBehaviour
 
     /********** MARK: Properties **********/
     #region Properties
+
+    public int Resources
+    {
+        get
+        {
+            return resources;
+        }
+
+        [Server] // TODO: im not really sure if this works? validate?
+        set
+        {
+            resources = value;
+        }
+    }
 
     public List<Unit> MyUnits
     {
@@ -139,6 +155,11 @@ public class RTSPlayer : NetworkBehaviour
 
         Building.AuthorityOnBuildingSpawned -= AuthorityHandleBuildingSpawned;
         Building.AuthorityOnBuildingDespawned -= AuthorityHandleBuildingDespawned;
+    }
+
+    private void ClientHandleResourcesUpdate(int oldResources, int newResources)
+    {
+        ClientOnResourcesUpdated?.Invoke(newResources);
     }
 
     private void AuthorityHandleUnitSpawned(Unit unit)
