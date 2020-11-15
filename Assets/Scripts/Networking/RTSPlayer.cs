@@ -18,6 +18,8 @@ public class RTSPlayer : NetworkBehaviour
 
     public event Action<int> ClientOnResourcesUpdated;
 
+    Color teamColor = new Color();
+
     List<Unit> myUnits = new List<Unit>();
 
     List<Building> myBuildings = new List<Building>();
@@ -26,6 +28,19 @@ public class RTSPlayer : NetworkBehaviour
 
     /********** MARK: Properties **********/
     #region Properties
+
+    public Color TeamColor
+    {
+        get
+        {
+            return teamColor;
+        }
+        [Server]
+        set
+        {
+            teamColor = value;
+        }
+    }
 
     public int Resources
     {

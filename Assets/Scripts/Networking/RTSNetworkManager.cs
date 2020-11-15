@@ -23,11 +23,16 @@ public class RTSNetworkManager : NetworkManager
     {
         base.OnServerAddPlayer(conn);
 
-        Vector3 pos = conn.identity.transform.position;
-
-        Quaternion rot = conn.identity.transform.rotation;
+        RTSPlayer player = conn.identity.GetComponent<RTSPlayer>();
+        player.TeamColor = new Color(
+            UnityEngine.Random.Range(0f, 1f),
+            UnityEngine.Random.Range(0f, 1f),
+            UnityEngine.Random.Range(0f, 1f)
+        );
 
         // spawns instance on server
+        Vector3 pos = conn.identity.transform.position;
+        Quaternion rot = conn.identity.transform.rotation;
         GameObject unitSpawnerInstance = Instantiate(unitSpawnerPrefab, pos, rot);
 
         // server tells all clients to spawn instance
