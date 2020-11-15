@@ -11,6 +11,9 @@ public class RTSPlayer : NetworkBehaviour
 
     [SerializeField] private Building[] buildings = new Building[0];
 
+    [SyncVar]
+    private int resources = 500;
+
     List<Unit> myUnits = new List<Unit>();
 
     List<Building> myBuildings = new List<Building>();
