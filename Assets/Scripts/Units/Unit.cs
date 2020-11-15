@@ -10,6 +10,7 @@ public class Unit : NetworkBehaviour
     /********** MARK: Private Variables **********/
     #region Private Variables
 
+    [SerializeField] int resourceCost = 10;
     [SerializeField] Health health = null;
     [SerializeField] UnitMovement unitMovement = null;
     [SerializeField] Targeter targeter = null;
@@ -26,6 +27,14 @@ public class Unit : NetworkBehaviour
 
     /********** MARK: Properties **********/
     #region Properties
+
+    public int ResourceCost
+    {
+        get
+        {
+            return resourceCost;
+        }
+    }
 
     public UnitMovement Movement
     {

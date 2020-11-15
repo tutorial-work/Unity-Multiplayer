@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using UnityEngine.EventSystems;
+using TMPro;
+using UnityEngine.UI;
 
 public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
 {
@@ -10,8 +12,20 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
     #region Private Variables
 
     [SerializeField] Health health = null;
-    [SerializeField] GameObject unitPrefab = null;
+    [SerializeField] Unit unitPrefab = null;
     [SerializeField] Transform spawnPoint = null;
+
+    [SerializeField] TMP_Text remainingUnitsText = null;
+    [SerializeField] Image unitProgressImage = null;
+
+    [SerializeField] int maxUnitQueue = 5;
+    [SerializeField] float spawnMoveRange = 7f;
+    [SerializeField] float unitSpawnDuration = 5f;
+
+    [SyncVar]
+    private int queuedUnits;
+    [SyncVar]
+    private float unitTimer;
 
     #endregion
 
