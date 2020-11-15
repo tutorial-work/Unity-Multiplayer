@@ -13,7 +13,7 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
 
     [SerializeField] Health health = null;
     [SerializeField] Unit unitPrefab = null;
-    [SerializeField] Transform spawnPoint = null;
+    [SerializeField] Transform unitSpawnPoint = null;
 
     [SerializeField] TMP_Text remainingUnitsText = null;
     [SerializeField] Image unitProgressImage = null;
@@ -22,10 +22,30 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
     [SerializeField] float spawnMoveRange = 7f;
     [SerializeField] float unitSpawnDuration = 5f;
 
+    [SyncVar(hook = nameof(ClientHandleQueuedUnitsUpdated))]
+    int queuedUnits;
     [SyncVar]
-    private int queuedUnits;
-    [SyncVar]
-    private float unitTimer;
+    float unitTimer;
+
+    float progressImageVelocity;
+
+    #endregion
+
+    /********** MARK: Class Functions **********/
+    #region Class Functions
+
+    private void Update()
+    {
+        if (isServer)
+        {
+            ServerProduceUnits();
+        }
+
+        if (isClient)
+        {
+            UpdateTimerDisplay();
+        }
+    }
 
     #endregion
 
@@ -41,6 +61,30 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
     {
         health.ServerOnDie -= ServerHandleDie;
     }
+    
+    [Server]
+    private void ServerProduceUnits()
+    {
+        if (queuedUnits == 0) return;
+
+        unitTimer += Time.deltaTime;
+
+        if (unitTimer < unitSpawnDuration) return;
+
+        GameObject instance = Instantiate(unitPrefab.gameObject, unitSpawnPoint.position, unitSpawnPoint.rotation);
+
+        // spawns the instance across the network and gives authority to the client that spawned it
+        NetworkServer.Spawn(instance, connectionToClient);
+
+        Vector3 spawnOffset = Random.insideUnitSphere * spawnMoveRange;
+        spawnOffset.y = unitSpawnPoint.position.y;
+
+        UnitMovement unitMovement = instance.GetComponent<UnitMovement>();
+        unitMovement.ServerMove(unitSpawnPoint.position + spawnOffset);
+
+        queuedUnits--;
+        unitTimer = 0;
+    }
 
     [Server]
     private void ServerHandleDie()
@@ -48,20 +92,44 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
         NetworkServer.Destroy(gameObject);
     }
 
-
     [Command]
     private void CmdSpawnUnit()
     {
-        GameObject instance = Instantiate(unitPrefab, spawnPoint.position, spawnPoint.rotation);
+        if (queuedUnits == maxUnitQueue) return;
 
-        // spawns the instance across the network and gives authority to the client that spawned it
-        NetworkServer.Spawn(instance, connectionToClient); 
+        RTSPlayer player = connectionToClient.identity.GetComponent<RTSPlayer>();
+
+        if (player.Resources < unitPrefab.ResourceCost) return;
+
+        queuedUnits++;
+
+        //player.Resources = player.Resources - unitPrefab.ResourceCost;
+        player.Resources -= unitPrefab.ResourceCost; // TODO: can you actually do this with getters and setters?
     }
 
     #endregion
 
     /********** MARK: Client Functions **********/
     #region Client Functions
+
+    private void UpdateTimerDisplay()
+    {
+        float newProgress = unitTimer / unitSpawnDuration;
+
+        if (newProgress < unitProgressImage.fillAmount)
+        {
+            unitProgressImage.fillAmount = newProgress;
+        }
+        else
+        {
+            unitProgressImage.fillAmount = Mathf.SmoothDamp(
+                unitProgressImage.fillAmount,
+                newProgress,
+                ref progressImageVelocity,
+                0.1f
+           );
+        }
+    }
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -74,6 +142,11 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
         CmdSpawnUnit();
     }
 
+    private void ClientHandleQueuedUnitsUpdated(int oldQueuedUnits, int newQueuedUnits)
+    {
+        remainingUnitsText.text = $"{newQueuedUnits}";
+    }
+    
     #endregion
 
     /********** MARK: Debug **********/
