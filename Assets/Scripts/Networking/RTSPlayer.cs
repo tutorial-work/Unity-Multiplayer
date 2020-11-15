@@ -9,7 +9,9 @@ public class RTSPlayer : NetworkBehaviour
     /********** MARK: Private Variables **********/
     #region Private Variables
 
+    [SerializeField] private LayerMask buildingBlockLayer = new LayerMask();
     [SerializeField] private Building[] buildings = new Building[0];
+    [SerializeField] float buildingRangeLimit = 5f;
 
     [SyncVar(hook = nameof(ClientHandleResourcesUpdate))]
     private int resources = 500;
@@ -122,10 +124,41 @@ public class RTSPlayer : NetworkBehaviour
 
         if (buildingToPlace == null) return;
 
+        if (resources < buildingToPlace.Price) return;
+
+        BoxCollider buildingCollider = buildingToPlace.GetComponent<BoxCollider>();
+        
+        if (!CanPlaceBuilding(buildingCollider, point)) return;
+        
         GameObject buildingInstance = 
             Instantiate(buildingToPlace.gameObject, point, buildingToPlace.transform.rotation);
 
         NetworkServer.Spawn(buildingInstance, connectionToClient);
+
+        Resources = resources - buildingToPlace.Price;
+    }
+
+    public bool CanPlaceBuilding(BoxCollider buildingCollider, Vector3 point)
+    {
+        if (Physics.CheckBox(
+            point + buildingCollider.center,
+            buildingCollider.size / 2,
+            Quaternion.identity,
+            buildingBlockLayer))
+        {
+            return false;
+        }
+
+        foreach (Building building in myBuildings)
+        {
+            if ((point - building.transform.position).sqrMagnitude <=
+                buildingRangeLimit * buildingRangeLimit)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     #endregion
