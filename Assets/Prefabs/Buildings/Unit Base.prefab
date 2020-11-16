@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4318064518642459344}
   - component: {fileID: 8555346199363303812}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,14 +131,19 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1659902187994752393, guid: da861a9408ede77488ef88c0a92b085a,
+    - target: {fileID: 1401628361909344387, guid: da861a9408ede77488ef88c0a92b085a,
         type: 3}
-      propertyPath: colorRenderers.Array.size
-      value: 1
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1659902187994752393, guid: da861a9408ede77488ef88c0a92b085a,
         type: 3}
-      propertyPath: colorRenderers.Array.data[0]
+      propertyPath: colorRenderers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659902187994752393, guid: da861a9408ede77488ef88c0a92b085a,
+        type: 3}
+      propertyPath: colorRenderers.Array.data[1]
       value: 
       objectReference: {fileID: 8555346199363303812}
     - target: {fileID: 3595921255908951392, guid: da861a9408ede77488ef88c0a92b085a,

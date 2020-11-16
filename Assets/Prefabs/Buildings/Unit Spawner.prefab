@@ -28,7 +28,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7951012853176796383}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7998539011227656244
 MonoBehaviour:
@@ -81,7 +81,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7951012853176796383}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8352674802535063658
 MonoBehaviour:
@@ -102,14 +102,19 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1659902187994752393, guid: da861a9408ede77488ef88c0a92b085a,
+    - target: {fileID: 1401628361909344387, guid: da861a9408ede77488ef88c0a92b085a,
         type: 3}
-      propertyPath: colorRenderers.Array.size
-      value: 1
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1659902187994752393, guid: da861a9408ede77488ef88c0a92b085a,
         type: 3}
-      propertyPath: colorRenderers.Array.data[0]
+      propertyPath: colorRenderers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659902187994752393, guid: da861a9408ede77488ef88c0a92b085a,
+        type: 3}
+      propertyPath: colorRenderers.Array.data[1]
       value: 
       objectReference: {fileID: 8555346199363303812}
     - target: {fileID: 3595921255908951392, guid: da861a9408ede77488ef88c0a92b085a,
