@@ -18,7 +18,6 @@ public class CameraController : NetworkBehaviour
 
     public override void OnStartAuthority()
     {
-
         playerCameraTransform.gameObject.SetActive(true);
 
         controls = new Controls();
@@ -26,7 +25,7 @@ public class CameraController : NetworkBehaviour
         controls.Player.MoveCamera.performed += SetPreviousInput;
         controls.Player.MoveCamera.canceled += SetPreviousInput;
 
-        Debug.Log("end of OnStartAuthority");
+        controls.Enable();
     }
 
     [ClientCallback]
@@ -83,6 +82,12 @@ public class CameraController : NetworkBehaviour
 
     private void SetPreviousInput(InputAction.CallbackContext ctx)
     {
+        Debug.Log("Calling SetPreviousInput()");
         previousInput = ctx.ReadValue<Vector2>();
     }
+
+    //private void HelloWorld(InputAction.CallbackContext ctx)
+    //{
+    //    Debug.Log($"saying hello {ctx.ReadValue<float>()}");
+    //}
 }
