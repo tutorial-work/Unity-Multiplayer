@@ -9,8 +9,9 @@ public class RTSPlayer : NetworkBehaviour
     /********** MARK: Private Variables **********/
     #region Private Variables
 
-    [SerializeField] private LayerMask buildingBlockLayer = new LayerMask();
-    [SerializeField] private Building[] buildings = new Building[0];
+    [SerializeField] Transform cameraTransform = null;
+    [SerializeField] LayerMask buildingBlockLayer = new LayerMask();
+    [SerializeField] Building[] buildings = new Building[0];
     [SerializeField] float buildingRangeLimit = 5f;
 
     [SyncVar(hook = nameof(ClientHandleResourcesUpdate))]
@@ -28,6 +29,14 @@ public class RTSPlayer : NetworkBehaviour
 
     /********** MARK: Properties **********/
     #region Properties
+
+    public Transform CameraTransform
+    {
+        get
+        {
+            return cameraTransform;
+        }
+    }
 
     public Color TeamColor
     {
