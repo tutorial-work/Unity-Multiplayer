@@ -9,7 +9,7 @@ public class RTSNetworkManager : NetworkManager
     /********** MARK: Private Variables **********/
     #region Private Variables
 
-    [SerializeField] GameObject unitSpawnerPrefab = null;
+    [SerializeField] GameObject unitBasePrefab = null;
     [SerializeField] GameOverHandler gameOverHandlerPrefab = null;
 
     #endregion
@@ -33,7 +33,7 @@ public class RTSNetworkManager : NetworkManager
         // spawns instance on server
         Vector3 pos = conn.identity.transform.position;
         Quaternion rot = conn.identity.transform.rotation;
-        GameObject unitSpawnerInstance = Instantiate(unitSpawnerPrefab, pos, rot);
+        GameObject unitSpawnerInstance = Instantiate(unitBasePrefab, pos, rot);
 
         // server tells all clients to spawn instance
         NetworkServer.Spawn(unitSpawnerInstance, conn);
