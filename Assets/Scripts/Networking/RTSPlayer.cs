@@ -150,7 +150,7 @@ public class RTSPlayer : NetworkBehaviour
 
         if (resources < buildingToPlace.Price) return;
 
-        BoxCollider buildingCollider = buildingToPlace.GetComponent<BoxCollider>();
+        BoxCollider buildingCollider = buildingToPlace.GetComponentInChildren<BoxCollider>();
         
         if (!CanPlaceBuilding(buildingCollider, point)) return;
         
@@ -164,6 +164,7 @@ public class RTSPlayer : NetworkBehaviour
 
     public bool CanPlaceBuilding(BoxCollider buildingCollider, Vector3 point)
     {
+        Debug.Log("checking valid");
         if (Physics.CheckBox(
             point + buildingCollider.center,
             buildingCollider.size / 2,
@@ -172,6 +173,8 @@ public class RTSPlayer : NetworkBehaviour
         {
             return false;
         }
+
+        Debug.Log("valid");
 
         foreach (Building building in myBuildings)
         {

@@ -8,12 +8,13 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: colour grid
-    second: {fileID: 2100000, guid: eb3d6ac3967601a4fa853fd7b7a73985, type: 2}
+    second: {fileID: 2100000, guid: 0eba6b72985b44b71877885cd6b9218c, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: emission
-    second: {fileID: 2100000, guid: 913e8893a2ffcd54990df29f57d1ab72, type: 2}
+    second: {fileID: -8212680083840791456, guid: f0cd4ec24789d9d4bae640b63966372f,
+      type: 3}
   materials:
     materialImportMode: 1
     materialName: 0

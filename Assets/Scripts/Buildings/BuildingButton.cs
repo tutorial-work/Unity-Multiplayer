@@ -39,7 +39,7 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         priceText.text = building.Price.ToString();
 
-        buildingCollider = building.GetComponent<BoxCollider>();
+        buildingCollider = building.GetComponentInChildren<BoxCollider>();
     }
 
     public void OnPointerDown(PointerEventData eventData)
