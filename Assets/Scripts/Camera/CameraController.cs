@@ -40,8 +40,6 @@ public class CameraController : NetworkBehaviour
     {
         Vector3 pos = playerCameraTransform.position;
 
-        Debug.Log($"printing previousInput: {previousInput}");
-
         if (previousInput == Vector2.zero)
         {
             Vector3 cursorMovement = Vector3.zero;
@@ -82,12 +80,6 @@ public class CameraController : NetworkBehaviour
 
     private void SetPreviousInput(InputAction.CallbackContext ctx)
     {
-        Debug.Log("Calling SetPreviousInput()");
         previousInput = ctx.ReadValue<Vector2>();
     }
-
-    //private void HelloWorld(InputAction.CallbackContext ctx)
-    //{
-    //    Debug.Log($"saying hello {ctx.ReadValue<float>()}");
-    //}
 }
