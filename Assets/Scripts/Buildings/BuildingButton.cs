@@ -39,7 +39,8 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         priceText.text = building.Price.ToString();
 
-        buildingCollider = building.GetComponentInChildren<BoxCollider>();
+        buildingCollider = building.GetComponent<BoxCollider>();
+        //buildingCollider = building.GetComponentInChildren<BoxCollider>();
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -116,6 +117,7 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         Color color = player.CanPlaceBuilding(buildingCollider, hit.point) ? Color.green : Color.red;
 
+        //foreach(Renderer renderer in buildingRendererInstance.GetComponents<Renderer>())
         buildingRendererInstance.material.SetColor("_BaseColor", color);
     }
 

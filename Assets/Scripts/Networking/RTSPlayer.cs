@@ -164,7 +164,11 @@ public class RTSPlayer : NetworkBehaviour
 
     public bool CanPlaceBuilding(BoxCollider buildingCollider, Vector3 point)
     {
-        Debug.Log("checking valid");
+        Debug.Log($"{buildingCollider.name}");
+
+        Collider[] colliders = Physics.OverlapBox(point + buildingCollider.center, buildingCollider.size / 2, Quaternion.identity, buildingBlockLayer);
+        foreach (Collider collider in colliders) Debug.Log($"logging: {collider.name}");
+
         if (Physics.CheckBox(
             point + buildingCollider.center,
             buildingCollider.size / 2,
@@ -173,8 +177,6 @@ public class RTSPlayer : NetworkBehaviour
         {
             return false;
         }
-
-        Debug.Log("valid");
 
         foreach (Building building in myBuildings)
         {
