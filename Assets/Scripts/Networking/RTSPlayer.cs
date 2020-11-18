@@ -15,9 +15,13 @@ public class RTSPlayer : NetworkBehaviour
     [SerializeField] float buildingRangeLimit = 5f;
 
     [SyncVar(hook = nameof(ClientHandleResourcesUpdate))]
-    private int resources = 500;
+    int resources = 500;
+
+    [SyncVar(hook = nameof(AuthorityHandlePartyOwnerStateUpdated))]
+    bool isPartyOwner = false;
 
     public event Action<int> ClientOnResourcesUpdated;
+    public static event Action<bool> AuthorityOnPartyOwnerStateUpdated;
 
     Color teamColor = new Color();
 
@@ -29,6 +33,20 @@ public class RTSPlayer : NetworkBehaviour
 
     /********** MARK: Properties **********/
     #region Properties
+
+    public bool IsPartyOwner
+    {
+        get
+        {
+            return isPartyOwner;
+        }
+
+        [Server]
+        set
+        {
+            isPartyOwner = value;
+        }
+    }
 
     public Transform CameraTransform
     {
@@ -190,6 +208,13 @@ public class RTSPlayer : NetworkBehaviour
         return false;
     }
 
+    public void CmdStartGame()
+    {
+        if (!isPartyOwner) return;
+
+        ((RTSNetworkManager)NetworkManager.singleton).StartGame();
+    }
+
     #endregion
 
     /********** MARK: Client Functions **********/
@@ -198,7 +223,7 @@ public class RTSPlayer : NetworkBehaviour
     public override void OnStartAuthority()
     {
         // if this is the server, return... i.e. add unit to list only if client
-        if (NetworkServer.active) return; 
+        if (NetworkServer.active) return;
 
         Unit.AuthorityOnUnitSpawned += AuthorityHandleUnitSpawned;
         Unit.AuthorityOnUnitDespawned += AuthorityHandleUnitDespawned;
@@ -207,10 +232,21 @@ public class RTSPlayer : NetworkBehaviour
         Building.AuthorityOnBuildingDespawned += AuthorityHandleBuildingDespawned;
     }
 
+    public override void OnStartClient()
+    {
+        if (NetworkServer.active) return;
+
+        ((RTSNetworkManager)NetworkManager.singleton).Players.Add(this);
+    }
+
     public override void OnStopClient()
     {
-        // if this is the server, return... i.e. add unit to list only if client
-        if (!isClientOnly || !hasAuthority) return;
+        
+        if (!isClientOnly) return; // this helps the client get a list of the players
+
+        ((RTSNetworkManager)NetworkManager.singleton).Players.Remove(this);
+
+        if (!hasAuthority) return; // if this is the server, return... i.e. add unit to list only if client
 
         Unit.AuthorityOnUnitSpawned -= AuthorityHandleUnitSpawned;
         Unit.AuthorityOnUnitDespawned -= AuthorityHandleUnitDespawned;
@@ -242,6 +278,13 @@ public class RTSPlayer : NetworkBehaviour
     private void AuthorityHandleBuildingDespawned(Building building)
     {
         myBuildings.Remove(building);
+    }
+
+    private void AuthorityHandlePartyOwnerStateUpdated(bool oldState, bool newState)
+    {
+        if (!hasAuthority) return;
+
+        AuthorityOnPartyOwnerStateUpdated?.Invoke(newState);
     }
 
     #endregion

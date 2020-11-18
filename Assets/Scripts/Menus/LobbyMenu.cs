@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Mirror;
 
 public class LobbyMenu : MonoBehaviour
@@ -9,7 +10,8 @@ public class LobbyMenu : MonoBehaviour
     /********** MARK: Variables **********/
     #region Variables
 
-    [SerializeField] private GameObject lobbyUI = null;
+    [SerializeField] GameObject lobbyUI = null;
+    [SerializeField] Button startGameButton = null;
 
     #endregion
 
@@ -19,11 +21,13 @@ public class LobbyMenu : MonoBehaviour
     private void Start()
     {
         RTSNetworkManager.ClientOnConnected += HandleClientConnected;
+        RTSPlayer.AuthorityOnPartyOwnerStateUpdated += AuthorityHandlePartyOwnerStateUpdated;
     }
 
     private void OnDestroy()
     {
         RTSNetworkManager.ClientOnConnected -= HandleClientConnected;
+        RTSPlayer.AuthorityOnPartyOwnerStateUpdated -= AuthorityHandlePartyOwnerStateUpdated;
     }
 
     #endregion
@@ -34,6 +38,16 @@ public class LobbyMenu : MonoBehaviour
     private void HandleClientConnected()
     {
         lobbyUI.SetActive(true);
+    }
+
+    private void AuthorityHandlePartyOwnerStateUpdated(bool state)
+    {
+        startGameButton.gameObject.SetActive(state);
+    }
+
+    public void StartGame()
+    {
+        NetworkClient.connection.identity.GetComponent<RTSPlayer>().CmdStartGame();
     }
 
     public void LeaveLobby()
