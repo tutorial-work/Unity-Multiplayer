@@ -77,6 +77,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 4.2
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b2b555badd753d34e8c300579fabbf4f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: cf3cc64bb44854119832a58a3f1108a0, type: 2}
     - target: {fileID: 919132149155446097, guid: b2b555badd753d34e8c300579fabbf4f,
         type: 3}
       propertyPath: m_Name
@@ -235,7 +240,7 @@ PrefabInstance:
     - target: {fileID: 6033682856054396528, guid: d5941778de8564480b34f0b483828e25,
         type: 3}
       propertyPath: m_Name
-      value: Small Unit
+      value: Triple Gun
       objectReference: {fileID: 0}
     - target: {fileID: 6164066368870331202, guid: d5941778de8564480b34f0b483828e25,
         type: 3}
