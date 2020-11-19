@@ -12,7 +12,7 @@ public class RTSNetworkManager : NetworkManager
 
     [SerializeField] GameObject unitBasePrefab = null;
     [SerializeField] GameOverHandler gameOverHandlerPrefab = null;
-    [SerializeField] [Range(1, 4)] int minPlayersToStartGame = 1; // HACK: increase max num of players
+    [SerializeField] [Range(1, 8)] int minPlayersToStartGame = 1;
 
     public static event Action ClientOnConnected;
     public static event Action ClientOnDisconnected;
