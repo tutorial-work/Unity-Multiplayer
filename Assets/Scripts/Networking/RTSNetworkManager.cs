@@ -12,6 +12,7 @@ public class RTSNetworkManager : NetworkManager
 
     [SerializeField] GameObject unitBasePrefab = null;
     [SerializeField] GameOverHandler gameOverHandlerPrefab = null;
+    [SerializeField] [Range(1, 4)] int minPlayersToStartGame = 1; // HACK: increase max num of players
 
     public static event Action ClientOnConnected;
     public static event Action ClientOnDisconnected;
@@ -24,6 +25,14 @@ public class RTSNetworkManager : NetworkManager
     #region Properties
 
     public List<RTSPlayer> Players { get; } = new List<RTSPlayer>();
+
+    public int MinPlayersToStartGame
+    {
+        get
+        {
+            return minPlayersToStartGame;
+        }
+    }
 
     #endregion
 
@@ -55,7 +64,7 @@ public class RTSNetworkManager : NetworkManager
 
     public void StartGame()
     {
-        if (Players.Count < 2) return;
+        if (Players.Count < MinPlayersToStartGame) return;
 
         isGameInProgress = true;
 
@@ -67,6 +76,11 @@ public class RTSNetworkManager : NetworkManager
         base.OnServerAddPlayer(conn);
 
         RTSPlayer player = conn.identity.GetComponent<RTSPlayer>();
+
+        Players.Add(player);
+
+        player.DisplayName = $"Player {Players.Count}";
+
         player.TeamColor = new Color(
             UnityEngine.Random.Range(0f, 1f),
             UnityEngine.Random.Range(0f, 1f),
@@ -91,8 +105,8 @@ public class RTSNetworkManager : NetworkManager
                 //GameObject unitSpawnerInstance = Instantiate(unitBasePrefab, pos, rot);
 
                 GameObject baseInstance = Instantiate(
-                    unitBasePrefab, 
-                    GetStartPosition().position, 
+                    unitBasePrefab,
+                    GetStartPosition().position,
                     Quaternion.identity
                 );
 

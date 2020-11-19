@@ -38,6 +38,8 @@ public class UnitSelectionHandler : MonoBehaviour
     {
         mainCamera = Camera.main;
 
+        player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
+
         Unit.AuthorityOnUnitDespawned += AuthorityHandleUnitDespawned;
         GameOverHandler.ClientOnGameOver += ClientHandleGameOver;
     }
@@ -53,8 +55,6 @@ public class UnitSelectionHandler : MonoBehaviour
     /// </summary>
     protected void Update()
     {
-        if (!TempSetPlayer()) return; // delete this after lobby is created
-
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             // Start selection area; deselects units
@@ -86,7 +86,7 @@ public class UnitSelectionHandler : MonoBehaviour
 
             SelectedUnits.Clear();
         }
-        
+
         unitSelectionArea.gameObject.SetActive(true);
 
         startPosition = Mouse.current.position.ReadValue();
@@ -117,7 +117,7 @@ public class UnitSelectionHandler : MonoBehaviour
 
             return;
         }
-         
+
         Vector2 min = unitSelectionArea.anchoredPosition - (unitSelectionArea.sizeDelta / 2);
         Vector2 max = unitSelectionArea.anchoredPosition + (unitSelectionArea.sizeDelta / 2);
 
@@ -146,7 +146,7 @@ public class UnitSelectionHandler : MonoBehaviour
         float areaHeight = mousePosition.y - startPosition.y;
 
         unitSelectionArea.sizeDelta = new Vector2(Mathf.Abs(areaWidth), Mathf.Abs(areaHeight));
-        unitSelectionArea.anchoredPosition = 
+        unitSelectionArea.anchoredPosition =
             startPosition + new Vector2(areaWidth / 2, areaHeight / 2);
     }
 
@@ -158,26 +158,6 @@ public class UnitSelectionHandler : MonoBehaviour
     private void ClientHandleGameOver(string winnerName)
     {
         enabled = false;
-    }
-
-    #endregion
-
-    /********** MARK: Debug **********/
-    #region Debug
-
-    private bool TempSetPlayer()
-    {
-        if (player == null)
-        {
-            if (NetworkClient.connection == null) return false;
-            if (NetworkClient.connection.identity == null) return false;
-
-            player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
-
-            Debug.Log("Setting Player:" + player.name);
-        }
-
-        return true;
     }
 
     #endregion
