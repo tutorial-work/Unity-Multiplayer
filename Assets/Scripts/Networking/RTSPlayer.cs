@@ -20,12 +20,7 @@ public class RTSPlayer : NetworkBehaviour
     [SyncVar(hook = nameof(AuthorityHandlePartyOwnerStateUpdated))]
     bool isPartyOwner = false;
 
-    [SyncVar(hook = nameof(ClientHandleDisplayNameUpdated))]
-    string displayName;
-    
     public event Action<int> ClientOnResourcesUpdated;
-
-    public static event Action ClientOnInfoUpdated;
     public static event Action<bool> AuthorityOnPartyOwnerStateUpdated;
 
     Color teamColor = new Color();
@@ -38,19 +33,6 @@ public class RTSPlayer : NetworkBehaviour
 
     /********** MARK: Properties **********/
     #region Properties
-
-    public string DisplayName
-    {
-        get
-        {
-            return displayName;
-        }
-        [Server]
-        set
-        {
-            displayName = value;
-        }
-    }
 
     public bool IsPartyOwner
     {
@@ -129,8 +111,6 @@ public class RTSPlayer : NetworkBehaviour
 
         Building.ServerOnBuildingSpawned += ServerHandleBuildingSpawned;
         Building.ServerOnBuildingDespawned += ServerHandleBuildingDespawned;
-
-        DontDestroyOnLoad(gameObject);
     }
 
     public override void OnStopServer()
@@ -256,15 +236,12 @@ public class RTSPlayer : NetworkBehaviour
     {
         if (NetworkServer.active) return;
 
-        DontDestroyOnLoad(gameObject);
-
         ((RTSNetworkManager)NetworkManager.singleton).Players.Add(this);
     }
 
     public override void OnStopClient()
     {
-        ClientOnInfoUpdated?.Invoke();
-
+        
         if (!isClientOnly) return; // this helps the client get a list of the players
 
         ((RTSNetworkManager)NetworkManager.singleton).Players.Remove(this);
@@ -281,11 +258,6 @@ public class RTSPlayer : NetworkBehaviour
     private void ClientHandleResourcesUpdate(int oldResources, int newResources)
     {
         ClientOnResourcesUpdated?.Invoke(newResources);
-    }
-
-    private void ClientHandleDisplayNameUpdated(string oldDisplayName, string newDisplayName)
-    {
-        ClientOnInfoUpdated?.Invoke();
     }
 
     private void AuthorityHandleUnitSpawned(Unit unit)

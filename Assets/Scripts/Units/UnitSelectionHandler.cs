@@ -38,8 +38,6 @@ public class UnitSelectionHandler : MonoBehaviour
     {
         mainCamera = Camera.main;
 
-        player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
-
         Unit.AuthorityOnUnitDespawned += AuthorityHandleUnitDespawned;
         GameOverHandler.ClientOnGameOver += ClientHandleGameOver;
     }
@@ -55,6 +53,8 @@ public class UnitSelectionHandler : MonoBehaviour
     /// </summary>
     protected void Update()
     {
+        if (!TempSetPlayer()) return; // delete this after lobby is created
+
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             // Start selection area; deselects units
@@ -158,6 +158,26 @@ public class UnitSelectionHandler : MonoBehaviour
     private void ClientHandleGameOver(string winnerName)
     {
         enabled = false;
+    }
+
+    #endregion
+
+    /********** MARK: Debug **********/
+    #region Debug
+
+    private bool TempSetPlayer()
+    {
+        if (player == null)
+        {
+            if (NetworkClient.connection == null) return false;
+            if (NetworkClient.connection.identity == null) return false;
+
+            player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
+
+            Debug.Log("Setting Player:" + player.name);
+        }
+
+        return true;
     }
 
     #endregion

@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -538,29 +538,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 156497888}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1552952072}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 616834542}
-        m_MethodName: set_interactable
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &156497888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1407,18 +1385,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 616834543}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1552952076}
-        m_MethodName: Join
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &616834543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1581,7 +1548,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 730641417}
-  - component: {fileID: 730641418}
   m_Layer: 5
   m_Name: Lobby Parent
   m_TagString: Untagged
@@ -1609,25 +1575,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &730641418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 730641416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8212c22d64a95c94bb9654885777c338, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lobbyUI: {fileID: 664677267}
-  startGameButton: {fileID: 744562265}
-  playerNameTexts:
-  - {fileID: 1885337310}
-  - {fileID: 959167672}
-  - {fileID: 1294848025}
-  - {fileID: 1969207651}
 --- !u!1 &732785224
 GameObject:
   m_ObjectHideFlags: 0
@@ -1842,18 +1789,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 744562266}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 730641418}
-        m_MethodName: StartGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &744562266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2070,7 +2006,7 @@ GameObject:
   - component: {fileID: 959167673}
   - component: {fileID: 959167672}
   m_Layer: 5
-  m_Name: Player Name Text
+  m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2272,18 +2208,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 996806489}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 730641418}
-        m_MethodName: LeaveLobby
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &996806489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2532,7 +2457,7 @@ GameObject:
   - component: {fileID: 1294848026}
   - component: {fileID: 1294848025}
   m_Layer: 5
-  m_Name: Player Name Text
+  m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3402,7 +3327,6 @@ GameObject:
   - component: {fileID: 1552952073}
   - component: {fileID: 1552952075}
   - component: {fileID: 1552952074}
-  - component: {fileID: 1552952076}
   m_Layer: 5
   m_Name: Enter Address
   m_TagString: Untagged
@@ -3467,21 +3391,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1552952072}
   m_CullTransparentMesh: 0
---- !u!114 &1552952076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1552952072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0427ec2e1e92354ea5f66ccae93aeef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  landingPagePanel: {fileID: 289844716}
-  addressInput: {fileID: 1955727399}
-  joinButton: {fileID: 616834542}
 --- !u!1 &1885337308
 GameObject:
   m_ObjectHideFlags: 0
@@ -3494,7 +3403,7 @@ GameObject:
   - component: {fileID: 1885337311}
   - component: {fileID: 1885337310}
   m_Layer: 5
-  m_Name: Player Name Text
+  m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3628,7 +3537,7 @@ GameObject:
   - component: {fileID: 1955727400}
   - component: {fileID: 1955727399}
   m_Layer: 5
-  m_Name: Address Input
+  m_Name: InputField (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3800,7 +3709,7 @@ GameObject:
   - component: {fileID: 1969207652}
   - component: {fileID: 1969207651}
   m_Layer: 5
-  m_Name: Player Name Text
+  m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4054,25 +3963,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2097045054}
   m_CullTransparentMesh: 0
---- !u!1 &3122935636446428435
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3122935636446428439}
-  - component: {fileID: 3122935636446428438}
-  - component: {fileID: 3122935636446428436}
-  m_Layer: 0
-  m_Name: Network Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &3122935636446428436
+--- !u!114 &3122935636446428433
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4081,7 +3972,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3122935636446428435}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
+  m_Script: {fileID: 11500000, guid: c7424c1070fad4ba2a7a96b02fbeb4bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   OnClientConnected:
@@ -4108,14 +3999,30 @@ MonoBehaviour:
   OnServerDisconnected:
     m_PersistentCalls:
       m_Calls: []
-  Port: 7777
+  port: 7777
   NoDelay: 1
-  Interval: 10
-  FastResend: 0
-  CongestionWindow: 1
-  SendWindowSize: 128
-  ReceiveWindowSize: 128
-  debugGUI: 0
+  serverMaxMessageSize: 16384
+  serverMaxReceivesPerTick: 10000
+  clientMaxMessageSize: 16384
+  clientMaxReceivesPerTick: 1000
+--- !u!1 &3122935636446428435
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3122935636446428439}
+  - component: {fileID: 3122935636446428438}
+  - component: {fileID: 3122935636446428433}
+  m_Layer: 0
+  m_Name: Network Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!114 &3122935636446428438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4135,7 +4042,7 @@ MonoBehaviour:
   serverTickRate: 30
   offlineScene: Assets/Scenes/Scene_Menu.unity
   onlineScene: 
-  transport: {fileID: 0}
+  transport: {fileID: 3122935636446428433}
   networkAddress: localhost
   maxConnections: 4
   disconnectInactiveConnections: 0
@@ -4161,7 +4068,6 @@ MonoBehaviour:
     type: 3}
   gameOverHandlerPrefab: {fileID: 5559102407637925187, guid: 4e4744b9755f24ef29e94d2a5e5783b2,
     type: 3}
-  minPlayersToStartGame: 2
 --- !u!4 &3122935636446428439
 Transform:
   m_ObjectHideFlags: 0
