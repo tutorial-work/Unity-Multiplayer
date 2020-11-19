@@ -39,6 +39,8 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         priceText.text = building.Price.ToString();
 
+        player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
+
         buildingCollider = building.GetComponent<BoxCollider>();
         //buildingCollider = building.GetComponentInChildren<BoxCollider>();
     }
@@ -74,9 +76,6 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     /// </summary>
     private void Update()
     {
-        bool isSet = TempSetPlayer(); // delete this after lobby is created
-        if (!isSet) return;
-
         if (buildingPreviewInstance == null) return;
 
         UpdateBuildingPreview();
@@ -86,21 +85,6 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     /********** MARK: Class Functions **********/
     #region Class Functions
-
-    private bool TempSetPlayer()
-    {
-        if (player == null)
-        {
-            if (NetworkClient.connection == null) return false;
-            if (NetworkClient.connection.identity == null) return false;
-
-            player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
-
-            Debug.Log("Setting Player:" + player.name);
-        }
-
-        return true;
-    }
 
     private void UpdateBuildingPreview()
     {

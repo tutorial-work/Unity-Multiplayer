@@ -18,9 +18,12 @@ public class ResourcesDisplay : MonoBehaviour
     /********** MARK: Unity Functions **********/
     #region Unity Functions
 
-    private void Update()
+    private void Start()
     {
-        if (!TempSetPlayer()) return; // delete this after lobby is created
+        player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
+
+        ClientHandleResourcesUpdated(player.Resources);
+        player.ClientOnResourcesUpdated += ClientHandleResourcesUpdated;
     }
 
     private void OnDestroy()
@@ -36,30 +39,6 @@ public class ResourcesDisplay : MonoBehaviour
     private void ClientHandleResourcesUpdated(int resources)
     {
         resourcesText.text = $"Resources: {resources}";
-    }
-
-    #endregion
-
-    /********** MARK: Debug **********/
-    #region Debug
-
-    private bool TempSetPlayer()
-    {
-        if (player == null)
-        {
-            if (NetworkClient.connection == null) return false;
-            if (NetworkClient.connection.identity == null) return false;
-
-            player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
-
-            ClientHandleResourcesUpdated(player.Resources);
-            player.ClientOnResourcesUpdated += ClientHandleResourcesUpdated;
-
-
-            Debug.Log($"Setting Player: {player.name} for {name}");
-        }
-
-        return true;
     }
 
     #endregion
