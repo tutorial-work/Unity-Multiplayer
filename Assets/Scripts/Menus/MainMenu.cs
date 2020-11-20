@@ -18,7 +18,14 @@ public class MainMenu : MonoBehaviour
     protected Callback<LobbyCreated_t> lobbyCreated;
     protected Callback<GameLobbyJoinRequested_t> gameLobbyJoinRequested;
     protected Callback<LobbyEnter_t> lobbyEntered;
+    
+    #endregion
 
+    /********** MARK: Properties **********/
+    #region Properties
+
+    public static CSteamID LobbyId { get; private set; }
+    
     #endregion
 
     /********** MARK: Class Functions **********/
@@ -80,11 +87,13 @@ public class MainMenu : MonoBehaviour
             return;
         }
 
+        LobbyId = new CSteamID(callback.m_ulSteamIDLobby);
+
         NetworkManager.singleton.StartHost();
 
         // this sends a new client the lobby ID
         SteamMatchmaking.SetLobbyData(
-            new CSteamID(callback.m_ulSteamIDLobby),
+            LobbyId,
             "HostAddress", // this is the key to get the lobby ID
             SteamUser.GetSteamID().ToString()
         );
@@ -112,7 +121,7 @@ public class MainMenu : MonoBehaviour
         if (NetworkServer.active) return; // do nothing if we're the server
 
         string hostAddress = SteamMatchmaking.GetLobbyData(
-            new CSteamID(callback.m_ulSteamIDLobby), // Steam ID object with the lobby steam id
+            LobbyId, // Steam ID object with the lobby steam id
             "HostAddress"
         );
 
