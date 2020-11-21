@@ -99,12 +99,12 @@ public class MainMenu : MonoBehaviour
             return;
         }
 
-        RTSNetworkManager.LobbyId = new CSteamID(callback.m_ulSteamIDLobby);
+        //RTSNetworkManager.LobbyId = new CSteamID(callback.m_ulSteamIDLobby);
 
         NetworkManager.singleton.StartHost();
 
         SteamMatchmaking.SetLobbyData(
-            RTSNetworkManager.LobbyId,
+            new CSteamID(callback.m_ulSteamIDLobby),
             "HostAddress",
             SteamUser.GetSteamID().ToString());
 

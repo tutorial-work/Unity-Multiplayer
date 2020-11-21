@@ -89,16 +89,16 @@ public class RTSNetworkManager : NetworkManager
 
         if (MainMenu.UseSteam)
         {
-            CSteamID steamId = SteamMatchmaking.GetLobbyMemberByIndex(
-                RTSNetworkManager.LobbyId,
-                numPlayers -1
-            );
+            //CSteamID steamId = SteamMatchmaking.GetLobbyMemberByIndex(
+            //    new CSteamID(callback.m_ulSteamIDLobby),
+            //    numPlayers - 1
+            //);
 
             //PlayerInfoDisplay playerInfoDisplay = conn.identity.GetComponent<PlayerInfoDisplay>();
 
             //playerInfoDisplay.SteamId = steamId.m_SteamID;
 
-            player.DisplayName = $"{SteamFriends.GetFriendPersonaName(steamId)}";
+            //player.DisplayName = $"{SteamFriends.GetFriendPersonaName(steamId)}";
             //player.DisplayName = $"{SteamFriends.GetPersonaName()}";
         }
         else
