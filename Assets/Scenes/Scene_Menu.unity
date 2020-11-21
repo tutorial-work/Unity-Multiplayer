@@ -3614,10 +3614,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1456013123}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 556330acdc0d2aa4283d9dcc54bf588c, type: 3}
+  m_Script: {fileID: 11500000, guid: 1592306b80e34a1438433c84d8e89dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugText: {fileID: 146464985}
   landingPagePanel: {fileID: 289844716}
   useSteam: 1
 --- !u!1 &1552952072
