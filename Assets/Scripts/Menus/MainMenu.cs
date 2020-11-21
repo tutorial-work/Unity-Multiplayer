@@ -40,6 +40,14 @@ public class MainMenu : MonoBehaviour
         UseSteam = useSteam;
     }
 
+    private void Awake()
+    {
+        if (useSteam) Debug.LogWarning("This build is using Steam");
+        else Debug.LogWarning("This build is NOT using Steam");
+
+        UseSteam = useSteam;
+    }
+
     private void Start()
     {
         if (!useSteam) { return; }
