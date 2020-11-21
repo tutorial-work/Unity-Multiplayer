@@ -25,7 +25,7 @@ public class RTSNetworkManager : NetworkManager
     /********** MARK: Properties **********/
     #region Properties
 
-    public static CSteamID LobbyId { get; [Server] set; }
+    public static CSteamID LobbyId { get; set; }
 
     public List<RTSPlayer> Players { get; } = new List<RTSPlayer>();
 
