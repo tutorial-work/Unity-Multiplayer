@@ -94,11 +94,11 @@ public class RTSNetworkManager : NetworkManager
                 numPlayers -1
             );
 
-            PlayerInfoDisplay playerInfoDisplay = conn.identity.GetComponent<PlayerInfoDisplay>();
+            //PlayerInfoDisplay playerInfoDisplay = conn.identity.GetComponent<PlayerInfoDisplay>();
 
-            playerInfoDisplay.SteamId = steamId.m_SteamID;
+            //playerInfoDisplay.SteamId = steamId.m_SteamID;
 
-            player.DisplayName = $"{playerInfoDisplay.DisplayName}";
+            player.DisplayName = $"{SteamFriends.GetFriendPersonaName(steamId)}";
         }
         else
         {
