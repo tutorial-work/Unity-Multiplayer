@@ -104,7 +104,7 @@ public class MainMenu : MonoBehaviour
         NetworkManager.singleton.StartHost();
 
         SteamMatchmaking.SetLobbyData(
-            RTSNetworkManager.LobbyId,
+            new CSteamID(callback.m_ulSteamIDLobby),
             "HostAddress",
             SteamUser.GetSteamID().ToString());
 
