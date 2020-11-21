@@ -132,7 +132,7 @@ public class MainMenu : MonoBehaviour
         if (NetworkServer.active) { return; }
 
         string hostAddress = SteamMatchmaking.GetLobbyData(
-            RTSNetworkManager.LobbyId,
+            new CSteamID(callback.m_ulSteamIDLobby),
             "HostAddress");
 
         NetworkManager.singleton.networkAddress = hostAddress;
