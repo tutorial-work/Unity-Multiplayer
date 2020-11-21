@@ -7,15 +7,38 @@ using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
+    /********** MARK: Variables **********/
+    #region Variables
+
     [SerializeField] TMP_Text debugText = null;
 
     [SerializeField] private GameObject landingPagePanel = null;
 
-    [SerializeField] private bool useSteam = false;
+    [SerializeField] bool useSteam = false;
 
     protected Callback<LobbyCreated_t> lobbyCreated;
     protected Callback<GameLobbyJoinRequested_t> gameLobbyJoinRequested;
     protected Callback<LobbyEnter_t> lobbyEntered;
+
+    #endregion
+
+    /********** MARK: Properties **********/
+    #region Properties
+
+    public static bool UseSteam { get; private set; }
+
+    #endregion
+
+    /********** MARK: Unity Functions **********/
+    #region Unity Functions
+
+    private void OnValidate()
+    {
+        if (useSteam) Debug.LogWarning("This build is using Steam");
+        else Debug.LogWarning("This build is NOT using Steam");
+
+        UseSteam = useSteam;
+    }
 
     private void Start()
     {
@@ -31,6 +54,11 @@ public class MainMenu : MonoBehaviour
         Debug.Log("completed SetupSteamCallbacks");
         debugText.text += ">completed SetupSteamCallbacks\n";
     }
+
+    #endregion
+
+    /********** MARK: Class Functions **********/
+    #region Class Functions
 
     public void HostLobby()
     {
@@ -64,10 +92,12 @@ public class MainMenu : MonoBehaviour
             return;
         }
 
+        RTSNetworkManager.LobbyId = new CSteamID(callback.m_ulSteamIDLobby);
+
         NetworkManager.singleton.StartHost();
 
         SteamMatchmaking.SetLobbyData(
-            new CSteamID(callback.m_ulSteamIDLobby),
+            RTSNetworkManager.LobbyId,
             "HostAddress",
             SteamUser.GetSteamID().ToString());
 
@@ -95,7 +125,7 @@ public class MainMenu : MonoBehaviour
         if (NetworkServer.active) { return; }
 
         string hostAddress = SteamMatchmaking.GetLobbyData(
-            new CSteamID(callback.m_ulSteamIDLobby),
+            RTSNetworkManager.LobbyId,
             "HostAddress");
 
         NetworkManager.singleton.networkAddress = hostAddress;
@@ -106,4 +136,6 @@ public class MainMenu : MonoBehaviour
         Debug.Log("completed OnLobbyEntered");
         debugText.text += ">completed OnLobbyEntered\n";
     }
+
+    #endregion
 }

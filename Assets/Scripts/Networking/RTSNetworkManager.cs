@@ -4,6 +4,7 @@ using UnityEngine;
 using Mirror;
 using UnityEngine.SceneManagement;
 using System;
+using Steamworks;
 
 public class RTSNetworkManager : NetworkManager
 {
@@ -24,6 +25,8 @@ public class RTSNetworkManager : NetworkManager
     /********** MARK: Properties **********/
     #region Properties
 
+    public static CSteamID LobbyId { get; [Server] set; }
+
     public List<RTSPlayer> Players { get; } = new List<RTSPlayer>();
 
     public int MinPlayersToStartGame
@@ -34,6 +37,11 @@ public class RTSNetworkManager : NetworkManager
         }
     }
 
+    #endregion
+
+    /********** MARK: Unity Functions **********/
+    #region Unity Functions
+        
     #endregion
 
     /********** MARK: Server Functions **********/
@@ -79,7 +87,23 @@ public class RTSNetworkManager : NetworkManager
 
         Players.Add(player);
 
-        player.DisplayName = $"Player {Players.Count}";
+        if (MainMenu.UseSteam)
+        {
+            CSteamID steamId = SteamMatchmaking.GetLobbyMemberByIndex(
+                RTSNetworkManager.LobbyId,
+                numPlayers -1
+            );
+
+            PlayerInfoDisplay playerInfoDisplay = conn.identity.GetComponent<PlayerInfoDisplay>();
+
+            playerInfoDisplay.SteamId = steamId.m_SteamID;
+
+            player.DisplayName = $"{playerInfoDisplay.DisplayName}";
+        }
+        else
+        {
+            player.DisplayName = $"Player {Players.Count}";
+        }
 
         player.TeamColor = new Color(
             UnityEngine.Random.Range(0f, 1f),

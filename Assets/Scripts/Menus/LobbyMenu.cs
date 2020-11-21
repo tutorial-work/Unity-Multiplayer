@@ -14,6 +14,7 @@ public class LobbyMenu : MonoBehaviour
     [SerializeField] GameObject lobbyUI = null;
     [SerializeField] Button startGameButton = null;
     [SerializeField] TMP_Text[] playerNameTexts = new TMP_Text[4]; // HACK: hardcoded
+    [SerializeField] RawImage[] playerSteamImages = new RawImage[4]; // HACK: hardcoded
 
     #endregion
 
