@@ -77,7 +77,6 @@ public class MainMenu : MonoBehaviour
             Debug.Log("starting SteamMatchmaking.CreateLobby");
             debugText.text += ">starting SteamMatchmaking.CreateLobby\n";
 
-
             SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, 4);
 
             Debug.Log("completed SteamMatchmaking.CreateLobby");

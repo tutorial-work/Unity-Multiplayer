@@ -99,6 +99,7 @@ public class RTSNetworkManager : NetworkManager
             //playerInfoDisplay.SteamId = steamId.m_SteamID;
 
             player.DisplayName = $"{SteamFriends.GetFriendPersonaName(steamId)}";
+            //player.DisplayName = $"{SteamFriends.GetPersonaName()}";
         }
         else
         {
