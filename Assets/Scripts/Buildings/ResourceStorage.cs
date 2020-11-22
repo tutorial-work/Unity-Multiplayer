@@ -13,20 +13,20 @@ public class ResourceStorage : NetworkBehaviour
     /********** MARK: Server Functions **********/
     #region Server Functions
 
-    public override void OnStartServer()
-    {
-        timer = interval;
-        player = connectionToClient.identity.GetComponent<RTSPlayer>();
+    //public override void OnStartServer()
+    //{
+    //    timer = interval;
+    //    player = connectionToClient.identity.GetComponent<RTSPlayer>();
 
-        health.ServerOnDie += ServerHandleDie;
-        GameOverHandler.ServerOnGameOver += ServerHandleGameOver;
-    }
+    //    health.ServerOnDie += ServerHandleDie;
+    //    GameOverHandler.ServerOnGameOver += ServerHandleGameOver;
+    //}
 
-    public override void OnStopServer()
-    {
-        health.ServerOnDie -= ServerHandleDie;
-        GameOverHandler.ServerOnGameOver -= ServerHandleGameOver;
-    }
+    //public override void OnStopServer()
+    //{
+    //    health.ServerOnDie -= ServerHandleDie;
+    //    GameOverHandler.ServerOnGameOver -= ServerHandleGameOver;
+    //}
 
     #endregion
 }
