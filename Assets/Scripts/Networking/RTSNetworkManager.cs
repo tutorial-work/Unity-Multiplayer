@@ -83,30 +83,30 @@ public class RTSNetworkManager : NetworkManager
     {
         base.OnServerAddPlayer(conn);
 
-        RTSPlayer player = conn.identity.GetComponent<RTSPlayer>();
+        Players.Add(conn.identity.GetComponent<RTSPlayer>());
 
-        Players.Add(player);
+        RTSPlayerInfo playerInfo = conn.identity.GetComponent<RTSPlayerInfo>();
+
         if (MainMenu.UseSteam)
         {
             CSteamID steamId = SteamMatchmaking.GetLobbyMemberByIndex(
                 new CSteamID(LobbyId),
                 numPlayers - 1
             );
-
-            player.DisplayName = $"{SteamFriends.GetFriendPersonaName(steamId)}";
+            playerInfo.SteamId = steamId.m_SteamID; // this sets up all the steam info, name, picture
         }
         else
         {
-            player.DisplayName = $"Player {Players.Count}";
+            playerInfo.DisplayName = $"Player {Players.Count}";
         }
 
-        player.TeamColor = new Color(
+        playerInfo.TeamColor = new Color(
             UnityEngine.Random.Range(0f, 1f),
             UnityEngine.Random.Range(0f, 1f),
             UnityEngine.Random.Range(0f, 1f)
         );
 
-        player.IsPartyOwner = (Players.Count == 1);
+        playerInfo.IsPartyOwner = (Players.Count == 1);
     }
 
     public override void OnServerSceneChanged(string sceneName)

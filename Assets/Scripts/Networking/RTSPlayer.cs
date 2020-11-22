@@ -17,18 +17,7 @@ public class RTSPlayer : NetworkBehaviour
     [SyncVar(hook = nameof(ClientHandleResourcesUpdate))]
     int resources = 500;
 
-    [SyncVar(hook = nameof(AuthorityHandlePartyOwnerStateUpdated))]
-    bool isPartyOwner = false;
-
-    [SyncVar(hook = nameof(ClientHandleDisplayNameUpdated))]
-    string displayName;
-
     public event Action<int> ClientOnResourcesUpdated;
-
-    public static event Action ClientOnInfoUpdated;
-    public static event Action<bool> AuthorityOnPartyOwnerStateUpdated;
-
-    Color teamColor = new Color();
 
     List<Unit> myUnits = new List<Unit>();
 
@@ -39,51 +28,11 @@ public class RTSPlayer : NetworkBehaviour
     /********** MARK: Properties **********/
     #region Properties
 
-    public string DisplayName
-    {
-        get
-        {
-            return displayName;
-        }
-        [Server]
-        set
-        {
-            displayName = value;
-        }
-    }
-
-    public bool IsPartyOwner
-    {
-        get
-        {
-            return isPartyOwner;
-        }
-
-        [Server]
-        set
-        {
-            isPartyOwner = value;
-        }
-    }
-
     public Transform CameraTransform
     {
         get
         {
             return cameraTransform;
-        }
-    }
-
-    public Color TeamColor
-    {
-        get
-        {
-            return teamColor;
-        }
-        [Server]
-        set
-        {
-            teamColor = value;
         }
     }
 
@@ -230,7 +179,7 @@ public class RTSPlayer : NetworkBehaviour
 
     public void CmdStartGame()
     {
-        if (!isPartyOwner) return;
+        if (!GetComponent<RTSPlayerInfo>().IsPartyOwner) return;
 
         ((RTSNetworkManager)NetworkManager.singleton).StartGame();
     }
@@ -263,7 +212,8 @@ public class RTSPlayer : NetworkBehaviour
 
     public override void OnStopClient()
     {
-        ClientOnInfoUpdated?.Invoke();
+        Debug.LogWarning("RTSPlayer Stopping Client");
+        GetComponent<RTSPlayerInfo>().AuthorityHandleOnStopClient();
 
         if (!isClientOnly) return; // this helps the client get a list of the players
 
@@ -281,11 +231,6 @@ public class RTSPlayer : NetworkBehaviour
     private void ClientHandleResourcesUpdate(int oldResources, int newResources)
     {
         ClientOnResourcesUpdated?.Invoke(newResources);
-    }
-
-    private void ClientHandleDisplayNameUpdated(string oldDisplayName, string newDisplayName)
-    {
-        ClientOnInfoUpdated?.Invoke();
     }
 
     private void AuthorityHandleUnitSpawned(Unit unit)
@@ -306,13 +251,6 @@ public class RTSPlayer : NetworkBehaviour
     private void AuthorityHandleBuildingDespawned(Building building)
     {
         myBuildings.Remove(building);
-    }
-
-    private void AuthorityHandlePartyOwnerStateUpdated(bool oldState, bool newState)
-    {
-        if (!hasAuthority) return;
-
-        AuthorityOnPartyOwnerStateUpdated?.Invoke(newState);
     }
 
     #endregion

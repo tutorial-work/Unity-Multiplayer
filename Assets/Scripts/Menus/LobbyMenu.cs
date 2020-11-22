@@ -24,15 +24,15 @@ public class LobbyMenu : MonoBehaviour
     private void Start()
     {
         RTSNetworkManager.ClientOnConnected += HandleClientConnected;
-        RTSPlayer.AuthorityOnPartyOwnerStateUpdated += AuthorityHandlePartyOwnerStateUpdated;
-        RTSPlayer.ClientOnInfoUpdated += ClientHandleInfoUpdated;
+        RTSPlayerInfo.AuthorityOnPartyOwnerStateUpdated += AuthorityHandlePartyOwnerStateUpdated;
+        RTSPlayerInfo.ClientOnInfoUpdated += ClientHandleInfoUpdated;
     }
 
     private void OnDestroy()
     {
         RTSNetworkManager.ClientOnConnected -= HandleClientConnected;
-        RTSPlayer.AuthorityOnPartyOwnerStateUpdated -= AuthorityHandlePartyOwnerStateUpdated;
-        RTSPlayer.ClientOnInfoUpdated -= ClientHandleInfoUpdated;
+        RTSPlayerInfo.AuthorityOnPartyOwnerStateUpdated -= AuthorityHandlePartyOwnerStateUpdated;
+        RTSPlayerInfo.ClientOnInfoUpdated -= ClientHandleInfoUpdated;
     }
 
     #endregion
@@ -52,12 +52,14 @@ public class LobbyMenu : MonoBehaviour
 
         for (int i = 0; i < players.Count; i++)
         {
-            playerNameTexts[i].text = players[i].DisplayName;
+            playerNameTexts[i].text = players[i].GetComponent<RTSPlayerInfo>().DisplayName;
+            playerSteamImages[i].texture = players[i].GetComponent<RTSPlayerInfo>().DisplayTexture;
         }
 
         for (int i = players.Count; i < playerNameTexts.Length; i++)
         {
             playerNameTexts[i].text = "Waiting For Player...";
+            playerSteamImages[i].texture = null;
         }
 
         startGameButton.interactable = (players.Count >= rtsNetworkManager.MinPlayersToStartGame);

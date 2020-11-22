@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
+using System;
 using Mirror;
 using Steamworks;
 
@@ -10,14 +10,27 @@ public class RTSPlayerInfo : NetworkBehaviour
 {
     /********** MARK: Variables **********/
     #region Variables
-        
+
+    [SyncVar(hook = nameof(HandleSteamIdUpdated))]
     ulong steamId;
-    
+
+    [SyncVar(hook = nameof(ClientHandleDisplayNameUpdated))]
     string displayName;
 
-    RawImage profileImage = null;
+    //[SyncVar(hook = nameof(ClientHandleDisplayTextureUpdated))]
+    Texture2D displayTexture;
+
+    [SyncVar(hook = nameof(AuthorityHandlePartyOwnerStateUpdated))]
+    bool isPartyOwner = false;
+
+    //RawImage profileImage = null;
+
+    Color teamColor = new Color();
 
     protected Callback<AvatarImageLoaded_t> avatarImageLoaded;
+
+    public static event Action ClientOnInfoUpdated;
+    public static event Action<bool> AuthorityOnPartyOwnerStateUpdated;
 
     #endregion
 
@@ -30,6 +43,8 @@ public class RTSPlayerInfo : NetworkBehaviour
         {
             return steamId;
         }
+
+        [Server]
         set
         {
             steamId = value;
@@ -42,12 +57,49 @@ public class RTSPlayerInfo : NetworkBehaviour
         {
             return displayName;
         }
+
+        [Server]
+        set
+        {
+            displayName = value;
+        }
     }
 
-    #endregion
+    public Texture2D DisplayTexture
+    {
+        get
+        {
+            return displayTexture;
+        }
+    }
 
-    /********** MARK: Server Functions **********/
-    #region Server Functions
+    public Color TeamColor
+    {
+        get
+        {
+            return teamColor;
+        }
+
+        [Server]
+        set
+        {
+            teamColor = value;
+        }
+    }
+
+    public bool IsPartyOwner
+    {
+        get
+        {
+            return isPartyOwner;
+        }
+
+        [Server]
+        set
+        {
+            isPartyOwner = value;
+        }
+    }
 
     #endregion
 
@@ -59,24 +111,12 @@ public class RTSPlayerInfo : NetworkBehaviour
         avatarImageLoaded = Callback<AvatarImageLoaded_t>.Create(OnAvatarImageLoaded);
     }
 
-    private void HandleSteamIdUpdated(ulong oldSteamId, ulong newSteamId)
-    {
-        CSteamID steamId = new CSteamID(newSteamId);
-
-        displayName = SteamFriends.GetFriendPersonaName(steamId);
-
-        int imageId = SteamFriends.GetLargeFriendAvatar(steamId);
-
-        if (imageId == -1) return;
-
-        profileImage.texture = GetSteamImageAsTexture(imageId);
-    }
-
     private void OnAvatarImageLoaded(AvatarImageLoaded_t callback)
     {
         if (callback.m_steamID.m_SteamID != steamId) return;
 
-        profileImage.texture = GetSteamImageAsTexture(callback.m_iImage);
+        displayTexture = GetSteamImageAsTexture(callback.m_iImage);
+        ClientOnInfoUpdated?.Invoke();
     }
 
     private Texture2D GetSteamImageAsTexture(int iImage)
@@ -101,6 +141,49 @@ public class RTSPlayerInfo : NetworkBehaviour
         }
 
         return texture;
+    }
+
+    #endregion
+
+    /********** MARK: Handle Functions **********/
+    #region Handle Functions
+
+    private void HandleSteamIdUpdated(ulong oldSteamId, ulong newSteamId)
+    {
+        CSteamID steamId = new CSteamID(newSteamId);
+
+        displayName = SteamFriends.GetFriendPersonaName(steamId);
+
+        int imageId = SteamFriends.GetLargeFriendAvatar(steamId);
+
+        if (imageId == -1) return;
+
+        displayTexture = GetSteamImageAsTexture(imageId);
+        ClientOnInfoUpdated?.Invoke();
+    }
+
+    private void ClientHandleDisplayNameUpdated(string oldDisplayName, string newDisplayName)
+    {
+        ClientOnInfoUpdated?.Invoke();
+    }
+
+    //private void ClientHandleDisplayTextureUpdated(Texture2D oldTexture, Texture2D newTexture)
+    //{
+    //    ClientOnInfoUpdated?.Invoke();
+    //}
+
+    private void AuthorityHandlePartyOwnerStateUpdated(bool oldState, bool newState)
+    {
+        if (!hasAuthority) return;
+
+        AuthorityOnPartyOwnerStateUpdated?.Invoke(newState);
+    }
+
+    public void AuthorityHandleOnStopClient()
+    {
+        //if (!hasAuthority) return; // IDK ahhhh
+
+        ClientOnInfoUpdated?.Invoke();
     }
 
     #endregion
