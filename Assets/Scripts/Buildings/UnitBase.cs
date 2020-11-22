@@ -26,18 +26,6 @@ public class UnitBase : NetworkBehaviour
 
     #endregion
 
-    /********** MARK: Class Functions **********/
-    #region Class Functions
-
-    private void Awake()
-    {
-        RTSPlayerInfo info = NetworkClient.connection.identity.GetComponent<RTSPlayerInfo>();
-
-        playerSteamImage.texture = info.DisplayTexture;
-    }
-
-    #endregion
-
     /********** MARK: Server Functions **********/
     #region Server Functions
 
@@ -46,6 +34,18 @@ public class UnitBase : NetworkBehaviour
         health.ServerOnDie += ServerHandleDie;
 
         ServerOnBaseSpawned?.Invoke(this);
+
+        // i have no idea what im doing
+
+        if (!hasAuthority) return;
+
+        RTSNetworkManager manager = (RTSNetworkManager)NetworkManager.singleton;
+
+        int playerId = connectionToClient.connectionId;
+
+        RTSPlayerInfo info = manager.Players[playerId].GetComponent<RTSPlayerInfo>();
+
+        playerSteamImage.texture = info.DisplayTexture;
     }
 
     public override void OnStopServer()
