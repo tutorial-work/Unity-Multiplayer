@@ -10,6 +10,14 @@
 ### Todo
 List of objectives to complete
 
+General
 - [x] Complete Tutorial
-- [ ] Complete Tutorial
-- [ ] Complete Tutorial
+- [x] Add Steam Username to Lobby
+- [x] Add Steam Profile Picture to Lobby
+
+Better Map
+- [ ] Add Steam Profile Picture to Game
+- [ ] Update Map with better Environment
+
+Pieces
+- [ ] Add 
