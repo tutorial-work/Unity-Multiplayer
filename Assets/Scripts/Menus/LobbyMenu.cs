@@ -14,6 +14,7 @@ public class LobbyMenu : MonoBehaviour
     [SerializeField] GameObject lobbyUI = null;
     [SerializeField] Button startGameButton = null;
     [SerializeField] TMP_Text[] playerNameTexts = new TMP_Text[4]; // HACK: hardcoded
+    [SerializeField] RawImage[] playerSteamImages = new RawImage[4]; // HACK: hardcoded
 
     #endregion
 
@@ -23,15 +24,15 @@ public class LobbyMenu : MonoBehaviour
     private void Start()
     {
         RTSNetworkManager.ClientOnConnected += HandleClientConnected;
-        RTSPlayer.AuthorityOnPartyOwnerStateUpdated += AuthorityHandlePartyOwnerStateUpdated;
-        RTSPlayer.ClientOnInfoUpdated += ClientHandleInfoUpdated;
+        RTSPlayerInfo.AuthorityOnPartyOwnerStateUpdated += AuthorityHandlePartyOwnerStateUpdated;
+        RTSPlayerInfo.ClientOnInfoUpdated += ClientHandleInfoUpdated;
     }
 
     private void OnDestroy()
     {
         RTSNetworkManager.ClientOnConnected -= HandleClientConnected;
-        RTSPlayer.AuthorityOnPartyOwnerStateUpdated -= AuthorityHandlePartyOwnerStateUpdated;
-        RTSPlayer.ClientOnInfoUpdated -= ClientHandleInfoUpdated;
+        RTSPlayerInfo.AuthorityOnPartyOwnerStateUpdated -= AuthorityHandlePartyOwnerStateUpdated;
+        RTSPlayerInfo.ClientOnInfoUpdated -= ClientHandleInfoUpdated;
     }
 
     #endregion
@@ -44,19 +45,21 @@ public class LobbyMenu : MonoBehaviour
         lobbyUI.SetActive(true);
     }
 
-    private void ClientHandleInfoUpdated() 
+    private void ClientHandleInfoUpdated()
     {
         RTSNetworkManager rtsNetworkManager = (RTSNetworkManager)NetworkManager.singleton;
         List<RTSPlayer> players = rtsNetworkManager.Players;
 
         for (int i = 0; i < players.Count; i++)
         {
-            playerNameTexts[i].text = players[i].DisplayName;
+            playerNameTexts[i].text = players[i].GetComponent<RTSPlayerInfo>().DisplayName;
+            playerSteamImages[i].texture = players[i].GetComponent<RTSPlayerInfo>().DisplayTexture;
         }
 
         for (int i = players.Count; i < playerNameTexts.Length; i++)
         {
             playerNameTexts[i].text = "Waiting For Player...";
+            playerSteamImages[i].texture = null;
         }
 
         startGameButton.interactable = (players.Count >= rtsNetworkManager.MinPlayersToStartGame);
@@ -84,7 +87,7 @@ public class LobbyMenu : MonoBehaviour
             NetworkManager.singleton.StopClient();
 
             // this reloads the start menu, it's the lazy way rather than turning on/off various UI
-            SceneManager.LoadScene(0); 
+            SceneManager.LoadScene(0);
         }
     }
 

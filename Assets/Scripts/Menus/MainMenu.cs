@@ -1,15 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Mirror;
 using Steamworks;
+using UnityEngine;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
     /********** MARK: Variables **********/
     #region Variables
 
-    [SerializeField] GameObject landingPagePanel = null;
+    [SerializeField] TMP_Text debugText = null;
+
+    [SerializeField] private GameObject landingPagePanel = null;
 
     [SerializeField] bool useSteam = false;
 
@@ -19,78 +22,127 @@ public class MainMenu : MonoBehaviour
 
     #endregion
 
-    /********** MARK: Class Functions **********/
-    #region Class Functions
+    /********** MARK: Properties **********/
+    #region Properties
+
+    public static bool UseSteam { get; private set; }
+
+    #endregion
+
+    /********** MARK: Unity Functions **********/
+    #region Unity Functions
+
+    private void OnValidate()
+    {
+        if (useSteam) Debug.LogWarning("This build is using Steam");
+        else Debug.LogWarning("This build is NOT using Steam");
+
+        UseSteam = useSteam;
+    }
+
+    private void Awake()
+    {
+        if (useSteam) Debug.LogWarning("This build is using Steam");
+        else Debug.LogWarning("This build is NOT using Steam");
+
+        UseSteam = useSteam;
+    }
 
     private void Start()
     {
-        // Steam Callback Code setup if using steam
-        if (useSteam) SetupSteamCallbacks();
+        if (!useSteam) { return; }
+
+        Debug.Log("starting SetupSteamCallbacks");
+        debugText.text += ">starting SetupSteamCallbacks\n";
+
+        lobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
+        gameLobbyJoinRequested = Callback<GameLobbyJoinRequested_t>.Create(OnGameLobbyJoinRequested);
+        lobbyEntered = Callback<LobbyEnter_t>.Create(OnLobbyEntered);
+
+        Debug.Log("completed SetupSteamCallbacks");
+        debugText.text += ">completed SetupSteamCallbacks\n";
     }
+
+    #endregion
+
+    /********** MARK: Class Functions **********/
+    #region Class Functions
 
     public void HostLobby()
     {
         landingPagePanel.SetActive(false);
 
-        if (useSteam) // if using steam prepare the lobby for the steam callbacks
+        if (useSteam)
         {
-            SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, 4); // HACK: hard-coded number of players
+            Debug.Log("starting SteamMatchmaking.CreateLobby");
+            debugText.text += ">starting SteamMatchmaking.CreateLobby\n";
+
+            SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, 4);
+
+            Debug.Log("completed SteamMatchmaking.CreateLobby");
+            debugText.text += ">completed SteamMatchmaking.CreateLobby\n";
+
+            return;
         }
-        else // otherwise, just create the host lobby
-        {
-            NetworkManager.singleton.StartHost();
-        }
-    }
 
-    #endregion
-
-    /********** MARK: Steam Functions **********/
-    #region Steam Functions
-
-    private void SetupSteamCallbacks()
-    {
-        lobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
-        gameLobbyJoinRequested = Callback<GameLobbyJoinRequested_t>.Create(OnGameLobbyJoinRequested);
-        lobbyEntered = Callback<LobbyEnter_t>.Create(OnLobbyEnter);
+        NetworkManager.singleton.StartHost();
     }
 
     private void OnLobbyCreated(LobbyCreated_t callback)
     {
-        // TODO: idk what this if statement does, he didn't go over it
-        if (callback.m_eResult != EResult.k_EResultOK) 
+        Debug.Log("starting OnLobbyCreated");
+        debugText.text += ">starting OnLobbyCreated\n";
+
+        if (callback.m_eResult != EResult.k_EResultOK)
         {
             landingPagePanel.SetActive(true);
             return;
         }
 
+        CSteamID lobbyId = new CSteamID(callback.m_ulSteamIDLobby);
+        RTSNetworkManager.LobbyId = lobbyId.m_SteamID;
+
         NetworkManager.singleton.StartHost();
 
-        // this sends a new client the lobby ID
         SteamMatchmaking.SetLobbyData(
-            new CSteamID(callback.m_ulSteamIDLobby),
-            "HostAddress", // this is the key to get the lobby ID
-            SteamUser.GetSteamID().ToString()
-        );
+            lobbyId,
+            "HostAddress",
+            SteamUser.GetSteamID().ToString());
+
+        Debug.Log("completed OnLobbyCreated");
+        debugText.text += ">completed OnLobbyCreated\n";
+
     }
 
     private void OnGameLobbyJoinRequested(GameLobbyJoinRequested_t callback)
     {
+        Debug.Log("starting OnGameLobbyJoinRequested");
+        debugText.text += ">starting OnGameLobbyJoinRequested\n";
+
         SteamMatchmaking.JoinLobby(callback.m_steamIDLobby);
+
+        Debug.Log("completed OnGameLobbyJoinRequested");
+        debugText.text += ">completed OnGameLobbyJoinRequested\n";
     }
 
-    private void OnLobbyEnter(LobbyEnter_t callback)
+    private void OnLobbyEntered(LobbyEnter_t callback)
     {
-        if (NetworkServer.active) return; // do nothing if we're the server
+        Debug.Log("starting OnLobbyEntered");
+        debugText.text += ">starting OnLobbyEntered\n";
+
+        if (NetworkServer.active) { return; }
 
         string hostAddress = SteamMatchmaking.GetLobbyData(
-            new CSteamID(callback.m_ulSteamIDLobby), // Steam ID object with the lobby steam id
-            "HostAddress"
-        );
+            new CSteamID(callback.m_ulSteamIDLobby),
+            "HostAddress");
 
         NetworkManager.singleton.networkAddress = hostAddress;
         NetworkManager.singleton.StartClient();
 
         landingPagePanel.SetActive(false);
+
+        Debug.Log("completed OnLobbyEntered");
+        debugText.text += ">completed OnLobbyEntered\n";
     }
 
     #endregion
