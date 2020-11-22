@@ -99,12 +99,12 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
 
         RTSPlayer player = connectionToClient.identity.GetComponent<RTSPlayer>();
 
-        if (player.Resources < unitPrefab.ResourceCost) return;
+        if (player.CurrentResources < unitPrefab.ResourceCost) return;
 
         queuedUnits++;
 
         //player.Resources = player.Resources - unitPrefab.ResourceCost;
-        player.Resources -= unitPrefab.ResourceCost; // TODO: can you actually do this with getters and setters?
+        player.CurrentResources -= unitPrefab.ResourceCost; // TODO: can you actually do this with getters and setters?
     }
 
     #endregion

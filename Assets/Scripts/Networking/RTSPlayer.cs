@@ -14,10 +14,13 @@ public class RTSPlayer : NetworkBehaviour
     [SerializeField] Building[] buildings = new Building[0];
     [SerializeField] float buildingRangeLimit = 5f;
 
-    [SyncVar(hook = nameof(ClientHandleResourcesUpdate))]
-    int resources = 500;
+    [SyncVar(hook = nameof(ClientHandleCurrentResourcesUpdate))]
+    int currentResources = 500;
 
-    public event Action<int> ClientOnResourcesUpdated;
+    [SyncVar(hook = nameof(ClientHandleMaxResourcesUpdate))]
+    int maxResources = 500;
+
+    public event Action<int, int> ClientOnResourcesUpdated;
 
     List<Unit> myUnits = new List<Unit>();
 
@@ -36,17 +39,31 @@ public class RTSPlayer : NetworkBehaviour
         }
     }
 
-    public int Resources
+    public int CurrentResources
     {
         get
         {
-            return resources;
+            return currentResources;
         }
 
         [Server] // TODO: im not really sure if this works? validate?
         set
         {
-            resources = value;
+            currentResources = Mathf.Clamp(value, 0, maxResources);
+        }
+    }
+
+    public int MaxResources
+    {
+        get
+        {
+            return maxResources;
+        }
+
+        [Server]
+        set
+        {
+            maxResources = value;
         }
     }
 
@@ -135,7 +152,7 @@ public class RTSPlayer : NetworkBehaviour
 
         if (buildingToPlace == null) return;
 
-        if (resources < buildingToPlace.Price) return;
+        if (currentResources < buildingToPlace.Price) return;
 
         BoxCollider buildingCollider = buildingToPlace.GetComponentInChildren<BoxCollider>();
 
@@ -146,7 +163,7 @@ public class RTSPlayer : NetworkBehaviour
 
         NetworkServer.Spawn(buildingInstance, connectionToClient);
 
-        Resources = resources - buildingToPlace.Price;
+        CurrentResources = currentResources - buildingToPlace.Price;
     }
 
     public bool CanPlaceBuilding(BoxCollider buildingCollider, Vector3 point)
@@ -228,9 +245,14 @@ public class RTSPlayer : NetworkBehaviour
         Building.AuthorityOnBuildingDespawned -= AuthorityHandleBuildingDespawned;
     }
 
-    private void ClientHandleResourcesUpdate(int oldResources, int newResources)
+    private void ClientHandleCurrentResourcesUpdate(int oldResources, int newResources)
     {
-        ClientOnResourcesUpdated?.Invoke(newResources);
+        ClientOnResourcesUpdated?.Invoke(newResources, maxResources);
+    }
+
+    private void ClientHandleMaxResourcesUpdate(int oldResources, int newResources)
+    {
+        ClientOnResourcesUpdated?.Invoke(currentResources, newResources);
     }
 
     private void AuthorityHandleUnitSpawned(Unit unit)

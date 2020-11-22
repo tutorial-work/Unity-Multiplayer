@@ -22,7 +22,7 @@ public class ResourcesDisplay : MonoBehaviour
     {
         player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
 
-        ClientHandleResourcesUpdated(player.Resources);
+        ClientHandleResourcesUpdated(player.CurrentResources, player.MaxResources);
         player.ClientOnResourcesUpdated += ClientHandleResourcesUpdated;
     }
 
@@ -36,9 +36,9 @@ public class ResourcesDisplay : MonoBehaviour
     /********** MARK: Class Functions **********/
     #region Class Functions
 
-    private void ClientHandleResourcesUpdated(int resources)
+    private void ClientHandleResourcesUpdated(int currentResources, int maxResources)
     {
-        resourcesText.text = $"Resources: {resources}";
+        resourcesText.text = $"Resources: {currentResources} / {maxResources}";
     }
 
     #endregion

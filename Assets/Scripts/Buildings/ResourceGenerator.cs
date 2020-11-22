@@ -44,7 +44,7 @@ public class ResourceGenerator : NetworkBehaviour
 
         if (timer <= 0)
         {
-            player.Resources = player.Resources + resourcesPerInterval;
+            player.CurrentResources = player.CurrentResources + resourcesPerInterval;
 
             timer += interval;
         }

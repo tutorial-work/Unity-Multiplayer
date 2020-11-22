@@ -49,7 +49,7 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     {
         if (eventData.button != PointerEventData.InputButton.Left) return;
 
-        if (player.Resources < building.Price) return;
+        if (player.CurrentResources < building.Price) return;
 
         buildingPreviewInstance = Instantiate(building.BuildingPreview);
         buildingRendererInstance = buildingPreviewInstance.GetComponentInChildren<Renderer>();

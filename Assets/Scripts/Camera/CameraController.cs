@@ -6,6 +6,9 @@ using UnityEngine.InputSystem;
 
 public class CameraController : NetworkBehaviour
 {
+    /********** MARK: Variables **********/
+    #region Variables
+
     [SerializeField] Transform playerCameraTransform = null;
     [SerializeField] float speed = 25f;
     [SerializeField] float screenBorderThickness = 10f;
@@ -16,6 +19,15 @@ public class CameraController : NetworkBehaviour
 
     Controls controls;
 
+    Vector3 resetPosition;
+
+    bool isCameraResetPositionInitialized = false;
+
+    #endregion
+
+    /********** MARK: Class Functions **********/
+    #region Class Functions
+
     public override void OnStartAuthority()
     {
         playerCameraTransform.gameObject.SetActive(true);
@@ -25,7 +37,11 @@ public class CameraController : NetworkBehaviour
         controls.Player.MoveCamera.performed += SetPreviousInput;
         controls.Player.MoveCamera.canceled += SetPreviousInput;
 
+        controls.Player.ResetCamera.performed += ResetCameraPosition;
+
         controls.Enable();
+
+        UnitBase.ServerOnBaseSpawned += InitializeCameraResetPosition;
     }
 
     [ClientCallback]
@@ -82,4 +98,24 @@ public class CameraController : NetworkBehaviour
     {
         previousInput = ctx.ReadValue<Vector2>();
     }
+
+    private void InitializeCameraResetPosition(UnitBase unitBase)
+    {
+        if (unitBase.connectionToClient.identity != connectionToClient.identity) return;
+
+        float cameraHeight = playerCameraTransform.position.y;
+        resetPosition = unitBase.transform.position;
+        resetPosition.y = cameraHeight;
+
+        playerCameraTransform.position = resetPosition;
+
+        isCameraResetPositionInitialized = true;
+    }
+
+    private void ResetCameraPosition(InputAction.CallbackContext ctx)
+    {
+        if (isCameraResetPositionInitialized) playerCameraTransform.position = resetPosition;
+    }
+
+    #endregion
 }
