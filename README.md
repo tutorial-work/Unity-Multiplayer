@@ -6,3 +6,10 @@
 	- download the latest version of <strong>Mirror</strong> from the <strong>Unity Asset Store</strong>
 - <strong>FizzySteamworks v2.6</strong>
 	- https://github.com/Chykary/FizzySteamworks/releases
+	
+### Todo
+List of objectives to complete
+
+- [x] Complete Tutorial
+- [ ] Complete Tutorial
+- [ ] Complete Tutorial
