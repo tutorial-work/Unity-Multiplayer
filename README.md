@@ -15,14 +15,14 @@ List of objectives to complete
 	- [x] add Steam username to lobby
 	- [x] add Steam profile picture to lobby
 - Better Map
-	- [ ] add Steam profile picture to game
+	- [x] add Steam profile picture to game
 	- [ ] update map with better environment
 	- [ ] spawn camera ontop of Unit Base
 - Buildings and Units
-	- [ ] add unit Prefabs
+	- [x] add unit Prefabs
 	- [ ] balance unit attributes
 	- [ ] balance building attributes
-	- [ ] update building Icons
+	- [x] update building Icons
 	- [ ] resource storage increase max resources
 	- [ ] unit population
 	- [ ] builder cars 
