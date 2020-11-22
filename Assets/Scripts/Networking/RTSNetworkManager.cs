@@ -18,8 +18,6 @@ public class RTSNetworkManager : NetworkManager
     public static event Action ClientOnConnected;
     public static event Action ClientOnDisconnected;
 
-    public static ulong lobbyId;
-
     bool isGameInProgress = false;
 
     #endregion
@@ -27,17 +25,7 @@ public class RTSNetworkManager : NetworkManager
     /********** MARK: Properties **********/
     #region Properties
 
-    public static ulong LobbyId
-    {
-        get
-        {
-            return lobbyId;
-        }
-        set
-        {
-            lobbyId = value;
-        }
-    }
+    public static ulong LobbyId { get; set; }
 
     public List<RTSPlayer> Players { get; } = new List<RTSPlayer>();
 
@@ -101,16 +89,11 @@ public class RTSNetworkManager : NetworkManager
         if (MainMenu.UseSteam)
         {
             CSteamID steamId = SteamMatchmaking.GetLobbyMemberByIndex(
-                new CSteamID(lobbyId),
+                new CSteamID(LobbyId),
                 numPlayers - 1
             );
 
-            //PlayerInfoDisplay playerInfoDisplay = conn.identity.GetComponent<PlayerInfoDisplay>();
-
-            //playerInfoDisplay.SteamId = steamId.m_SteamID;
-
             player.DisplayName = $"{SteamFriends.GetFriendPersonaName(steamId)}";
-            //player.DisplayName = $"{SteamFriends.GetPersonaName()}";
         }
         else
         {
