@@ -116,6 +116,8 @@ public class RTSPlayerInfo : NetworkBehaviour
 
     public override void OnStartClient()
     {
+        Debug.Log("Adding Client");
+
         avatarImageLoaded = Callback<AvatarImageLoaded_t>.Create(OnAvatarImageLoaded);
 
         UnitBase.ServerOnBaseSpawned += ClientHandleOnBaseSpawned;

@@ -65,7 +65,7 @@ public class UnitBase : NetworkBehaviour
             {
                 if (building.GetComponent<UnitBase>() == this)
                 {
-                    playerSteamImage.texture = playerInfo.DisplayTexture;
+                    //playerSteamImage.texture = playerInfo.DisplayTexture;
                 }
             }
         }
