@@ -116,7 +116,7 @@ public class RTSPlayerInfo : NetworkBehaviour
 
     public override void OnStartClient()
     {
-        Debug.Log("Adding Client");
+        Debug.Log($"Adding Client with id {connectionToClient.connectionId}");
 
         avatarImageLoaded = Callback<AvatarImageLoaded_t>.Create(OnAvatarImageLoaded);
 
