@@ -53,7 +53,7 @@ public class UnitBase : NetworkBehaviour
     [Command]
     public void CmdSetPlayerSteamImage()
     {
-        if (!hasAuthority) return;
+        //if (!hasAuthority) return;
 
         RTSPlayerInfo playerInfo = connectionToClient.identity.GetComponent<RTSPlayerInfo>();
 
