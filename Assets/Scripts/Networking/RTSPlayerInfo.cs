@@ -116,8 +116,6 @@ public class RTSPlayerInfo : NetworkBehaviour
 
     public override void OnStartClient()
     {
-        Debug.Log($"Adding Client with id {connectionToClient.connectionId}");
-
         avatarImageLoaded = Callback<AvatarImageLoaded_t>.Create(OnAvatarImageLoaded);
 
         UnitBase.ServerOnBaseSpawned += ClientHandleOnBaseSpawned;
@@ -205,6 +203,8 @@ public class RTSPlayerInfo : NetworkBehaviour
 
     public void ClientHandleOnBaseSpawned(UnitBase unitBase)
     {
+        Debug.Log($"Base {unitBase.name} spawned and Client {connectionToClient.connectionId} is listening");
+
         unitBase.CmdSetPlayerSteamImage();
     }
 
