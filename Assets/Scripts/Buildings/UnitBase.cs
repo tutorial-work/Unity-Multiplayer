@@ -53,11 +53,22 @@ public class UnitBase : NetworkBehaviour
     [Command]
     public void CmdSetPlayerSteamImage()
     {
-        //if (!hasAuthority) return;
+        RTSNetworkManager manager = (RTSNetworkManager)NetworkManager.singleton;
 
-        RTSPlayerInfo playerInfo = connectionToClient.identity.GetComponent<RTSPlayerInfo>();
+        List<RTSPlayer> players = manager.Players;
 
-        playerSteamImage.texture = playerInfo.DisplayTexture;
+        foreach (RTSPlayer player in players)
+        {
+            RTSPlayerInfo playerInfo = player.GetComponent<RTSPlayerInfo>();
+
+            foreach (Building building in player.MyBuildings)
+            {
+                if (building.GetComponent<UnitBase>() == this)
+                {
+                    playerSteamImage.texture = playerInfo.DisplayTexture;
+                }
+            }
+        }
     }
 
     #endregion
