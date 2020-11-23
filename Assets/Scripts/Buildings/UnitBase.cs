@@ -17,8 +17,7 @@ public class UnitBase : NetworkBehaviour
     public static event Action<int> ServerOnPlayerDie;
     public static event Action<UnitBase> ServerOnBaseSpawned;
     public static event Action<UnitBase> ServerOnBaseDespawned;
-
-
+    
     #endregion
 
     /********** MARK: Properties **********/
@@ -34,18 +33,6 @@ public class UnitBase : NetworkBehaviour
         health.ServerOnDie += ServerHandleDie;
 
         ServerOnBaseSpawned?.Invoke(this);
-
-        // i have no idea what im doing
-
-        if (!hasAuthority) return;
-
-        RTSNetworkManager manager = (RTSNetworkManager)NetworkManager.singleton;
-
-        int playerId = connectionToClient.connectionId;
-
-        RTSPlayerInfo info = manager.Players[playerId].GetComponent<RTSPlayerInfo>();
-
-        playerSteamImage.texture = info.DisplayTexture;
     }
 
     public override void OnStopServer()
@@ -63,10 +50,21 @@ public class UnitBase : NetworkBehaviour
         NetworkServer.Destroy(gameObject);
     }
 
+    [Command]
+    public void CmdSetPlayerSteamImage()
+    {
+        if (!hasAuthority) return;
+
+        RTSPlayerInfo playerInfo = connectionToClient.identity.GetComponent<RTSPlayerInfo>();
+
+        playerSteamImage.texture = playerInfo.DisplayTexture;
+    }
+
     #endregion
 
     /********** MARK: Client Functions **********/
     #region Client Functions
+        
 
     #endregion
 }
