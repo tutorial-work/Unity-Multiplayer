@@ -141,8 +141,8 @@ public class RTSNetworkManager : NetworkManager
     /********** MARK: Client Functions **********/
     #region Client Functions
 
-    public override void OnClientSceneChanged(NetworkConnection conn)
-    {
+    //public override void OnClientSceneChanged(NetworkConnection conn)
+    //{
         //if (SceneManager.GetActiveScene().name.StartsWith("Scene_Map")) // HACK: string reference
         //{
         //    foreach (RTSPlayer player in Players)
@@ -160,7 +160,7 @@ public class RTSNetworkManager : NetworkManager
         //        Debug.Log("uh");
         //    }
         //}
-    }
+    //}
 
     public override void OnClientConnect(NetworkConnection conn)
     {
