@@ -213,6 +213,7 @@ MonoBehaviour:
   health: {fileID: 5987727696471465971}
   unitMovement: {fileID: 7329324945722029012}
   targeter: {fileID: 5367381574226022990}
+  highlightMarker: {fileID: 3816498942210769777}
   onSelected:
     m_PersistentCalls:
       m_Calls:

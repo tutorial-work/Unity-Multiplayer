@@ -19,11 +19,10 @@ List of objectives to complete
 	- [x] update map with better environment
 	- [x] spawn camera ontop of Unit Base
 	- [x] camera zoom and camera rotation
-	- [ ] can delete building
 	- [ ] spectator mode
+	- [ ] ~~can delete building~~
 - Buildings and Units
 	- [x] add unit prefabs
-	- [x] update building Icons
 	- [x] builder cars 
 	- [x] units auto attack if they take damage and don't have a task
 	- [x] resource storage increase max resources
@@ -31,12 +30,13 @@ List of objectives to complete
 	- [x] balance unit attributes
 	- [ ] ~~unit population~~
 - User Interface
+	- [x] update building Icons
 	- [x] buttons light up when you can afford building	
 	- [ ] description UI with controls/units/buildings
 	- [ ] resignation UI
 - Quality of Life
 	- [x] increase number of max players
-	- [ ] change health and selection colors to match team color
+	- [x] change health and selection colors to match team color
  	- [ ] ~~control groups~~
 	- [ ] ~~team color picker~~
 	- [ ] ~~teams~~

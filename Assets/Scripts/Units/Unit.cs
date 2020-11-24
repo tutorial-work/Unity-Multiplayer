@@ -14,6 +14,7 @@ public class Unit : NetworkBehaviour
     [SerializeField] Health health = null;
     [SerializeField] UnitMovement unitMovement = null;
     [SerializeField] Targeter targeter = null;
+    [SerializeField] SpriteRenderer highlightMarker = null;
     [SerializeField] UnityEvent onSelected = null;
     [SerializeField] UnityEvent onDeselected = null;
 
@@ -98,6 +99,14 @@ public class Unit : NetworkBehaviour
     public override void OnStartAuthority()
     {
         AuthorityOnUnitSpawned?.Invoke(this);
+
+        RTSPlayerInfo playerInfo = connectionToClient.identity.GetComponent<RTSPlayerInfo>();
+
+        // change selection sprite color
+        highlightMarker.color = playerInfo.TeamColor;
+
+        // change health bar color
+        GetComponent<HealthDisplay>().SetHealthBarColor(playerInfo.TeamColor);
     }
 
     public override void OnStopClient()

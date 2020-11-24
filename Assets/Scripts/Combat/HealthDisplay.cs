@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+//using UnityEngine.InputSystem;
 
 public class HealthDisplay : MonoBehaviour
 {
@@ -47,6 +48,11 @@ public class HealthDisplay : MonoBehaviour
     private void HandleHealthUpdated(int currentHealth, int maxHealth)
     {
         healthBarImage.fillAmount = (float)currentHealth / maxHealth;
+    }
+
+    public void SetHealthBarColor(Color color)
+    {
+        healthBarImage.color = color;
     }
 
     #endregion
