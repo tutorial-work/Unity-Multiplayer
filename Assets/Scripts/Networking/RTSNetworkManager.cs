@@ -141,26 +141,28 @@ public class RTSNetworkManager : NetworkManager
     /********** MARK: Client Functions **********/
     #region Client Functions
 
-    //public override void OnClientSceneChanged(NetworkConnection conn)
-    //{
-        //if (SceneManager.GetActiveScene().name.StartsWith("Scene_Map")) // HACK: string reference
-        //{
-        //    foreach (RTSPlayer player in Players)
-        //    {
-        //        RTSPlayerInfo playerInfo = player.GetComponent<RTSPlayerInfo>();
+    public override void OnClientSceneChanged(NetworkConnection conn)
+    {
+        base.OnClientSceneChanged(conn);
 
-        //        foreach (Building building in player.MyBuildings)
-        //        {
-        //            if (building.TryGetComponent<UnitBase>(out UnitBase unitBase))
-        //            {
-        //                unitBase.SetPlayerSteamImage(playerInfo);
-        //                break;
-        //            }
-        //        }
-        //        Debug.Log("uh");
-        //    }
-        //}
-    //}
+        if (SceneManager.GetActiveScene().name.StartsWith("Scene_Map")) // HACK: string reference
+        {
+            foreach (RTSPlayer player in Players)
+            {
+                RTSPlayerInfo playerInfo = player.GetComponent<RTSPlayerInfo>();
+
+                foreach (Building building in player.MyBuildings)
+                {
+                    if (building.TryGetComponent<UnitBase>(out UnitBase unitBase))
+                    {
+                        unitBase.SetPlayerSteamImage(playerInfo);
+                        break;
+                    }
+                }
+                Debug.Log("uh");
+            }
+        }
+    }
 
     public override void OnClientConnect(NetworkConnection conn)
     {
