@@ -41,7 +41,7 @@ public class CameraController : NetworkBehaviour
 
         controls.Enable();
 
-        UnitBase.ServerOnBaseSpawned += InitializeCameraResetPosition;
+        UnitBase.AuthorityOnBaseSpawned += InitializeCameraResetPosition; // HACK: does this need to be unsubscribed?
     }
 
     [ClientCallback]
@@ -101,8 +101,6 @@ public class CameraController : NetworkBehaviour
 
     private void InitializeCameraResetPosition(UnitBase unitBase)
     {
-        if (unitBase.connectionToClient.identity != connectionToClient.identity) return;
-
         float cameraHeight = playerCameraTransform.position.y;
         resetPosition = unitBase.transform.position;
         resetPosition.y = cameraHeight;

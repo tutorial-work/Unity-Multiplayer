@@ -20,7 +20,8 @@ public class UnitBase : NetworkBehaviour
     public static event Action<int> ServerOnPlayerDie;
     public static event Action<UnitBase> ServerOnBaseSpawned;
     public static event Action<UnitBase> ServerOnBaseDespawned;
-    
+    public static event Action<UnitBase> AuthorityOnBaseSpawned;
+
     [SyncVar(hook = nameof(ClientHandleSteamIdUpdated))]
     ulong steamId;
 
@@ -61,6 +62,11 @@ public class UnitBase : NetworkBehaviour
         health.ServerOnDie += ServerHandleDie;
 
         ServerOnBaseSpawned?.Invoke(this);
+    }
+
+    public override void OnStartAuthority()
+    {
+        AuthorityOnBaseSpawned?.Invoke(this);
     }
 
     public override void OnStopServer()
