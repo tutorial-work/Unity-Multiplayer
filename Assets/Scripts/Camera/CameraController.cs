@@ -103,6 +103,7 @@ public class CameraController : NetworkBehaviour
     {
         float cameraHeight = playerCameraTransform.position.y;
         resetPosition = unitBase.transform.position;
+        resetPosition.z -= 10f; // HACK: hardcoded offset
         resetPosition.y = cameraHeight;
 
         playerCameraTransform.position = resetPosition;

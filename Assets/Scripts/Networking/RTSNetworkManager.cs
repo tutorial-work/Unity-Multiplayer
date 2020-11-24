@@ -131,7 +131,7 @@ public class RTSNetworkManager : NetworkManager
                 pos = unitBase.SpawnPoint.position;
                 GameObject smallCarInstance = Instantiate(smallCarPrefab, pos, rot);
 
-                // server tells all clients to spawn instance
+                // server tells all clients to spawn instance, and sets authority to a connection
                 NetworkServer.Spawn(unitBaseInstance, player.connectionToClient);
                 NetworkServer.Spawn(smallCarInstance, player.connectionToClient);
             }
