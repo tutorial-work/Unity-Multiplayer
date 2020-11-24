@@ -145,7 +145,7 @@ public class RTSNetworkManager : NetworkManager
     {
         //Debug.Log("log 1");
 
-        //base.OnClientSceneChanged(conn);
+        base.OnClientSceneChanged(conn);
 
         //Debug.Log("log 2");
 
