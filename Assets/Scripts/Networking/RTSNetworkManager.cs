@@ -112,7 +112,7 @@ public class RTSNetworkManager : NetworkManager
 
     public override void OnServerSceneChanged(string sceneName)
     {
-        if (SceneManager.GetActiveScene().name.StartsWith("Scene_Map"))
+        if (SceneManager.GetActiveScene().name.StartsWith("Scene_Map")) // HACK: string reference
         {
             GameOverHandler gameOverHandlerInstance = Instantiate(gameOverHandlerPrefab);
 
@@ -143,16 +143,19 @@ public class RTSNetworkManager : NetworkManager
 
     public override void OnClientSceneChanged(NetworkConnection conn)
     {
-        foreach (RTSPlayer player in Players)
+        if (SceneManager.GetActiveScene().name.StartsWith("Scene_Map")) // HACK: string reference
         {
-            RTSPlayerInfo playerInfo = player.GetComponent<RTSPlayerInfo>();
-
-            foreach (Building building in player.MyBuildings)
+            foreach (RTSPlayer player in Players)
             {
-                if (building.TryGetComponent<UnitBase>(out UnitBase unitBase))
+                RTSPlayerInfo playerInfo = player.GetComponent<RTSPlayerInfo>();
+
+                foreach (Building building in player.MyBuildings)
                 {
-                    unitBase.SetPlayerSteamImage(playerInfo);
-                    break;
+                    if (building.TryGetComponent<UnitBase>(out UnitBase unitBase))
+                    {
+                        unitBase.SetPlayerSteamImage(playerInfo);
+                        break;
+                    }
                 }
             }
         }
