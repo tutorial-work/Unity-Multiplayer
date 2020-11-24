@@ -15,7 +15,7 @@ public class RTSPlayer : NetworkBehaviour
     [SerializeField] float buildingRangeLimit = 5f;
 
     [SyncVar(hook = nameof(ClientHandleCurrentResourcesUpdate))]
-    int currentResources = 50;
+    int currentResources = 5550;
 
     [SyncVar(hook = nameof(ClientHandleMaxResourcesUpdate))]
     int maxResources = 100;
