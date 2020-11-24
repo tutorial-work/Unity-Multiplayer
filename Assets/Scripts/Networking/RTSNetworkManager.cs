@@ -143,12 +143,20 @@ public class RTSNetworkManager : NetworkManager
 
     public override void OnClientSceneChanged(NetworkConnection conn)
     {
+        Debug.Log("log 1");
+
         base.OnClientSceneChanged(conn);
+
+        Debug.Log("log 2");
 
         if (SceneManager.GetActiveScene().name.StartsWith("Scene_Map")) // HACK: string reference
         {
+            Debug.Log("log 3");
+
             foreach (RTSPlayer player in Players)
             {
+                Debug.Log($"log 4, player: {player.name}");
+
                 RTSPlayerInfo playerInfo = player.GetComponent<RTSPlayerInfo>();
 
                 foreach (Building building in player.MyBuildings)
