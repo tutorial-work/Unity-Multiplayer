@@ -17,7 +17,7 @@ List of objectives to complete
 - Better Map
 	- [x] add Steam profile picture to game
 	- [x] spawn camera ontop of Unit Base
-	- [ ] update map with better environment
+	- [x] update map with better environment
 - Buildings and Units
 	- [x] add unit Prefabs
 	- [x] update building Icons
@@ -28,8 +28,8 @@ List of objectives to complete
 	- [ ] ~~unit population~~
 	
 - Quality of Life
-	- [ ] units auto attack if it takes damage and they don't have a task
-	- [ ] increase number of max players
+	- [x] units auto attack if it takes damage and they don't have a task
+	- [x] increase number of max players
 	- [ ] ~~team color picker~~
 	- [ ] ~~teams~~
 	- [ ] ~~left click on minimap doesn't deselect units~~

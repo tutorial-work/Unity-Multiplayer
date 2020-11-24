@@ -41,7 +41,12 @@ public class CameraController : NetworkBehaviour
 
         controls.Enable();
 
-        UnitBase.AuthorityOnBaseSpawned += InitializeCameraResetPosition; // HACK: does this need to be unsubscribed?
+        UnitBase.AuthorityOnBaseSpawned += InitializeCameraResetPosition; 
+    }
+
+    public override void OnStopClient()
+    {
+        if (hasAuthority) UnitBase.AuthorityOnBaseSpawned -= InitializeCameraResetPosition;
     }
 
     [ClientCallback]
