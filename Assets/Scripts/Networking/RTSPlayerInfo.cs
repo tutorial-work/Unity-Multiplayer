@@ -101,6 +101,8 @@ public class RTSPlayerInfo : NetworkBehaviour
         }
     }
 
+    public UnitBase MyUnitBase { get; [Server] set; }
+
     #endregion
 
     /********** MARK: Server Functions **********/

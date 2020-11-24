@@ -15,8 +15,8 @@ List of objectives to complete
 	- [x] add Steam username to lobby
 	- [x] add Steam profile picture to lobby
 - Better Map
-	- [x] add Steam profile picture to game
-	- [x] spawn camera ontop of Unit Base
+	- [ ] add Steam profile picture to game
+	- [ ] spawn camera ontop of Unit Base
 	- [ ] update map with better environment
 - Buildings and Units
 	- [x] add unit Prefabs

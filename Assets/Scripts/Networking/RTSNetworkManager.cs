@@ -126,7 +126,7 @@ public class RTSNetworkManager : NetworkManager
                 GameObject unitBaseInstance = Instantiate(unitBasePrefab, pos, rot);
 
                 UnitBase unitBase = unitBaseInstance.GetComponent<UnitBase>();
-                unitBase.SetPlayerSteamImage(player.GetComponent<RTSPlayerInfo>());
+                //unitBase.SetPlayerSteamImage(player.GetComponent<RTSPlayerInfo>());
 
                 // spawning the small car on server
                 pos = unitBase.SpawnPoint.position;
