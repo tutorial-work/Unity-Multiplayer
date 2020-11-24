@@ -4,6 +4,7 @@ using UnityEngine;
 using Mirror;
 using System;
 using UnityEngine.UI;
+using Steamworks;
 
 public class UnitBase : NetworkBehaviour
 {
@@ -20,6 +21,9 @@ public class UnitBase : NetworkBehaviour
     public static event Action<UnitBase> ServerOnBaseSpawned;
     public static event Action<UnitBase> ServerOnBaseDespawned;
     
+    [SyncVar(hook = nameof(ClientHandleSteamIdUpdated))]
+    ulong steamId;
+
     #endregion
 
     /********** MARK: Properties **********/
@@ -30,6 +34,20 @@ public class UnitBase : NetworkBehaviour
         get
         {
             return unitSpawnPoint;
+        }
+    }
+
+    public ulong SteamId
+    {
+        get
+        {
+            return steamId;
+        }
+
+        [Server]
+        set
+        {
+            steamId = value;
         }
     }
 
@@ -65,9 +83,20 @@ public class UnitBase : NetworkBehaviour
     /********** MARK: Client Functions **********/
     #region Client Functions
         
-    public void SetPlayerSteamImage(RTSPlayerInfo playerInfo)
+    public void SetPlayerSteamImage(Texture2D displayTexture)
     {
-        playerSteamImage.texture = playerInfo.DisplayTexture;
+        playerSteamImage.texture = displayTexture;
+    }
+
+    private void ClientHandleSteamIdUpdated(ulong oldSteamId, ulong newSteamId)
+    {
+        CSteamID steamId = new CSteamID(newSteamId);
+
+        int imageId = SteamFriends.GetLargeFriendAvatar(steamId);
+
+        if (imageId == -1) return;
+
+        SetPlayerSteamImage(RTSPlayerInfo.GetSteamImageAsTexture(imageId));
     }
 
     #endregion

@@ -125,7 +125,7 @@ public class RTSPlayerInfo : NetworkBehaviour
         ClientOnInfoUpdated?.Invoke();
     }
 
-    private Texture2D GetSteamImageAsTexture(int iImage)
+    public static Texture2D GetSteamImageAsTexture(int iImage)
     {
         Texture2D texture = null;
 

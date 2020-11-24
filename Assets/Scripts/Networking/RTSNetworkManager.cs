@@ -124,9 +124,11 @@ public class RTSNetworkManager : NetworkManager
                 Vector3 pos = GetStartPosition().position;
                 Quaternion rot = Quaternion.identity;
                 GameObject unitBaseInstance = Instantiate(unitBasePrefab, pos, rot);
+                UnitBase unitBase = unitBaseInstance.GetComponent<UnitBase>();
+                unitBase.SteamId = player.GetComponent<RTSPlayerInfo>().SteamId;
 
                 // spawning the small car on server
-                pos = unitBaseInstance.GetComponent<UnitBase>().SpawnPoint.position;
+                pos = unitBase.SpawnPoint.position;
                 GameObject smallCarInstance = Instantiate(smallCarPrefab, pos, rot);
 
                 // server tells all clients to spawn instance
@@ -140,68 +142,6 @@ public class RTSNetworkManager : NetworkManager
 
     /********** MARK: Client Functions **********/
     #region Client Functions
-
-    public override void OnClientSceneChanged(NetworkConnection conn)
-    {
-        //Debug.Log("log 1");
-
-        base.OnClientSceneChanged(conn);
-
-        //Debug.Log("log 2");
-
-        //if (SceneManager.GetActiveScene().name.StartsWith("Scene_Map")) // HACK: string reference
-        //{
-        //    Debug.Log("log 3");
-
-        //    foreach (RTSPlayer player in Players)
-        //    {
-        //        Debug.Log($"log 4, player: {player.name}");
-
-        //        RTSPlayerInfo playerInfo = player.GetComponent<RTSPlayerInfo>();
-
-        //        foreach (Building building in player.MyBuildings)
-        //        {
-        //            if (building.TryGetComponent<UnitBase>(out UnitBase unitBase))
-        //            {
-        //                Debug.Log($"logging display texture: {playerInfo.DisplayTexture}");
-        //                unitBase.SetPlayerSteamImage(playerInfo);
-        //                break;
-        //            }
-        //        }
-        //    }
-        //}
-
-        StartCoroutine(TempFunctionName());
-    }
-
-    public IEnumerator TempFunctionName()
-    {
-        yield return new WaitForSeconds(1);
-
-        Debug.Log("1");
-
-        if (SceneManager.GetActiveScene().name.StartsWith("Scene_Map")) // HACK: string reference
-        {
-            UnitBase[] unitBases = FindObjectsOfType<UnitBase>();
-
-            foreach (UnitBase unitBase in unitBases)
-            {
-                Debug.Log("2");
-
-                foreach (RTSPlayer player in Players)
-                {
-                    Debug.Log("3");
-
-                    if (unitBase.connectionToClient == player.connectionToClient)
-                    {
-                        Debug.Log("4");
-                        RTSPlayerInfo playerInfo = player.GetComponent<RTSPlayerInfo>();
-                        unitBase.SetPlayerSteamImage(playerInfo);
-                    }
-                }
-            }
-        }
-    }
 
     public override void OnClientConnect(NetworkConnection conn)
     {
