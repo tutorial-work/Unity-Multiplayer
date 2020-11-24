@@ -18,6 +18,12 @@ public class Targeter : NetworkBehaviour
         {
             return target;
         }
+
+        [Server]
+        set
+        {
+            target = value;
+        }
     }
 
     #endregion

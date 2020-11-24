@@ -28,7 +28,7 @@ List of objectives to complete
 	- [ ] ~~unit population~~
 	
 - Quality of Life
-	- [ ] units auto attack if enemy is in range and they don't have a task
+	- [ ] units auto attack if it takes damage and they don't have a task
 	- [ ] increase number of max players
 	- [ ] ~~team color picker~~
 	- [ ] ~~teams~~

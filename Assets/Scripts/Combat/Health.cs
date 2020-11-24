@@ -13,6 +13,8 @@ public class Health : NetworkBehaviour
     [SyncVar(hook = nameof(HandleHealthUpdated))]
     int currentHealth;
 
+    public event Action<Transform> ServerOnTakeDamage;
+
     public event Action ServerOnDie;
 
     public event Action<int, int> ClientOnHealthUpdated;
@@ -56,6 +58,14 @@ public class Health : NetworkBehaviour
         ServerOnDie?.Invoke();
 
         Debug.LogWarning(gameObject.name + " has died");
+    }
+
+    [Server]
+    public void DealDamage(UnitProjectile projectile)
+    {
+        ServerOnTakeDamage?.Invoke(projectile.OriginTransform);
+
+        DealDamage(projectile.DamageToDeal);
     }
 
     #endregion

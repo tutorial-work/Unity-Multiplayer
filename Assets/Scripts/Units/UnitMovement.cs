@@ -15,6 +15,10 @@ public class UnitMovement : NetworkBehaviour
 
     #endregion
 
+    public bool HasWaypoint { get; [Server] set; }
+
+    public Vector3 MyWaypoint { get; [Server] set; }
+
     /********** MARK: Server Functions **********/
     #region Server Functions
 
@@ -39,12 +43,12 @@ public class UnitMovement : NetworkBehaviour
                 > chaseRange * chaseRange)
             {
                 // chase
-                agent.SetDestination(target.transform.position);
+                SetMyWaypoint(target.transform.position);
             }
             else if(agent.hasPath)
             {
                 // stop
-                agent.ResetPath();
+                ClearMyWaypoint();
             }
 
             return;
@@ -54,7 +58,7 @@ public class UnitMovement : NetworkBehaviour
 
         if (agent.remainingDistance > agent.stoppingDistance) return;
 
-        agent.ResetPath();
+        ClearMyWaypoint();
     }
 
     [Command]
@@ -74,7 +78,22 @@ public class UnitMovement : NetworkBehaviour
         if (!NavMesh.SamplePosition(position, out NavMeshHit hit, leeway, NavMesh.AllAreas))
             return;
 
+        SetMyWaypoint(position);
+    }
+
+    [Server]
+    public void SetMyWaypoint(Vector3 position)
+    {
+        HasWaypoint = true;
+        MyWaypoint = position;
         agent.SetDestination(position);
+    }
+
+    [Server]
+    public void ClearMyWaypoint()
+    {
+        HasWaypoint = false;
+        agent.ResetPath();
     }
 
     [Server]

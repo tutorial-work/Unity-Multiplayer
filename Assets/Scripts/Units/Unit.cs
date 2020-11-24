@@ -44,7 +44,7 @@ public class Unit : NetworkBehaviour
         }
     }
 
-    public Targeter Targeter
+    public Targeter MyTargeter
     {
         get
         {
@@ -61,6 +61,7 @@ public class Unit : NetworkBehaviour
     {
         ServerOnUnitSpawned?.Invoke(this);
 
+        health.ServerOnTakeDamage += ServerHandleTakeDamage;
         health.ServerOnDie += ServerHandleDie;
     }
 
@@ -68,6 +69,7 @@ public class Unit : NetworkBehaviour
     {
         ServerOnUnitDespawned?.Invoke(this);
 
+        health.ServerOnTakeDamage -= ServerHandleTakeDamage;
         health.ServerOnDie -= ServerHandleDie;
     }
 
@@ -75,6 +77,17 @@ public class Unit : NetworkBehaviour
     public void ServerHandleDie()
     {
         NetworkServer.Destroy(gameObject);
+    }
+
+    [Server]
+    public void ServerHandleTakeDamage(Transform enemyTransform)
+    {
+        // if i don't have a task and i am not en route
+        if (!targeter.Target && !unitMovement.HasWaypoint)
+        {
+            // then go towards the enemy to attack
+            targeter.Target = enemyTransform.GetComponent<Targetable>();
+        }
     }
 
     #endregion

@@ -77,7 +77,7 @@ public class UnitCommandGiver : MonoBehaviour
     {
         foreach (Unit unit in unitSelectionHandler.SelectedUnits)
         {
-            unit.Targeter.CmdSetTarget(target.gameObject);
+            unit.MyTargeter.CmdSetTarget(target.gameObject);
         }
     }
 

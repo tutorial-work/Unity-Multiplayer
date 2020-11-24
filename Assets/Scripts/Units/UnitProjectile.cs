@@ -15,6 +15,15 @@ public class UnitProjectile : NetworkBehaviour
     /********** MARK: Properties **********/
     #region Properties
 
+    public int DamageToDeal
+    {
+        get
+        {
+            return damageToDeal;
+        }
+    }
+
+    public Transform OriginTransform { get; [Server] set; }
 
     #endregion
 
@@ -41,7 +50,7 @@ public class UnitProjectile : NetworkBehaviour
 
         if (other.TryGetComponent<Health>(out Health health))
         {
-            health.DealDamage(damageToDeal);
+            health.DealDamage(this);
         }
 
         DestroySelf();
