@@ -20,12 +20,13 @@ List of objectives to complete
 	- [ ] update map with better environment
 - Buildings and Units
 	- [x] add unit Prefabs
+	- [x] update building Icons
+	- [x] builder cars 
 	- [ ] balance unit attributes
 	- [ ] balance building attributes
-	- [x] update building Icons
 	- [ ] resource storage increase max resources
 	- [ ] unit population
-	- [ ] builder cars 
+	
 - Quality of Life
 	- [ ] left click on minimap doesn't deselect units
 	- [ ] left click on UI doesn't drag unit selection box

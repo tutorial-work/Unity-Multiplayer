@@ -12,6 +12,7 @@ public class RTSNetworkManager : NetworkManager
     #region Private Variables
 
     [SerializeField] GameObject unitBasePrefab = null;
+    [SerializeField] GameObject smallCarPrefab = null;
     [SerializeField] GameOverHandler gameOverHandlerPrefab = null;
     [SerializeField] [Range(1, 4)] int minPlayersToStartGame = 1; // HACK: increase max num of players
 
@@ -41,7 +42,7 @@ public class RTSNetworkManager : NetworkManager
 
     /********** MARK: Unity Functions **********/
     #region Unity Functions
-        
+
     #endregion
 
     /********** MARK: Server Functions **********/
@@ -119,18 +120,21 @@ public class RTSNetworkManager : NetworkManager
 
             foreach (RTSPlayer player in Players)
             {
-                //Vector3 pos = conn.identity.transform.position;
-                //Quaternion rot = conn.identity.transform.rotation;
-                //GameObject unitSpawnerInstance = Instantiate(unitBasePrefab, pos, rot);
+                // spawning unit base on server
+                Vector3 pos = GetStartPosition().position;
+                Quaternion rot = Quaternion.identity;
+                GameObject unitBaseInstance = Instantiate(unitBasePrefab, pos, rot);
 
-                GameObject baseInstance = Instantiate(
-                    unitBasePrefab,
-                    GetStartPosition().position,
-                    Quaternion.identity
-                );
+                UnitBase unitBase = unitBaseInstance.GetComponent<UnitBase>();
+                unitBase.SetPlayerSteamImage(player.GetComponent<RTSPlayerInfo>());
 
-                NetworkServer.Spawn(baseInstance, player.connectionToClient);
-                //NetworkServer.Spawn(unitSpawnerInstance, conn); // server tells all clients to spawn instance
+                // spawning the small car on server
+                pos = unitBase.SpawnPoint.position;
+                GameObject smallCarInstance = Instantiate(smallCarPrefab, pos, rot);
+
+                // server tells all clients to spawn instance
+                NetworkServer.Spawn(unitBaseInstance, player.connectionToClient);
+                NetworkServer.Spawn(smallCarInstance, player.connectionToClient);
             }
         }
     }

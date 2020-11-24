@@ -59,8 +59,7 @@ MonoBehaviour:
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 4369051049471955617, guid: cb57466cd6d32144fb251afb809026ac,
-    type: 3}
+  playerPrefab: {fileID: 4369051049471955617, guid: cb57466cd6d32144fb251afb809026ac, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 1
   spawnPrefabs:
@@ -74,11 +73,17 @@ MonoBehaviour:
   - {fileID: 4678634873296470356, guid: 8fc713dfe6a96c94398005f613c646ec, type: 3}
   - {fileID: 4678634873296470356, guid: 13f457b081db46845adbcd9376d31fa7, type: 3}
   - {fileID: 4678634873296470356, guid: eed2cc4a5f42d9845ad1a774803d5804, type: 3}
+  - {fileID: 2301196946906138814, guid: 3e7f31bb4c28e4f4694134ac9f6c1d4a, type: 3}
+  - {fileID: 2301196946906138814, guid: 3f343a56b85608e4fb37cdd6b7fabcb4, type: 3}
+  - {fileID: 2301196946906138814, guid: 44820eb6cbb64234c94811b9958cc9a1, type: 3}
+  - {fileID: 4423088463685977023, guid: 633512a6013fe3743af501a9bc1dfb4c, type: 3}
   - {fileID: 4423088463685977023, guid: 2788eb128bb6df848b4d55e445b2df64, type: 3}
-  unitBasePrefab: {fileID: 7078580406497908326, guid: 8f8429966ea2da243ad7314639dc4f20,
-    type: 3}
-  gameOverHandlerPrefab: {fileID: 5559102407637925187, guid: 4e4744b9755f24ef29e94d2a5e5783b2,
-    type: 3}
+  - {fileID: 4423088463685977023, guid: ec10d92fd1583fc49b42419a1b2e0d05, type: 3}
+  - {fileID: 4423088463685977023, guid: 42c5a773de27d494e9f630850ebe2311, type: 3}
+  - {fileID: 4423088463685977023, guid: d496c3dd82b7928459c55b6f11cd6ebd, type: 3}
+  unitBasePrefab: {fileID: 7078580406497908326, guid: 8f8429966ea2da243ad7314639dc4f20, type: 3}
+  smallCarPrefab: {fileID: 4423088463685977023, guid: 633512a6013fe3743af501a9bc1dfb4c, type: 3}
+  gameOverHandlerPrefab: {fileID: 5559102407637925187, guid: 4e4744b9755f24ef29e94d2a5e5783b2, type: 3}
   minPlayersToStartGame: 1
 --- !u!114 &7396895992467785921
 MonoBehaviour:

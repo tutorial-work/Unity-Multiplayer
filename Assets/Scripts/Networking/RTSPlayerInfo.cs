@@ -101,8 +101,6 @@ public class RTSPlayerInfo : NetworkBehaviour
         }
     }
 
-    public UnitBase MyUnitBase { get; [Server] set; }
-
     #endregion
 
     /********** MARK: Server Functions **********/
@@ -117,13 +115,6 @@ public class RTSPlayerInfo : NetworkBehaviour
     public override void OnStartClient()
     {
         avatarImageLoaded = Callback<AvatarImageLoaded_t>.Create(OnAvatarImageLoaded);
-
-        UnitBase.ServerOnBaseSpawned += ClientHandleOnBaseSpawned;
-    }
-
-    public override void OnStopClient()
-    {
-        UnitBase.ServerOnBaseSpawned -= ClientHandleOnBaseSpawned;
     }
 
     private void OnAvatarImageLoaded(AvatarImageLoaded_t callback)
@@ -199,13 +190,6 @@ public class RTSPlayerInfo : NetworkBehaviour
         //if (!hasAuthority) return; // IDK ahhhh
 
         ClientOnInfoUpdated?.Invoke();
-    }
-
-    public void ClientHandleOnBaseSpawned(UnitBase unitBase)
-    {
-        Debug.Log($"Base {unitBase.name} spawned and Client {connectionToClient.connectionId} is listening");
-
-        unitBase.CmdSetPlayerSteamImage();
     }
 
     #endregion

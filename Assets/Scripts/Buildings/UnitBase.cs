@@ -14,6 +14,8 @@ public class UnitBase : NetworkBehaviour
 
     [SerializeField] Health health = null;
 
+    [SerializeField] Transform unitSpawnPoint = null;
+
     public static event Action<int> ServerOnPlayerDie;
     public static event Action<UnitBase> ServerOnBaseSpawned;
     public static event Action<UnitBase> ServerOnBaseDespawned;
@@ -22,6 +24,14 @@ public class UnitBase : NetworkBehaviour
 
     /********** MARK: Properties **********/
     #region Properties
+
+    public Transform SpawnPoint
+    {
+        get
+        {
+            return unitSpawnPoint;
+        }
+    }
 
     #endregion
 
@@ -50,32 +60,15 @@ public class UnitBase : NetworkBehaviour
         NetworkServer.Destroy(gameObject);
     }
 
-    [Command]
-    public void CmdSetPlayerSteamImage()
-    {
-        RTSNetworkManager manager = (RTSNetworkManager)NetworkManager.singleton;
-
-        List<RTSPlayer> players = manager.Players;
-
-        foreach (RTSPlayer player in players)
-        {
-            RTSPlayerInfo playerInfo = player.GetComponent<RTSPlayerInfo>();
-
-            foreach (Building building in player.MyBuildings)
-            {
-                if (building.GetComponent<UnitBase>() == this)
-                {
-                    //playerSteamImage.texture = playerInfo.DisplayTexture;
-                }
-            }
-        }
-    }
-
     #endregion
 
     /********** MARK: Client Functions **********/
     #region Client Functions
         
+    public void SetPlayerSteamImage(RTSPlayerInfo playerInfo)
+    {
+        playerSteamImage.texture = playerInfo.DisplayTexture;
+    }
 
     #endregion
 }

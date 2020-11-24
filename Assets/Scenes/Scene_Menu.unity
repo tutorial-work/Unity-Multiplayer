@@ -2759,17 +2759,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1111729476}
   m_CullTransparentMesh: 0
---- !u!114 &1284925910 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7396895992467785920, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
-  m_PrefabInstance: {fileID: 5616526244670715349}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea368fb6f27ec2f40a40e20977992b9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1291829775
 GameObject:
   m_ObjectHideFlags: 0
@@ -4907,14 +4896,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7396895992467785920, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7396895992467785921, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7396895992467785922, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -4959,57 +4940,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7396895992467785923, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
-      propertyPath: transport
-      value: 
-      objectReference: {fileID: 1284925910}
-    - target: {fileID: 7396895992467785923, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
-      propertyPath: isUsingSteam
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7396895992467785923, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
-      propertyPath: spawnPrefabs.Array.size
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 7396895992467785923, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
-      propertyPath: spawnPrefabs.Array.data[10]
-      value: 
-      objectReference: {fileID: 2301196946906138814, guid: 3e7f31bb4c28e4f4694134ac9f6c1d4a, type: 3}
-    - target: {fileID: 7396895992467785923, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
-      propertyPath: spawnPrefabs.Array.data[11]
-      value: 
-      objectReference: {fileID: 2301196946906138814, guid: 3f343a56b85608e4fb37cdd6b7fabcb4, type: 3}
-    - target: {fileID: 7396895992467785923, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
-      propertyPath: spawnPrefabs.Array.data[12]
-      value: 
-      objectReference: {fileID: 2301196946906138814, guid: 44820eb6cbb64234c94811b9958cc9a1, type: 3}
-    - target: {fileID: 7396895992467785923, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
-      propertyPath: spawnPrefabs.Array.data[13]
-      value: 
-      objectReference: {fileID: 4423088463685977023, guid: 633512a6013fe3743af501a9bc1dfb4c, type: 3}
-    - target: {fileID: 7396895992467785923, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
-      propertyPath: spawnPrefabs.Array.data[14]
-      value: 
-      objectReference: {fileID: 4423088463685977023, guid: 2788eb128bb6df848b4d55e445b2df64, type: 3}
-    - target: {fileID: 7396895992467785923, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
-      propertyPath: spawnPrefabs.Array.data[15]
-      value: 
-      objectReference: {fileID: 4423088463685977023, guid: ec10d92fd1583fc49b42419a1b2e0d05, type: 3}
-    - target: {fileID: 7396895992467785923, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
-      propertyPath: spawnPrefabs.Array.data[16]
-      value: 
-      objectReference: {fileID: 4423088463685977023, guid: 42c5a773de27d494e9f630850ebe2311, type: 3}
-    - target: {fileID: 7396895992467785923, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
-      propertyPath: spawnPrefabs.Array.data[17]
-      value: 
-      objectReference: {fileID: 4423088463685977023, guid: d496c3dd82b7928459c55b6f11cd6ebd, type: 3}
     - target: {fileID: 7396895992467785926, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
       propertyPath: m_Name
       value: Network Manager
-      objectReference: {fileID: 0}
-    - target: {fileID: 7396895992467785933, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
