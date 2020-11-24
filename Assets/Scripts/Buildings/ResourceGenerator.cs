@@ -14,8 +14,23 @@ public class ResourceGenerator : NetworkBehaviour
 
     [SerializeField] private float interval = 2f;
 
+    [SerializeField] private float personalSpaceRange = 2f;
+
     float timer;
     RTSPlayer player;
+
+    #endregion
+
+    /********** MARK: Properties **********/
+    #region Properties
+
+    public float PersonalSpaceRange
+    {
+        get
+        {
+            return personalSpaceRange;
+        }
+    }
 
     #endregion
 

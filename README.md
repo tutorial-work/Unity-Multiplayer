@@ -28,19 +28,23 @@ List of objectives to complete
 	- [x] resource storage increase max resources
 	- [x] balance building attributes
 	- [x] balance unit attributes
+	- [x] resource generator personal space range
+	- [x] resource storage cap
 	- [ ] ~~unit population~~
 - User Interface
 	- [x] update building Icons
 	- [x] buttons light up when you can afford building	
-	- [ ] description UI with controls/units/buildings
-	- [ ] resignation UI
+	- [x] description UI with controls/units/buildings
+	- [ ] ~~resignation UI~~
 - Quality of Life
 	- [x] increase number of max players
 	- [x] change health and selection colors to match team color
+	- [ ] post processing 
  	- [ ] ~~control groups~~
 	- [ ] ~~team color picker~~
 	- [ ] ~~teams~~
 	- [ ] ~~left click on minimap doesn't deselect units~~
 	- [ ] ~~left click on UI doesn't drag unit selection box~~
 - Debugging
+	- [ ] unit base/player death causes crash
 	- [ ] muliple lobbies in one session crashes game

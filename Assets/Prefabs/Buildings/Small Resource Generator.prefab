@@ -47,6 +47,7 @@ MonoBehaviour:
   health: {fileID: 8854267337666962492}
   resourcesPerInterval: 10
   interval: 5
+  personalSpaceRange: 5
 --- !u!1001 &6042542298760467206
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -43,7 +43,8 @@ public class Health : NetworkBehaviour
     {
         if (connectionToClient.connectionId != connectionId) return;
 
-        DealDamage(currentHealth);
+        // this just auto kills the owner by dealing their current damage to themself
+        DealDamage(currentHealth); 
     }
 
     [Server]

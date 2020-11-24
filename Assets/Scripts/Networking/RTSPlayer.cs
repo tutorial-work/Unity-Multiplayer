@@ -20,6 +20,11 @@ public class RTSPlayer : NetworkBehaviour
     [SyncVar(hook = nameof(ClientHandleMaxResourcesUpdate))]
     [SerializeField] int maxResources = 50;
 
+    [SyncVar]
+    [SerializeField] int resourceStoragesCount = 0;
+
+    [SerializeField] int maxResourceStorages = 15;
+
     public event Action<int, int> ClientOnResourcesUpdated;
 
     List<Unit> myUnits = new List<Unit>();
@@ -64,6 +69,15 @@ public class RTSPlayer : NetworkBehaviour
         set
         {
             maxResources = value;
+        }
+    }
+
+    // HACK: this seems a little silly to me
+    public int ResourceStoragesCount
+    {
+        get
+        {
+            return resourceStoragesCount;
         }
     }
 
@@ -131,7 +145,8 @@ public class RTSPlayer : NetworkBehaviour
 
         // HACK: these lines should probably be moved into resource Generator
         if (!building.TryGetComponent<ResourceStorage>(out ResourceStorage resourceStorage)) return;
-        maxResources += resourceStorage.ResourceCapacity; 
+        maxResources += resourceStorage.ResourceCapacity;
+        resourceStoragesCount++;
     }
 
     [Server] // TODO: Verify this line
@@ -144,6 +159,7 @@ public class RTSPlayer : NetworkBehaviour
         // HACK: these lines should probably be moved into resource Generator
         if (!building.TryGetComponent<ResourceStorage>(out ResourceStorage resourceStorage)) return;
         maxResources -= resourceStorage.ResourceCapacity;
+        resourceStoragesCount--;
     }
 
     [Command]
@@ -178,6 +194,9 @@ public class RTSPlayer : NetworkBehaviour
 
     public bool CanPlaceBuilding(BoxCollider buildingCollider, Vector3 point)
     {
+        if (buildingCollider.GetComponent<ResourceStorage>() 
+            && resourceStoragesCount >= maxResourceStorages) return false;
+
         Collider[] colliders = Physics.OverlapBox(
             point + buildingCollider.center, 
             buildingCollider.size / 2, Quaternion.identity, 
@@ -193,13 +212,29 @@ public class RTSPlayer : NetworkBehaviour
             return false;
         }
 
+        // HACK: holy yikes this is some janky panky
         foreach (Unit unit in myUnits)
         {
             if (unit.GetComponent<UnitBuilder>())
             {
-                if ((point - unit.transform.position).sqrMagnitude <=
-                buildingRangeLimit * buildingRangeLimit)
+                if ((point - unit.transform.position).sqrMagnitude <= // checks if building is inside range
+                    buildingRangeLimit * buildingRangeLimit)
                 {
+                    ResourceGenerator generator = buildingCollider.GetComponent<ResourceGenerator>();
+
+                    if (generator) // resource generator validation
+                    {
+                        foreach (Building building in myBuildings)
+                        {
+                            ResourceGenerator otherGenerator = building.GetComponent<ResourceGenerator>();
+
+                            if (otherGenerator && (point - otherGenerator.transform.position).sqrMagnitude <=
+                                otherGenerator.PersonalSpaceRange * otherGenerator.PersonalSpaceRange)
+                                return false; // building cant be in range of other derrick
+                        }
+                    }
+
+                    // regular building validation
                     return true;
                 }
             }
