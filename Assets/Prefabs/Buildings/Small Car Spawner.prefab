@@ -92,9 +92,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 425e794cb99594e4796a5e95ab7077d8, type: 3}
     - target: {fileID: 3728335438580089072, guid: 8871bebf8352fe54e927db0082fc8bed, type: 3}
+      propertyPath: price
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3728335438580089072, guid: 8871bebf8352fe54e927db0082fc8bed, type: 3}
       propertyPath: buildingPreview
       value: 
       objectReference: {fileID: 175773127007811710}
+    - target: {fileID: 3763948355522757954, guid: 8871bebf8352fe54e927db0082fc8bed, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.43
+      objectReference: {fileID: 0}
     - target: {fileID: 4073067624673163873, guid: 8871bebf8352fe54e927db0082fc8bed, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -199,6 +207,22 @@ PrefabInstance:
       propertyPath: unitPrefab
       value: 
       objectReference: {fileID: 7954714886208339757, guid: 633512a6013fe3743af501a9bc1dfb4c, type: 3}
+    - target: {fileID: 7998539011227656244, guid: 8871bebf8352fe54e927db0082fc8bed, type: 3}
+      propertyPath: maxUnitQueue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7998539011227656244, guid: 8871bebf8352fe54e927db0082fc8bed, type: 3}
+      propertyPath: spawnMoveRange
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7998539011227656244, guid: 8871bebf8352fe54e927db0082fc8bed, type: 3}
+      propertyPath: unitSpawnDuration
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8854267337666962492, guid: 8871bebf8352fe54e927db0082fc8bed, type: 3}
+      propertyPath: maxHealth
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8871bebf8352fe54e927db0082fc8bed, type: 3}
 --- !u!4 &5514199043454358509 stripped

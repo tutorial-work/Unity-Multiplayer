@@ -11,11 +11,12 @@ public class CameraController : NetworkBehaviour
 
     [SerializeField] Transform playerCameraTransform = null;
     [SerializeField] float speed = 25f;
+    [SerializeField] float zoomDelta = 0.2f;
     [SerializeField] float screenBorderThickness = 10f;
     [SerializeField] Vector2 screenXLimits = Vector2.zero;
     [SerializeField] Vector2 screenZLimits = Vector2.zero;
 
-    Vector2 previousInput;
+    Vector2 moveInput;
 
     Controls controls;
 
@@ -39,6 +40,8 @@ public class CameraController : NetworkBehaviour
 
         controls.Player.ResetCamera.performed += ResetCameraPosition;
 
+        controls.Player.ZoomCamera.performed += ZoomCamera;
+
         controls.Enable();
 
         UnitBase.AuthorityOnBaseSpawned += InitializeCameraResetPosition; 
@@ -61,7 +64,7 @@ public class CameraController : NetworkBehaviour
     {
         Vector3 pos = playerCameraTransform.position;
 
-        if (previousInput == Vector2.zero)
+        if (moveInput == Vector2.zero)
         {
             Vector3 cursorMovement = Vector3.zero;
 
@@ -89,7 +92,7 @@ public class CameraController : NetworkBehaviour
         }
         else
         {
-            pos += new Vector3(previousInput.x, 0f, previousInput.y) * speed * Time.deltaTime;
+            pos += new Vector3(moveInput.x, 0f, moveInput.y) * speed * Time.deltaTime;
         }
 
         // these x & y's are really the min and maxes, we just stored them as a Vector2
@@ -101,7 +104,7 @@ public class CameraController : NetworkBehaviour
 
     private void SetPreviousInput(InputAction.CallbackContext ctx)
     {
-        previousInput = ctx.ReadValue<Vector2>();
+        moveInput = ctx.ReadValue<Vector2>();
     }
 
     private void InitializeCameraResetPosition(UnitBase unitBase)
@@ -118,7 +121,25 @@ public class CameraController : NetworkBehaviour
 
     private void ResetCameraPosition(InputAction.CallbackContext ctx)
     {
-        if (isCameraResetPositionInitialized) playerCameraTransform.position = resetPosition;
+        if (!isCameraResetPositionInitialized) return;
+
+        resetPosition.y = playerCameraTransform.position.y;
+
+        playerCameraTransform.position = resetPosition;
+    }
+
+    private void ZoomCamera(InputAction.CallbackContext ctx)
+    {
+        bool zoomDirection = (ctx.ReadValue<Vector2>().y > 0);
+
+        Vector3 position = playerCameraTransform.position;
+
+        if (zoomDirection) position.y += zoomDelta;
+        else position.y -= zoomDelta;
+
+        position.y = Mathf.Clamp(position.y, 5, 20);
+
+        playerCameraTransform.position = position;
     }
 
     #endregion

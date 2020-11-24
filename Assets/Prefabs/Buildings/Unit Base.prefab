@@ -201,23 +201,6 @@ Transform:
   m_Father: {fileID: 7951012853176796383}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1692073300552898826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7078580406497908326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af4639517a9fb4c1f9fbaf456dcc9c56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  playerSteamImage: {fileID: 4754848068367312417}
-  health: {fileID: 8854267337666962492}
-  unitSpawnPoint: {fileID: 9048231291518499513}
 --- !u!1 &6450528348328829084
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,6 +231,23 @@ Transform:
   m_Father: {fileID: 7951012853176796383}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1692073300552898826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7078580406497908326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af4639517a9fb4c1f9fbaf456dcc9c56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  playerSteamImage: {fileID: 4754848068367312417}
+  health: {fileID: 8854267337666962492}
+  unitSpawnPoint: {fileID: 9048231291518499513}
 --- !u!1001 &2667881284952539146
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -431,6 +431,10 @@ PrefabInstance:
       propertyPath: colorRenderers.Array.data[2]
       value: 
       objectReference: {fileID: 2667881284954577002}
+    - target: {fileID: 2971180653478442810, guid: da861a9408ede77488ef88c0a92b085a, type: 3}
+      propertyPath: maxHealth
+      value: 2000
+      objectReference: {fileID: 0}
     - target: {fileID: 3595921255908951392, guid: da861a9408ede77488ef88c0a92b085a, type: 3}
       propertyPath: m_Name
       value: Unit Base

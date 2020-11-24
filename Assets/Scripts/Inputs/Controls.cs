@@ -33,6 +33,22 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Set Control Group"",
+                    ""type"": ""Button"",
+                    ""id"": ""7fbfe763-92ba-4d8e-8b48-80a48dd5e9fe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Zoom Camera"",
+                    ""type"": ""Value"",
+                    ""id"": ""3ba64fe1-150b-4847-bd35-0c835514b268"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -156,6 +172,50 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""action"": ""Reset Camera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Ctrl + ..."",
+                    ""id"": ""966274d3-2482-4797-a260-c8328aa43259"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Set Control Group"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""0df405c7-e460-47b8-a0a3-433c4d0dcef1"",
+                    ""path"": ""<Keyboard>/numpadEnter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Set Control Group"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""3080065d-5167-4320-b5c8-c4cdf9d7feea"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Set Control Group"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7f651dfa-c04f-4c13-8f32-4ab2a4c05b6e"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Zoom Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -183,6 +243,8 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_MoveCamera = m_Player.FindAction("Move Camera", throwIfNotFound: true);
         m_Player_ResetCamera = m_Player.FindAction("Reset Camera", throwIfNotFound: true);
+        m_Player_SetControlGroup = m_Player.FindAction("Set Control Group", throwIfNotFound: true);
+        m_Player_ZoomCamera = m_Player.FindAction("Zoom Camera", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -234,12 +296,16 @@ public class @Controls : IInputActionCollection, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_MoveCamera;
     private readonly InputAction m_Player_ResetCamera;
+    private readonly InputAction m_Player_SetControlGroup;
+    private readonly InputAction m_Player_ZoomCamera;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
         public PlayerActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @MoveCamera => m_Wrapper.m_Player_MoveCamera;
         public InputAction @ResetCamera => m_Wrapper.m_Player_ResetCamera;
+        public InputAction @SetControlGroup => m_Wrapper.m_Player_SetControlGroup;
+        public InputAction @ZoomCamera => m_Wrapper.m_Player_ZoomCamera;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -255,6 +321,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @ResetCamera.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnResetCamera;
                 @ResetCamera.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnResetCamera;
                 @ResetCamera.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnResetCamera;
+                @SetControlGroup.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSetControlGroup;
+                @SetControlGroup.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSetControlGroup;
+                @SetControlGroup.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSetControlGroup;
+                @ZoomCamera.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoomCamera;
+                @ZoomCamera.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoomCamera;
+                @ZoomCamera.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoomCamera;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -265,6 +337,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @ResetCamera.started += instance.OnResetCamera;
                 @ResetCamera.performed += instance.OnResetCamera;
                 @ResetCamera.canceled += instance.OnResetCamera;
+                @SetControlGroup.started += instance.OnSetControlGroup;
+                @SetControlGroup.performed += instance.OnSetControlGroup;
+                @SetControlGroup.canceled += instance.OnSetControlGroup;
+                @ZoomCamera.started += instance.OnZoomCamera;
+                @ZoomCamera.performed += instance.OnZoomCamera;
+                @ZoomCamera.canceled += instance.OnZoomCamera;
             }
         }
     }
@@ -282,5 +360,7 @@ public class @Controls : IInputActionCollection, IDisposable
     {
         void OnMoveCamera(InputAction.CallbackContext context);
         void OnResetCamera(InputAction.CallbackContext context);
+        void OnSetControlGroup(InputAction.CallbackContext context);
+        void OnZoomCamera(InputAction.CallbackContext context);
     }
 }

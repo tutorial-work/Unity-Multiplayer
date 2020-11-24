@@ -92,9 +92,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 58270d8dca8f0be45a8c4ee03e233fe3, type: 3}
     - target: {fileID: 3728335438580089072, guid: 8871bebf8352fe54e927db0082fc8bed, type: 3}
+      propertyPath: price
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 3728335438580089072, guid: 8871bebf8352fe54e927db0082fc8bed, type: 3}
       propertyPath: buildingPreview
       value: 
       objectReference: {fileID: 8786866040122329544}
+    - target: {fileID: 3763948355522757954, guid: 8871bebf8352fe54e927db0082fc8bed, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763948355522757954, guid: 8871bebf8352fe54e927db0082fc8bed, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.31
+      objectReference: {fileID: 0}
     - target: {fileID: 4073067624673163873, guid: 8871bebf8352fe54e927db0082fc8bed, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.371
@@ -157,7 +169,7 @@ PrefabInstance:
       objectReference: {fileID: 1590168759752747457}
     - target: {fileID: 7078580406497908326, guid: 8871bebf8352fe54e927db0082fc8bed, type: 3}
       propertyPath: m_Name
-      value: Lazer Tank Spawner
+      value: Laser Tank Spawner
       objectReference: {fileID: 0}
     - target: {fileID: 7838824595740509978, guid: 8871bebf8352fe54e927db0082fc8bed, type: 3}
       propertyPath: m_IsActive
@@ -211,6 +223,18 @@ PrefabInstance:
       propertyPath: unitPrefab
       value: 
       objectReference: {fileID: 7954714886208339757, guid: d496c3dd82b7928459c55b6f11cd6ebd, type: 3}
+    - target: {fileID: 7998539011227656244, guid: 8871bebf8352fe54e927db0082fc8bed, type: 3}
+      propertyPath: maxUnitQueue
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7998539011227656244, guid: 8871bebf8352fe54e927db0082fc8bed, type: 3}
+      propertyPath: unitSpawnDuration
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 8854267337666962492, guid: 8871bebf8352fe54e927db0082fc8bed, type: 3}
+      propertyPath: maxHealth
+      value: 500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8871bebf8352fe54e927db0082fc8bed, type: 3}
 --- !u!4 &5514199043454358509 stripped
@@ -271,7 +295,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4766504871373879161, guid: b3c3da3fc3ddd6f44853ae0664bdb7ba, type: 3}
       propertyPath: m_Name
-      value: Lazer Tank Spawner Preview
+      value: Laser Tank Spawner Preview
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3c3da3fc3ddd6f44853ae0664bdb7ba, type: 3}

@@ -97,6 +97,10 @@ PrefabInstance:
       propertyPath: targeter
       value: 
       objectReference: {fileID: 2641009379136309121}
+    - target: {fileID: 53715644203969250, guid: d5941778de8564480b34f0b483828e25, type: 3}
+      propertyPath: resourceCost
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 819783143299678692, guid: d5941778de8564480b34f0b483828e25, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.5
@@ -115,7 +119,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2938427204633081240, guid: d5941778de8564480b34f0b483828e25, type: 3}
       propertyPath: m_Speed
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2938427204633081240, guid: d5941778de8564480b34f0b483828e25, type: 3}
       propertyPath: m_Height
@@ -127,15 +131,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2938427204633081240, guid: d5941778de8564480b34f0b483828e25, type: 3}
       propertyPath: m_Acceleration
-      value: 999
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2938427204633081240, guid: d5941778de8564480b34f0b483828e25, type: 3}
       propertyPath: m_AngularSpeed
-      value: 999
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 2938427204633081240, guid: d5941778de8564480b34f0b483828e25, type: 3}
       propertyPath: m_StoppingDistance
-      value: 0.7
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3349905165620157574, guid: d5941778de8564480b34f0b483828e25, type: 3}
       propertyPath: m_IsActive
@@ -195,7 +199,7 @@ PrefabInstance:
       objectReference: {fileID: 6079930887459047234}
     - target: {fileID: 5987727696471465971, guid: d5941778de8564480b34f0b483828e25, type: 3}
       propertyPath: maxHealth
-      value: 50
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 6025075627310156590, guid: d5941778de8564480b34f0b483828e25, type: 3}
       propertyPath: m_IsActive
@@ -273,6 +277,10 @@ PrefabInstance:
       propertyPath: targeter
       value: 
       objectReference: {fileID: 2641009379136309121}
+    - target: {fileID: 7329324945722029012, guid: d5941778de8564480b34f0b483828e25, type: 3}
+      propertyPath: chaseRange
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7544196744804184987, guid: d5941778de8564480b34f0b483828e25, type: 3}
       propertyPath: m_IsActive
       value: 1

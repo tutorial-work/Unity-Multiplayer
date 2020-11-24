@@ -14,23 +14,33 @@ List of objectives to complete
 	- [x] complete GameDev.tv tutorial
 	- [x] add Steam username to lobby
 	- [x] add Steam profile picture to lobby
-- Better Map
+- Better Map Interaction
 	- [x] add Steam profile picture to game
-	- [x] spawn camera ontop of Unit Base
 	- [x] update map with better environment
+	- [x] spawn camera ontop of Unit Base
+	- [x] camera zoom and camera rotation
+	- [ ] can delete building
+	- [ ] spectator mode
 - Buildings and Units
-	- [x] add unit Prefabs
+	- [x] add unit prefabs
 	- [x] update building Icons
 	- [x] builder cars 
+	- [x] units auto attack if they take damage and don't have a task
 	- [x] resource storage increase max resources
-	- [ ] balance unit attributes
-	- [ ] balance building attributes
+	- [x] balance building attributes
+	- [x] balance unit attributes
 	- [ ] ~~unit population~~
-	
+- User Interface
+	- [x] buttons light up when you can afford building	
+	- [ ] description UI with controls/units/buildings
+	- [ ] resignation UI
 - Quality of Life
-	- [x] units auto attack if it takes damage and they don't have a task
 	- [x] increase number of max players
+	- [ ] change health and selection colors to match team color
+ 	- [ ] ~~control groups~~
 	- [ ] ~~team color picker~~
 	- [ ] ~~teams~~
 	- [ ] ~~left click on minimap doesn't deselect units~~
 	- [ ] ~~left click on UI doesn't drag unit selection box~~
+- Debugging
+	- [ ] muliple lobbies in one session crashes game

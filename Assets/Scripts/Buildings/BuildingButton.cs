@@ -17,11 +17,33 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     [SerializeField] TMP_Text priceText = null;
     [SerializeField] LayerMask floorMask = new LayerMask();
 
-    private Camera mainCamera;
-    private BoxCollider buildingCollider;
-    private RTSPlayer player;
-    private GameObject buildingPreviewInstance;
-    private Renderer buildingRendererInstance;
+    Camera mainCamera;
+    BoxCollider buildingCollider;
+    RTSPlayer player;
+    GameObject buildingPreviewInstance;
+    Renderer buildingRendererInstance;
+
+    bool canAffordBuilding = true;
+
+    #endregion
+
+    /********** MARK: Properties **********/
+    #region Properties
+
+    private bool CanAffordBuilding
+    {
+        get
+        {
+            return canAffordBuilding;
+        }
+        set
+        {
+            if (canAffordBuilding == value) return;
+
+            iconImage.color = (value) ? new Color(1f, 1f, 1f) : new Color(0.25f, 0.25f, 0.25f);
+            canAffordBuilding = value;
+        }
+    }
 
     #endregion
 
@@ -42,7 +64,6 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
 
         buildingCollider = building.GetComponent<BoxCollider>();
-        //buildingCollider = building.GetComponentInChildren<BoxCollider>();
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -76,6 +97,8 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     /// </summary>
     private void Update()
     {
+        CanAffordBuilding = (building.Price <= player.CurrentResources);
+
         if (buildingPreviewInstance == null) return;
 
         UpdateBuildingPreview();

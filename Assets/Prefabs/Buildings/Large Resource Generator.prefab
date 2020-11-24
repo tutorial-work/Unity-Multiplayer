@@ -16,7 +16,7 @@ MonoBehaviour:
   syncInterval: 0.1
   health: {fileID: 8854267337666962492}
   resourcesPerInterval: 10
-  interval: 2
+  interval: 1
 --- !u!1 &6450528348328829084
 GameObject:
   m_ObjectHideFlags: 0
@@ -41,7 +41,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6450528348328829084}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1.36, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7951012853176796383}
@@ -90,6 +90,10 @@ PrefabInstance:
       propertyPath: colorRenderers.Array.data[1]
       value: 
       objectReference: {fileID: 1428059467578686233}
+    - target: {fileID: 2971180653478442810, guid: da861a9408ede77488ef88c0a92b085a, type: 3}
+      propertyPath: maxHealth
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 3595921255908951392, guid: da861a9408ede77488ef88c0a92b085a, type: 3}
       propertyPath: m_Name
       value: Large Resource Generator
@@ -176,7 +180,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 5dafa66b53f78a64eb28a13e43c4a725, type: 3}
     - target: {fileID: 6946478513112404982, guid: da861a9408ede77488ef88c0a92b085a, type: 3}
       propertyPath: price
-      value: 50
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 6946478513112404982, guid: da861a9408ede77488ef88c0a92b085a, type: 3}
       propertyPath: buildingPreview
