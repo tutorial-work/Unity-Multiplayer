@@ -147,16 +147,17 @@ public class RTSNetworkManager : NetworkManager
         {
             foreach (RTSPlayer player in Players)
             {
-                RTSPlayerInfo playerInfo = player.GetComponent<RTSPlayerInfo>();
+                //RTSPlayerInfo playerInfo = player.GetComponent<RTSPlayerInfo>();
 
-                foreach (Building building in player.MyBuildings)
-                {
-                    if (building.TryGetComponent<UnitBase>(out UnitBase unitBase))
-                    {
-                        unitBase.SetPlayerSteamImage(playerInfo);
-                        break;
-                    }
-                }
+                //foreach (Building building in player.MyBuildings)
+                //{
+                //    if (building.TryGetComponent<UnitBase>(out UnitBase unitBase))
+                //    {
+                //        unitBase.SetPlayerSteamImage(playerInfo);
+                //        break;
+                //    }
+                //}
+                Debug.Log("uh");
             }
         }
     }
