@@ -48,6 +48,9 @@ public class UnitFiring : NetworkBehaviour
             GameObject projectileInstance =
                 Instantiate(projectilePrefab, projectileSpawnPoint.position, projectileRotation);
 
+            UnitProjectile projectile = projectileInstance.GetComponent<UnitProjectile>();
+            projectile.OriginTransform = transform;
+
             NetworkServer.Spawn(projectileInstance, connectionToClient);
 
             lastFireTime = Time.time;
