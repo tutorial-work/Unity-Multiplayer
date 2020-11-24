@@ -143,29 +143,46 @@ public class RTSNetworkManager : NetworkManager
 
     public override void OnClientSceneChanged(NetworkConnection conn)
     {
-        Debug.Log("log 1");
+        //Debug.Log("log 1");
 
-        base.OnClientSceneChanged(conn);
+        //base.OnClientSceneChanged(conn);
 
-        Debug.Log("log 2");
+        //Debug.Log("log 2");
+
+        //if (SceneManager.GetActiveScene().name.StartsWith("Scene_Map")) // HACK: string reference
+        //{
+        //    Debug.Log("log 3");
+
+        //    foreach (RTSPlayer player in Players)
+        //    {
+        //        Debug.Log($"log 4, player: {player.name}");
+
+        //        RTSPlayerInfo playerInfo = player.GetComponent<RTSPlayerInfo>();
+
+        //        foreach (Building building in player.MyBuildings)
+        //        {
+        //            if (building.TryGetComponent<UnitBase>(out UnitBase unitBase))
+        //            {
+        //                Debug.Log($"logging display texture: {playerInfo.DisplayTexture}");
+        //                unitBase.SetPlayerSteamImage(playerInfo);
+        //                break;
+        //            }
+        //        }
+        //    }
+        //}
 
         if (SceneManager.GetActiveScene().name.StartsWith("Scene_Map")) // HACK: string reference
         {
-            Debug.Log("log 3");
+            UnitBase[] unitBases = FindObjectsOfType<UnitBase>();
 
-            foreach (RTSPlayer player in Players)
+            foreach (UnitBase unitBase in unitBases)
             {
-                Debug.Log($"log 4, player: {player.name}");
-
-                RTSPlayerInfo playerInfo = player.GetComponent<RTSPlayerInfo>();
-
-                foreach (Building building in player.MyBuildings)
+                foreach (RTSPlayer player in Players)
                 {
-                    if (building.TryGetComponent<UnitBase>(out UnitBase unitBase))
+                    if (unitBase.connectionToClient == player.connectionToClient)
                     {
-                        Debug.Log($"logging display texture: {playerInfo.DisplayTexture}");
+                        RTSPlayerInfo playerInfo = player.GetComponent<RTSPlayerInfo>();
                         unitBase.SetPlayerSteamImage(playerInfo);
-                        break;
                     }
                 }
             }
