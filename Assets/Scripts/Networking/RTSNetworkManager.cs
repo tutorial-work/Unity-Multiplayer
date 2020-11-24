@@ -155,11 +155,11 @@ public class RTSNetworkManager : NetworkManager
                 {
                     if (building.TryGetComponent<UnitBase>(out UnitBase unitBase))
                     {
+                        Debug.Log($"logging display texture: {playerInfo.DisplayTexture}");
                         unitBase.SetPlayerSteamImage(playerInfo);
                         break;
                     }
                 }
-                Debug.Log("uh");
             }
         }
     }
