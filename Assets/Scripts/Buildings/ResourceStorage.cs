@@ -1,32 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
 
-public class ResourceStorage : NetworkBehaviour
+public class ResourceStorage : MonoBehaviour
 {
     /********** MARK: Variables **********/
     #region Variables
 
+    [SerializeField] int resourceCapacity = 50;
+
     #endregion
 
-    /********** MARK: Server Functions **********/
-    #region Server Functions
+    /********** MARK: Properties **********/
+    #region Properties
 
-    //public override void OnStartServer()
-    //{
-    //    timer = interval;
-    //    player = connectionToClient.identity.GetComponent<RTSPlayer>();
-
-    //    health.ServerOnDie += ServerHandleDie;
-    //    GameOverHandler.ServerOnGameOver += ServerHandleGameOver;
-    //}
-
-    //public override void OnStopServer()
-    //{
-    //    health.ServerOnDie -= ServerHandleDie;
-    //    GameOverHandler.ServerOnGameOver -= ServerHandleGameOver;
-    //}
+    public int ResourceCapacity
+    {
+        get
+        {
+            return resourceCapacity;
+        }
+    }
 
     #endregion
 }

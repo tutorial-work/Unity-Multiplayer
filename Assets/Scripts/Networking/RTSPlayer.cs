@@ -15,10 +15,10 @@ public class RTSPlayer : NetworkBehaviour
     [SerializeField] float buildingRangeLimit = 5f;
 
     [SyncVar(hook = nameof(ClientHandleCurrentResourcesUpdate))]
-    int currentResources = 500;
+    int currentResources = 50;
 
     [SyncVar(hook = nameof(ClientHandleMaxResourcesUpdate))]
-    int maxResources = 500;
+    int maxResources = 100;
 
     public event Action<int, int> ClientOnResourcesUpdated;
 
@@ -122,13 +122,19 @@ public class RTSPlayer : NetworkBehaviour
         myUnits.Remove(unit);
     }
 
+    [Server] // TODO: Verify this line
     private void ServerHandleBuildingSpawned(Building building)
     {
         if (building.connectionToClient.connectionId != connectionToClient.connectionId) return;
 
         myBuildings.Add(building);
+
+        // HACK: these lines should probably be moved into resource Generator
+        if (!building.TryGetComponent<ResourceStorage>(out ResourceStorage resourceStorage)) return;
+        maxResources += resourceStorage.ResourceCapacity; 
     }
 
+    [Server] // TODO: Verify this line
     private void ServerHandleBuildingDespawned(Building building)
     {
         if (building.connectionToClient.connectionId != connectionToClient.connectionId) return;

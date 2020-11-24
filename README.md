@@ -22,15 +22,15 @@ List of objectives to complete
 	- [x] add unit Prefabs
 	- [x] update building Icons
 	- [x] builder cars 
+	- [x] resource storage increase max resources
 	- [ ] balance unit attributes
 	- [ ] balance building attributes
-	- [ ] resource storage increase max resources
-	- [ ] unit population
+	- [ ] ~~unit population~~
 	
 - Quality of Life
-	- [ ] left click on minimap doesn't deselect units
-	- [ ] left click on UI doesn't drag unit selection box
 	- [ ] units auto attack if enemy is in range and they don't have a task
 	- [ ] increase number of max players
-	- [ ] team color picker
-	- [ ] teams
+	- [ ] ~~team color picker~~
+	- [ ] ~~teams~~
+	- [ ] ~~left click on minimap doesn't deselect units~~
+	- [ ] ~~left click on UI doesn't drag unit selection box~~
