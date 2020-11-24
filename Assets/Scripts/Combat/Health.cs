@@ -63,7 +63,7 @@ public class Health : NetworkBehaviour
     [Server]
     public void DealDamage(UnitProjectile projectile)
     {
-        ServerOnTakeDamage?.Invoke(projectile.OriginTransform);
+        if (projectile.OriginTransform) ServerOnTakeDamage?.Invoke(projectile.OriginTransform);
 
         DealDamage(projectile.DamageToDeal);
     }
