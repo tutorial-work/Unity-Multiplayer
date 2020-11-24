@@ -22,6 +22,8 @@ public class Health : NetworkBehaviour
     /********** MARK: Properties **********/
     #region Properties
 
+    public bool HasStartedDeath { get; [Server] set; }
+
     #endregion
 
     /********** MARK: Server Functions **********/
@@ -35,7 +37,7 @@ public class Health : NetworkBehaviour
 
     public override void OnStopServer()
     {
-        UnitBase.ServerOnPlayerDie += ServerHandlePlayerDie;
+        UnitBase.ServerOnPlayerDie -= ServerHandlePlayerDie;
     }
 
     [Server]

@@ -19,7 +19,7 @@ List of objectives to complete
 	- [x] update map with better environment
 	- [x] spawn camera ontop of Unit Base
 	- [x] camera zoom and camera rotation
-	- [ ] spectator mode
+	- [ ] spectator mode after defeat
 	- [ ] ~~can delete building~~
 - Buildings and Units
 	- [x] add unit prefabs
