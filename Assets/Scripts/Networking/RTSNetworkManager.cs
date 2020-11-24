@@ -171,16 +171,30 @@ public class RTSNetworkManager : NetworkManager
         //    }
         //}
 
+        StartCoroutine(TempFunctionName());
+    }
+
+    public IEnumerator TempFunctionName()
+    {
+        yield return new WaitForSeconds(1);
+
+        Debug.Log("1");
+
         if (SceneManager.GetActiveScene().name.StartsWith("Scene_Map")) // HACK: string reference
         {
             UnitBase[] unitBases = FindObjectsOfType<UnitBase>();
 
             foreach (UnitBase unitBase in unitBases)
             {
+                Debug.Log("2");
+
                 foreach (RTSPlayer player in Players)
                 {
+                    Debug.Log("3");
+
                     if (unitBase.connectionToClient == player.connectionToClient)
                     {
+                        Debug.Log("4");
                         RTSPlayerInfo playerInfo = player.GetComponent<RTSPlayerInfo>();
                         unitBase.SetPlayerSteamImage(playerInfo);
                     }
