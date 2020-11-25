@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &912749025261881110
 RectTransform:
   m_ObjectHideFlags: 0
@@ -230,16 +230,18 @@ MonoBehaviour:
 
     Multi Select - Drag/Ctrl/Shift + Mouse Left
 
-    Command -
-    Mouse Right
+    Select All
+    Military - Space Bar
+
+    Command - Mouse Right
 
 
     BUILDINGS
 
-    Place Building - Drag + Mouse Left (on UI)
+    Place Building
+    - Drag + Mouse Left (on UI)
 
-    Spawn
-    Unit - Mouse Left (on Spawner)'
+    Spawn Unit - Mouse Left (on Spawner)'
 --- !u!1 &912749025965407134
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,37 +994,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '
-
-    UNITS
-
-    small car ~50
-
-    triple gun ~ 50
-
-    tank ~ 100
-
-    big
-    tank ~ 200
-
-    laser tank ~ 250
-
-
-    RESOURCES
-
-    - buildings must be built
-    in radius of small car
-
-    - only 15 oil storages can be placed
-
-    - oil derricks
-    need space from eachother
-
-
-    GAME OVER
-
-    - player loses when his Base is
-    destroyed'
+  m_Text: "\nUNITS\nsmall car ~50                  tank ~ 100\n triple gun ~ 50           
+    big tank ~ 200\n                                     laser tank ~ 250\n\nRESOURCES\n-
+    buildings must be built in radius of small car\n- only 15 oil storages can be
+    placed\n- oil derricks need space from eachother\n\nGAME OVER\n- player loses
+    when his Base is destroyed\n- warning, don't lose your last small car, it's the
+    only unit that can build!"
 --- !u!1 &6368045797595112671
 GameObject:
   m_ObjectHideFlags: 0
