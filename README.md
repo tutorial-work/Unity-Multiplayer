@@ -7,19 +7,18 @@ To play the game, please download the following .zip file to your corresponding 
 - [Windows Build Download (tested on Windows 10)](https://www.dropbox.com/s/od03xu0ia6dvqow/Windows.zip?dl=0 "Windows.zip download")
 
 ### Essential Packages 
-- <strong>Mirror 26</strong>
-	- download the latest version of <strong>Mirror</strong> from the <strong>Unity Asset Store</strong>
-- <strong>FizzySteamworks v2.6</strong>
-	- https://github.com/Chykary/FizzySteamworks/releases
+These packages, along with a few others, come with this repository and are required to run the project in the Unity Editor.
+- <strong>Mirror 26</strong> (download the latest version from the <strong>Unity Asset Store</strong>)
+- [FizzySteamworks v2.6](https://github.com/Chykary/FizzySteamworks/releases "FizzySteamworks Steam Transport Repository")
 	
 ### Todo
 List of objectives to complete
 
-- General
+- <strong>General</strong>
 	- [x] complete GameDev.tv tutorial
 	- [x] add Steam username to lobby
 	- [x] add Steam profile picture to lobby
-- Better Map Interaction
+- <strong>Better Map Interaction</strong>
 	- [x] add Steam profile picture to game
 	- [x] update map with better environment
 	- [x] spawn camera ontop of Unit Base
@@ -27,7 +26,7 @@ List of objectives to complete
 	- [x] spectator mode after defeat
 	- [x] select all units button 
 	- [ ] ~~can delete building~~
-- Buildings and Units
+- <strong>Buildings and Units</strong>
 	- [x] add unit prefabs
 	- [x] builder cars 
 	- [x] units auto attack if they take damage and don't have a task
@@ -37,12 +36,12 @@ List of objectives to complete
 	- [x] resource generator personal space range
 	- [x] resource storage cap
 	- [ ] ~~unit population~~
-- User Interface
+- <strong>User Interface</strong>
 	- [x] update building Icons
 	- [x] buttons light up when you can afford building	
 	- [x] description UI with controls/units/buildings
 	- [ ] ~~resignation UI~~
-- Quality of Life
+- <strong>Quality of Life</strong>
 	- [x] increase number of max players
 	- [x] change health and selection colors to match team color
 	- [x] post processing 
@@ -51,7 +50,7 @@ List of objectives to complete
 	- [ ] ~~teams~~
 	- [ ] ~~left click on minimap doesn't deselect units~~
 	- [ ] ~~left click on UI doesn't drag unit selection box~~
-- Debugging
+- <strong>Debugging</strong>
 	- [x] unit base/player death causes crash
 	- [x] muliple lobbies in one session crashes game
 	- [x] health/selection colors not set on clients
