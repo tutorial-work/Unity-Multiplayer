@@ -2,12 +2,12 @@
 #### Foundation of a Multiplayer RTS game
 
 ## Builds
-To play the game, please download the following .zip file to your corresponding operating system from Dropbox. Do not change any of the contents of the folder to run the game.
+To play the game, please download the following <strong>.zip</strong> file to your corresponding operating system from <strong>Dropbox</strong>. Do not change any of the contents of the folder to run the game.
 - [Mac OS Build Download](https://www.dropbox.com/s/s38w5mp8b4tybsz/macOS.zip?dl=0 "macOS.zip download")
 - [Windows Build Download (tested on Windows 10)](https://www.dropbox.com/s/od03xu0ia6dvqow/Windows.zip?dl=0 "Windows.zip download")
 
 ### Essential Packages 
-These packages, along with a few others, come with this repository and are required to run the project in the Unity Editor.
+These packages, along with a few others, come with this repository and are required to run the project in the <strong>Unity Editor</strong>.
 - <strong>Mirror 26</strong> (download the latest version from the <strong>Unity Asset Store</strong>)
 - [FizzySteamworks v2.6](https://github.com/Chykary/FizzySteamworks/releases "FizzySteamworks Steam Transport Repository")
 	
