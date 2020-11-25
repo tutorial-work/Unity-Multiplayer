@@ -1,11 +1,10 @@
-# Real Time Strategy
+# Real Time Strategy Demo
 #### Foundation of a Multiplayer RTS game
 
 ## Builds
-- Mac OS
-	- [I'm an inline-style link with title](https://www.google.com "Google's Homepage")
-- Windows (tested on Windows 10)
-
+To play the game, please download the following .zip file to your corresponding operating system from Dropbox. Do not change any of the contents of the folder to run the game.
+- [Mac OS Build Download](https://www.dropbox.com/s/s38w5mp8b4tybsz/macOS.zip?dl=0 "macOS.zip download")
+- [Windows Build Download (tested on Windows 10)](https://www.dropbox.com/s/od03xu0ia6dvqow/Windows.zip?dl=0 "Windows.zip download")
 
 ### Essential Packages 
 - <strong>Mirror 26</strong>
