@@ -173,8 +173,15 @@ public class UnitSelectionHandler : MonoBehaviour
         SelectedUnits.Clear();
         foreach (Unit unit in player.MyUnits)
         {
-            SelectedUnits.Add(unit);
-            unit.Select();
+            if (unit.GetComponent<UnitBuilder>())
+            {
+                unit.Deselect();
+            }
+            else
+            {
+                unit.Select();
+                SelectedUnits.Add(unit);
+            }
         }
     }
     

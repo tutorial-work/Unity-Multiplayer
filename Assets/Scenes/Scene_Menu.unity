@@ -6355,6 +6355,47 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 912749025261881111, guid: 47d1ce04108fd514881ce39a20955903, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 912749025405495760, guid: 47d1ce04108fd514881ce39a20955903, type: 3}
+      propertyPath: m_Text
+      value: '
+
+        CAMERA
+
+        Move - WASD or Arrow Keys
+
+        Move (Minimap)
+        - Mouse Right
+
+        Zoom - Mouse Wheel
+
+        Reset to Base - T
+
+
+        UNITS
+
+        Select
+        - Mouse Left
+
+        Multi Select - Drag/Ctrl/Shift + Mouse Left
+
+        Select
+        All Military - Space Bar
+
+        Command - Mouse Right
+
+
+        BUILDINGS
+
+        Place
+        Building - Drag + Mouse Left (on UI)
+
+        Spawn Unit - Mouse Left (on
+        Spawner)'
+      objectReference: {fileID: 0}
     - target: {fileID: 912749026391047465, guid: 47d1ce04108fd514881ce39a20955903, type: 3}
       propertyPath: m_Name
       value: Settings Display
@@ -6446,6 +6487,19 @@ PrefabInstance:
     - target: {fileID: 912749026391047469, guid: 47d1ce04108fd514881ce39a20955903, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 912749026604377972, guid: 47d1ce04108fd514881ce39a20955903, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3631590110725257224, guid: 47d1ce04108fd514881ce39a20955903, type: 3}
+      propertyPath: m_Text
+      value: "\nUNITS\nsmall car ~50                  tank ~ 100\n triple gun ~ 50           
+        big tank ~ 200\n                                     laser tank ~ 250\n\nRESOURCES\n-
+        buildings must be built in radius of small car\n- only 15 oil storages can
+        be placed\n- oil derricks need space from eachother\n\nGAME OVER\n- player
+        loses when his Base is destroyed\n- warning, don't lose your last small car,
+        it's the only unit that can build!"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47d1ce04108fd514881ce39a20955903, type: 3}
