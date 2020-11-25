@@ -1,6 +1,12 @@
 # Real Time Strategy
 #### Foundation of a Multiplayer RTS game
 
+## Builds
+- Mac OS
+	- [I'm an inline-style link with title](https://www.google.com "Google's Homepage")
+- Windows (tested on Windows 10)
+
+
 ### Essential Packages 
 - <strong>Mirror 26</strong>
 	- download the latest version of <strong>Mirror</strong> from the <strong>Unity Asset Store</strong>
