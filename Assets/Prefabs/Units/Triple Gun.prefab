@@ -239,7 +239,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6643961590572130180, guid: d5941778de8564480b34f0b483828e25, type: 3}
       propertyPath: fireRange
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6643961590572130180, guid: d5941778de8564480b34f0b483828e25, type: 3}
       propertyPath: rotationSpeed
