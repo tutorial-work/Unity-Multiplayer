@@ -19,6 +19,8 @@ public class UnitSelectionHandler : MonoBehaviour
     RTSPlayer player;
     Camera mainCamera;
 
+    Controls controls;
+
     #endregion
 
     /********** MARK: Properties **********/
@@ -38,10 +40,16 @@ public class UnitSelectionHandler : MonoBehaviour
     {
         mainCamera = Camera.main;
 
-        player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
+        player = NetworkClient.connection.identity.GetComponent<RTSPlayer>(); // TODO: just breath this line of code in
 
         Unit.AuthorityOnUnitDespawned += AuthorityHandleUnitDespawned;
         GameOverHandler.ClientOnGameOver += ClientHandleGameOver;
+
+        controls = new Controls();
+
+        controls.Player.SelectAllUnits.performed += SelectAllUnits;
+
+        controls.Enable();
     }
 
     private void OnDestroy()
@@ -149,7 +157,7 @@ public class UnitSelectionHandler : MonoBehaviour
         unitSelectionArea.anchoredPosition =
             startPosition + new Vector2(areaWidth / 2, areaHeight / 2);
     }
-
+    
     private void AuthorityHandleUnitDespawned(Unit unit)
     {
         SelectedUnits.Remove(unit);
@@ -160,5 +168,15 @@ public class UnitSelectionHandler : MonoBehaviour
         enabled = false;
     }
 
+    private void SelectAllUnits(InputAction.CallbackContext ctx)
+    {
+        SelectedUnits.Clear();
+        foreach (Unit unit in player.MyUnits)
+        {
+            SelectedUnits.Add(unit);
+            unit.Select();
+        }
+    }
+    
     #endregion
 }

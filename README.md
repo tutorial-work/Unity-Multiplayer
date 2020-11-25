@@ -19,7 +19,8 @@ List of objectives to complete
 	- [x] update map with better environment
 	- [x] spawn camera ontop of Unit Base
 	- [x] camera zoom and camera rotation
-	- [ ] spectator mode after defeat
+	- [x] spectator mode after defeat
+	- [x] select all units button 
 	- [ ] ~~can delete building~~
 - Buildings and Units
 	- [x] add unit prefabs
@@ -39,12 +40,13 @@ List of objectives to complete
 - Quality of Life
 	- [x] increase number of max players
 	- [x] change health and selection colors to match team color
-	- [ ] post processing 
+	- [x] post processing 
  	- [ ] ~~control groups~~
 	- [ ] ~~team color picker~~
 	- [ ] ~~teams~~
 	- [ ] ~~left click on minimap doesn't deselect units~~
 	- [ ] ~~left click on UI doesn't drag unit selection box~~
 - Debugging
-	- [ ] unit base/player death causes crash
-	- [ ] muliple lobbies in one session crashes game
+	- [x] unit base/player death causes crash
+	- [x] muliple lobbies in one session crashes game
+	- [x] health/selection colors not set on clients

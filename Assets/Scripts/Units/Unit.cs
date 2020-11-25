@@ -53,6 +53,14 @@ public class Unit : NetworkBehaviour
         }
     }
 
+    public SpriteRenderer HighlightMarker
+    {
+        get
+        {
+            return highlightMarker;
+        }
+    }
+
     #endregion
 
     /********** MARK: Server Functions **********/
@@ -99,14 +107,6 @@ public class Unit : NetworkBehaviour
     public override void OnStartAuthority()
     {
         AuthorityOnUnitSpawned?.Invoke(this);
-
-        RTSPlayerInfo playerInfo = connectionToClient.identity.GetComponent<RTSPlayerInfo>();
-
-        // change selection sprite color
-        highlightMarker.color = playerInfo.TeamColor;
-
-        // change health bar color
-        GetComponent<HealthDisplay>().SetHealthBarColor(playerInfo.TeamColor);
     }
 
     public override void OnStopClient()

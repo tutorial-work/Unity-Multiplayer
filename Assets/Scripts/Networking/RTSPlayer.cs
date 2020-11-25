@@ -127,6 +127,8 @@ public class RTSPlayer : NetworkBehaviour
         if (unit.connectionToClient.connectionId != connectionToClient.connectionId) return;
 
         myUnits.Add(unit);
+
+        SetSpriteColors(unit);
     }
 
     private void ServerHandleUnitDespawned(Unit unit)
@@ -142,6 +144,8 @@ public class RTSPlayer : NetworkBehaviour
         if (building.connectionToClient.connectionId != connectionToClient.connectionId) return;
 
         myBuildings.Add(building);
+
+        SetSpriteColors(building);
 
         // HACK: these lines should probably be moved into resource Generator
         if (!building.TryGetComponent<ResourceStorage>(out ResourceStorage resourceStorage)) return;
@@ -307,6 +311,8 @@ public class RTSPlayer : NetworkBehaviour
     private void AuthorityHandleUnitSpawned(Unit unit)
     {
         myUnits.Add(unit);
+
+        SetSpriteColors(unit);
     }
 
     private void AuthorityHandleUnitDespawned(Unit unit)
@@ -317,11 +323,37 @@ public class RTSPlayer : NetworkBehaviour
     private void AuthorityHandleBuildingSpawned(Building building)
     {
         myBuildings.Add(building);
+
+        SetSpriteColors(building);
     }
 
     private void AuthorityHandleBuildingDespawned(Building building)
     {
         myBuildings.Remove(building);
+    }
+
+    #endregion
+
+    /********** MARK: Class Functions **********/
+    #region Class Functions
+
+    private void SetSpriteColors(Unit unit)
+    {
+        RTSPlayerInfo playerInfo = GetComponent<RTSPlayerInfo>();
+
+        // change selection sprite color
+        unit.HighlightMarker.color = playerInfo.TeamColor;
+
+        // change health bar color
+        unit.GetComponent<HealthDisplay>().SetHealthBarColor(playerInfo.TeamColor);
+    }
+
+    private void SetSpriteColors(Building building)
+    {
+        RTSPlayerInfo playerInfo = GetComponent<RTSPlayerInfo>();
+
+        // change health bar color
+        building.GetComponent<HealthDisplay>().SetHealthBarColor(playerInfo.TeamColor);
     }
 
     #endregion

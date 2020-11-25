@@ -80,11 +80,6 @@ public class Building : NetworkBehaviour
     public override void OnStartAuthority()
     {
         AuthorityOnBuildingSpawned?.Invoke(this);
-
-        RTSPlayerInfo playerInfo = connectionToClient.identity.GetComponent<RTSPlayerInfo>();
-
-        // change health bar color
-        GetComponent<HealthDisplay>().SetHealthBarColor(playerInfo.TeamColor);
     }
 
     public override void OnStopClient()
@@ -95,4 +90,5 @@ public class Building : NetworkBehaviour
     }
 
     #endregion
+    
 }

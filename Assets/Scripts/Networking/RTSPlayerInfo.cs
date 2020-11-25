@@ -25,6 +25,7 @@ public class RTSPlayerInfo : NetworkBehaviour
 
     //RawImage profileImage = null;
 
+    [SyncVar]
     Color teamColor = new Color();
 
     protected Callback<AvatarImageLoaded_t> avatarImageLoaded;
