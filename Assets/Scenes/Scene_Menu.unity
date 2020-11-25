@@ -816,17 +816,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 156497885}
   m_CullTransparentMesh: 0
---- !u!114 &210423764 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7396895992467785921, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
-  m_PrefabInstance: {fileID: 5616526244670715349}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &222432478
 GameObject:
   m_ObjectHideFlags: 0
@@ -5029,7 +5018,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugText: {fileID: 146464985}
   landingPagePanel: {fileID: 289844716}
-  useSteam: 0
+  useSteam: 1
 --- !u!1 &1506981052
 GameObject:
   m_ObjectHideFlags: 0
@@ -5194,6 +5183,17 @@ MonoBehaviour:
   landingPagePanel: {fileID: 289844716}
   addressInput: {fileID: 1955727399}
   joinButton: {fileID: 616834542}
+--- !u!114 &1608223393 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7396895992467785920, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
+  m_PrefabInstance: {fileID: 5616526244670715349}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea368fb6f27ec2f40a40e20977992b9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1614844366
 GameObject:
   m_ObjectHideFlags: 0
@@ -6458,11 +6458,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7396895992467785920, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7396895992467785921, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7396895992467785922, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
       propertyPath: m_RootOrder
@@ -6511,14 +6511,14 @@ PrefabInstance:
     - target: {fileID: 7396895992467785923, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
       propertyPath: transport
       value: 
-      objectReference: {fileID: 210423764}
+      objectReference: {fileID: 1608223393}
     - target: {fileID: 7396895992467785926, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
       propertyPath: m_Name
       value: Network Manager
       objectReference: {fileID: 0}
     - target: {fileID: 7396895992467785933, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13b3ddd383cff054496f822b6feb951e, type: 3}
