@@ -14,7 +14,8 @@ public class RTSNetworkManager : NetworkManager
     [SerializeField] GameObject unitBasePrefab = null;
     [SerializeField] GameObject smallCarPrefab = null;
     [SerializeField] GameOverHandler gameOverHandlerPrefab = null;
-    [SerializeField] [Range(1, 4)] int minPlayersToStartGame = 1; 
+    [SerializeField] [Range(1, 4)] int minPlayersToStartGame = 1;
+    //[SerializeField] [Range(2, 8)] int maxPlayersToStartGame = 8;
 
     public static event Action ClientOnConnected;
     public static event Action ClientOnDisconnected;
@@ -35,6 +36,14 @@ public class RTSNetworkManager : NetworkManager
         get
         {
             return minPlayersToStartGame;
+        }
+    }
+
+    public static int MaxPlayersToStartGame
+    {
+        get
+        {
+            return 8;
         }
     }
 

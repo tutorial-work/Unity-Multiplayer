@@ -77,7 +77,10 @@ public class MainMenu : MonoBehaviour
             Debug.Log("starting SteamMatchmaking.CreateLobby");
             debugText.text += ">starting SteamMatchmaking.CreateLobby\n";
 
-            SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, 4);
+            SteamMatchmaking.CreateLobby(
+                ELobbyType.k_ELobbyTypeFriendsOnly,
+                RTSNetworkManager.MaxPlayersToStartGame
+            );
 
             Debug.Log("completed SteamMatchmaking.CreateLobby");
             debugText.text += ">completed SteamMatchmaking.CreateLobby\n";
