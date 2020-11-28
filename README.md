@@ -51,7 +51,7 @@ List of objectives to complete
 	- [ ] ~~left click on minimap doesn't deselect units~~
 	- [ ] ~~left click on UI doesn't drag unit selection box~~
 - <strong>Debugging</strong>
-	- [ ] ~~macOS build cannot get Steamworks to connect to Steam~~ 
 	- [x] unit base/player death causes crash
 	- [x] muliple lobbies in one session crashes game
 	- [x] health/selection colors not set on clients
+	- [ ] ~~macOS build cannot get Steamworks to connect to Steam~~ 
