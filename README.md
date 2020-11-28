@@ -3,7 +3,7 @@
 
 ## Builds
 To play the current build of the game, please download the following <strong>.zip</strong> file to your corresponding operating system from <strong>Dropbox</strong>. Do not change any of the contents of the folder to run the game.
-- ~~[Mac OS Build Download]~~(https://github.com/tutorial-work/Unity-Multiplayer "macOS.zip download")
+- ~~Mac OS Build Download (test *failed* on macOS Mojave 10.14.6, Steamworks cannot connect to Steam)~~
 - [Windows Build Download (tested on Windows 10)](https://www.dropbox.com/s/hqdcxf1a9i8jc76/Windows.zip?dl=0 "Windows.zip download")
 
 ### Essential Packages 
