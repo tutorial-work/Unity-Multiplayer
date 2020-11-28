@@ -3,8 +3,8 @@
 
 ## Builds
 To play the current build of the game, please download the following <strong>.zip</strong> file to your corresponding operating system from <strong>Dropbox</strong>. Do not change any of the contents of the folder to run the game.
-- [Mac OS Build Download](https://www.dropbox.com/s/s38w5mp8b4tybsz/macOS.zip?dl=0 "macOS.zip download")
-- [Windows Build Download (tested on Windows 10)](https://www.dropbox.com/s/od03xu0ia6dvqow/Windows.zip?dl=0 "Windows.zip download")
+- ~~[Mac OS Build Download]~~(https://github.com/tutorial-work/Unity-Multiplayer "macOS.zip download")
+- [Windows Build Download (tested on Windows 10)](https://www.dropbox.com/s/hqdcxf1a9i8jc76/Windows.zip?dl=0 "Windows.zip download")
 
 ### Essential Packages 
 These packages, along with a few others, come with this repository and are required to run the project in the <strong>Unity Editor</strong>.
