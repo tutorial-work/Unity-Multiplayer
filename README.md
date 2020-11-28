@@ -3,8 +3,8 @@
 
 ## Builds
 To play the current build of the game, please download the following <strong>.zip</strong> file to your corresponding operating system from <strong>Dropbox</strong>. Do not change any of the contents of the folder to run the game.
-- ~~Mac OS Build Download (test *failed* on macOS Mojave 10.14.6, Steamworks cannot connect to Steam)~~
 - [Windows Build Download (tested on Windows 10)](https://www.dropbox.com/s/hqdcxf1a9i8jc76/Windows.zip?dl=0 "Windows.zip download")
+- ~~Mac OS Build Download (test failed on macOS Mojave 10.14.6; Steamworks cannot connect to Steam)~~
 
 ### Essential Packages 
 These packages, along with a few others, come with this repository and are required to run the project in the <strong>Unity Editor</strong>.
@@ -51,6 +51,7 @@ List of objectives to complete
 	- [ ] ~~left click on minimap doesn't deselect units~~
 	- [ ] ~~left click on UI doesn't drag unit selection box~~
 - <strong>Debugging</strong>
+	- [ ] ~~macOS build cannot get Steamworks to connect to Steam~~ 
 	- [x] unit base/player death causes crash
 	- [x] muliple lobbies in one session crashes game
 	- [x] health/selection colors not set on clients
